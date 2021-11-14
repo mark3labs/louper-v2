@@ -22,7 +22,9 @@
     class="fixed mt-0 z-10 inset-0 overflow-y-auto flex items-center justify-center w-full h-full bg-black bg-opacity-75"
   >
     <!-- A basic modal dialog with title, body and one button to close -->
-    <div class="h-auto text-left min-w-full fixed  md:min-w-0 md:w-1/2 rounded shadow-xl p-8 mx-12 bg-base-100 text-base-content">
+    <div
+      class="h-auto text-left min-w-full fixed  md:min-w-0 md:w-1/2 rounded shadow-xl p-8 mx-12 bg-base-100 text-base-content"
+    >
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
         <h3 class="text-2xl font-medium leading-6 mb-5">
           Read {facet.name}
@@ -58,17 +60,19 @@
               {selectedMethod.fragment.name}
             </h3>
             {#each selectedMethod.fragment.inputs as input, i}
-              <div class="ml-2 inline-block mr-2">
-                <label for={input.name}>{input.name}</label>
+              <div class="ml-2 inline-block mr-2 form-control">
+                <label for={input.name} class="label"
+                  ><span class="label-text">{input.name}</span></label
+                >
                 <input
                   type="text"
                   name={input.name}
                   bind:value={args[i]}
-                  class="border-2 rounded m-2"
+                  class="border-2 rounded m-2 input input-primary input-bordered"
                 />
               </div>
             {/each}
-              <button type="submit" class="btn btn-sm bg-primary glass">Read</button>
+            <button type="submit" class="btn btn-sm bg-primary glass">Read</button>
           </form>
 
           <h2 class="text-lg font-semibold mt-5">Result</h2>
