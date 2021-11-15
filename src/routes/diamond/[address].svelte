@@ -19,6 +19,7 @@
 <script lang="ts">
   import Search from '$lib/components/Search.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
+  import WriteContract from '$lib/components/WriteContract.svelte'
   import DiamondContract from '$lib/services/diamond'
   import { getExplorerAddressUrl } from '$lib/utils'
 
@@ -101,7 +102,13 @@
               >
               Read
             </button>
-            <button class="btn glass btn-xs">
+            <button class="btn glass btn-xs"
+              on:click={() => {
+                showReadContract = false
+                showWriteContract = true
+                activeFacet = facet
+              }}
+            >
               <svg
                 class="w-4 h-4 mr-1"
                 fill="currentColor"
@@ -124,6 +131,13 @@
     address={diamond.address}
     network={diamond.network}
     bind:showModal={showReadContract}
+    bind:facet={activeFacet}
+  />
+  <WriteContract
+    address={diamond.address}
+    network={diamond.network}
+    allFacets={diamond.facets}
+    bind:showModal={showWriteContract}
     bind:facet={activeFacet}
   />
 </div>

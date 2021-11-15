@@ -27,6 +27,8 @@ specifiers:
   tailwindcss: ^2.2.16
   tslib: ^2.3.1
   typescript: ^4.4.3
+  web3w: ^0.3.2-beta.7
+  web3w-walletconnect-loader: ^0.3.2
 
 dependencies:
   '@supabase/supabase-js': 1.27.0
@@ -37,6 +39,8 @@ dependencies:
   dotenv: 10.0.0
   ethers: 5.5.1
   redaxios: 0.4.1
+  web3w: 0.3.2-beta.7
+  web3w-walletconnect-loader: 0.3.2
 
 devDependencies:
   '@sveltejs/kit': 1.0.0-next.196_svelte@3.44.1
@@ -2147,6 +2151,10 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
+  /named-logs/0.1.0:
+    resolution: {integrity: sha512-BH/I7iUfuL+FR9QmNUT1wUK/JC53qUogrCEv3XGVCHrlQ9hqRrLNakfE5BQbjXPC2A6Kb0whw9BkU+A7nhYKOg==}
+    dev: false
+
   /nanoid/3.1.30:
     resolution: {integrity: sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -3211,6 +3219,23 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /web3w-walletconnect-loader/0.3.2:
+    resolution: {integrity: sha512-6IgyNsnC92ermTq3cGmU0hLMM0LuGObyN3sZfR/Zp01haaMGi6GRrtx9BtHkBcHfO4lXbtx6iO3Chc71prtHrA==}
+    dependencies:
+      named-logs: 0.1.0
+    dev: false
+
+  /web3w/0.3.2-beta.7:
+    resolution: {integrity: sha512-CUl2QoZ/udJOHUnJHrfPBQa9msLAw3iWE6/+ajwkB6fr6xCr8M1u4uNuTLJmgA7qUBIFyb71RpDbAxEiHEh5zQ==}
+    peerDependencies:
+      '@ethersproject/abi': ^5.0.0
+      '@ethersproject/bignumber': ^5.0.0
+      '@ethersproject/contracts': ^5.0.0
+      '@ethersproject/providers': ^5.0.0
+    dependencies:
+      named-logs: 0.1.0
+    dev: false
 
   /websocket/1.0.34:
     resolution: {integrity: sha512-PRDso2sGwF6kM75QykIesBijKSVceR6jL2G8NGYyq2XrItNC2P5/qL5XeR056GhA+Ly7JMFvJb9I312mJfmqnQ==}

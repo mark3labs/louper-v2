@@ -72,13 +72,13 @@
                 />
               </div>
             {/each}
-            <button type="submit" class="btn btn-sm bg-primary glass">Read</button>
+            <button type="submit" class="btn btn-sm bg-primary glass mt-3">Read</button>
           </form>
 
           <h2 class="text-lg font-semibold mt-5">Result</h2>
           <div class="mt-2 flex justify-center h-72">
             <p
-              class="leading-5 bg-neutral-focus text-neutral-content w-full p-5 rounded overflow-auto"
+              class="leading-5 bg-neutral-focus text-neutral-content w-full p-5 rounded-box overflow-auto"
             >
               {#await readResult}
                 <div class="self-center">
@@ -87,8 +87,11 @@
               {:then res}
                 {#if res}
                   <pre
-                    class="text-xs md:text-base">
-                  {JSON.stringify(res.data, undefined, 2)}
+                    class="text-xs md:text-base text-info"
+                    >
+                    <code>
+                    {JSON.stringify(res.data, undefined, 2)}
+                    </code>
                 </pre>
                 {/if}
               {:catch error}
