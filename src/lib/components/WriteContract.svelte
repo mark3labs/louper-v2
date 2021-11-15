@@ -131,13 +131,15 @@
               {selectedMethod.fragment.name}
             </h3>
             {#each selectedMethod.fragment.inputs as input, i}
-              <div class="ml-2 inline-block mr-2">
-                <label for={input.name}>{input.name}</label>
+              <div class="ml-2 inline-block mr-2 form-control">
+                <label for={input.name} class="label">
+                  <span class="label-text">{input.name}</span>
+                </label>
                 <input
                   type="text"
                   name={input.name}
                   bind:value={args[i]}
-                  class="border-2 rounded m-2"
+                  class="border-2 rounded m-2 input input-primary input-bordered"
                 />
               </div>
             {/each}

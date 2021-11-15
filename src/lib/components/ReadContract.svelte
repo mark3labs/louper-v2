@@ -61,9 +61,9 @@
             </h3>
             {#each selectedMethod.fragment.inputs as input, i}
               <div class="ml-2 inline-block mr-2 form-control">
-                <label for={input.name} class="label"
-                  ><span class="label-text">{input.name}</span></label
-                >
+                <label for={input.name} class="label">
+                  <span class="label-text">{input.name}</span>
+                </label>
                 <input
                   type="text"
                   name={input.name}
@@ -87,8 +87,7 @@
               {:then res}
                 {#if res}
                   <pre
-                    class="text-xs md:text-base text-info"
-                    >
+                    class="text-xs md:text-base text-info">
                     <code>
                     {JSON.stringify(res.data, undefined, 2)}
                     </code>
