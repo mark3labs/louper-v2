@@ -34,13 +34,20 @@
   <Search />
 
   <h1 class="text-4xl text-center">{diamond.name}</h1>
+  <div>
+    {#if diamond.isFinal}
+      <div class="badge badge-success badge-lg">Final</div>
+    {:else}
+      <div class="badge badge-warning badge-lg">Upgradable</div>
+    {/if}
+  </div>
   <div class="grid lg:grid-cols-2 w-full gap-3">
     {#each diamond.facets as facet}
       <div class="card shadow mockup-code bg-base-300 text-base-content">
         <div class="card-body">
           <h2 class="card-title text-primary-focus font-bold">{facet.name}</h2>
           <div
-            class="badge badge-info p-3 cursor-pointer"
+            class="badge badge-info p-3 cursor-pointer overflow-ellipsis"
             on:click={() => window.open(getExplorerAddressUrl(facet.address, diamond.network))}
           >
             {facet.address}
@@ -102,7 +109,8 @@
               >
               Read
             </button>
-            <button class="btn glass btn-xs"
+            <button
+              class="btn glass btn-xs"
               on:click={() => {
                 showReadContract = false
                 showWriteContract = true
