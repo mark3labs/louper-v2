@@ -30,7 +30,7 @@
   let activeFacet: Facet
 </script>
 
-<div class="flex flex-col w-full space-y-10 my-5">
+<div class="flex flex-col w-full space-y-10 my-5 mx-auto">
   <Search />
 
   <h1 class="text-4xl text-center">{diamond.name}</h1>
@@ -46,7 +46,7 @@
       <div class="card shadow mockup-code bg-base-300 text-base-content">
         <div class="card-body">
           <h2 class="card-title text-primary-focus font-bold">{facet.name}</h2>
-          <div
+          <span
             class="badge badge-info p-3 cursor-pointer overflow-ellipsis"
             on:click={() => window.open(getExplorerAddressUrl(facet.address, diamond.network))}
           >
@@ -64,7 +64,7 @@
                 d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
               />
             </svg>
-          </div>
+          </span>
           <div class="overflow-x-auto mt-5 h-full">
             <table class="table w-full table-compact">
               <thead>
