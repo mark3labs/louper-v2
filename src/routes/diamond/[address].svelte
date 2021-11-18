@@ -41,13 +41,13 @@
       <div class="badge badge-warning badge-lg">Upgradable</div>
     {/if}
   </div>
-  <div class="grid lg:grid-cols-2 w-full gap-3">
+  <div class="grid lg:grid-cols-2 gap-3">
     {#each diamond.facets as facet}
       <div class="card shadow mockup-code bg-base-300 text-base-content">
         <div class="card-body">
           <h2 class="card-title text-primary-focus font-bold">{facet.name}</h2>
-          <span
-            class="badge badge-info p-3 cursor-pointer overflow-ellipsis"
+          <div
+            class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
             on:click={() => window.open(getExplorerAddressUrl(facet.address, diamond.network))}
           >
             {facet.address}
@@ -64,7 +64,7 @@
                 d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
               />
             </svg>
-          </span>
+          </div>
           <div class="overflow-x-auto mt-5 h-full">
             <table class="table w-full table-compact">
               <thead>
@@ -76,10 +76,9 @@
               {#each facet.methods as method}
                 <tr>
                   <td>{method.signature}</td>
-                  <td class="text-right"
-                    ><span class="badge badge-info badge-outline font-bold">{method.selector}</span
-                    ></td
-                  >
+                  <td class="text-right">
+                    <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
+                  </td>
                 </tr>
               {/each}
             </table>
@@ -101,12 +100,10 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 viewBox="0 0 24 24"
-                ><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle
-                  cx="12"
-                  cy="12"
-                  r="3"
-                /></svg
               >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
               Read
             </button>
             <button
@@ -122,12 +119,13 @@
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                ><path
+              >
+                <path
                   fill-rule="evenodd"
                   d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
                   clip-rule="evenodd"
-                /></svg
-              >
+                />
+              </svg>
               Write
             </button>
           </div>
