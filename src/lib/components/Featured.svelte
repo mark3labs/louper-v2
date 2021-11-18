@@ -18,6 +18,11 @@
       url: '/diamond/0x10e138877df69Ca44Fdc68655f86c88CDe142D7F'
     },
     {
+      name: 'Beanstalk',
+      icon: '/img/beanstalk-logo.png',
+      url: '/diamond/0xC1E088fC1323b20BCBee9bd1B9fC9546db5624C5',
+    },
+    {
       name: 'PieDAO',
       icon: '/img/piedao-logo.png',
       url: '/diamond/0x17525E4f4Af59fbc29551bC4eCe6AB60Ed49CE31'
@@ -31,7 +36,7 @@
 </script>
 
 <div class="text-center text-4xl ">Featured Diamonds</div>
-<div class="grid grid-cols-3 lg:grid-cols-5 bg-base-300 p-5 gap-5 rounded-box">
+<div class="grid  grid-cols-1 lg:grid-cols-3 bg-base-300 p-5 gap-5 rounded-box">
   {#each diamonds as diamond}
     <div class="card glass shadow-xl text-center cursor-pointer" on:click={() => goto(diamond.url)}>
       <div class="justify-end card-body">

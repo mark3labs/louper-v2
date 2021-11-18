@@ -17,7 +17,8 @@
 <div class="flex flex-col h-screen justify-between bg-base-100 text-base-content">
   <div class="navbar shadow-lg bg-base text-base-content fixed w-full z-20 bg-base-100">
     <div class="px-2 mx-2 navbar-start">
-      <span class="text-lg font-bold">💎 Louper - The Ethereum Diamond Inspector</span>
+      <span class="text-lg font-bold hidden lg:inline-block">💎 Louper - The Ethereum Diamond Inspector</span>
+      <span class="text-lg font-bold lg:hidden">💎 Louper</span>
     </div>
     <div class="hidden px-2 mx-2 navbar-center lg:flex">
       <div class="flex items-stretch">
@@ -49,7 +50,7 @@
       {/if}
     </main>
   </div>
-  <footer class="items-center p-4 footer bg-base-300 text-base-content">
+  <footer class="items-center p-4 footer bg-base-300 text-base-content text-xs lg:text-base">
     <div class="items-center grid-flow-col">
       <p>Copyright © 2021</p>
       <img src="/img/mark3labslogo.png" alt="Mark III Labs, LLC" class="h-6 invert" />
