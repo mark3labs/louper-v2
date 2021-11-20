@@ -35,15 +35,15 @@
   ]
 </script>
 
-<div class="text-center text-4xl ">Featured Diamonds</div>
-<div class="grid  grid-cols-1 lg:grid-cols-3 bg-base-300 p-5 gap-5 rounded-box">
+<div class="text-center text-4xl">Featured Diamonds</div>
+<div class="grid  grid-cols-2 lg:grid-cols-3 bg-base-300 p-5 gap-5 rounded-box lg:w-1/2 place-self-center">
   {#each diamonds as diamond}
     <div class="card glass shadow-xl text-center cursor-pointer" on:click={() => goto(diamond.url)}>
       <div class="justify-end card-body">
-        <figure class="px-12 py-6">
+        <figure class="">
           <img src={diamond.icon} class="rounded-full shadow-xl" alt={diamond.name} />
         </figure>
-        <h2 class="card-title">{diamond.name}</h2>
+        <h2 class="card-title text-xs my-2 lg:text-lg">{diamond.name}</h2>
       </div>
     </div>
   {/each}
