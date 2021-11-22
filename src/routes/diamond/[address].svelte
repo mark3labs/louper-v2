@@ -45,7 +45,7 @@
     {#each diamond.facets as facet}
       <div class="card shadow mockup-code bg-base-300 text-base-content">
         <div class="card-body">
-          <h2 class="card-title text-primary-focus font-bold">{facet.name}</h2>
+          <h2 class="card-title text-primary-focus font-bold">{facet.name || 'UNVERIFIED'}</h2>
           <div
             class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
             on:click={() => window.open(getExplorerAddressUrl(facet.address, diamond.network))}
@@ -83,52 +83,54 @@
               {/each}
             </table>
           </div>
-          <div class="card-actions bg-secondary rounded-md p-1 text-secondary-content">
-            <button
-              class="btn glass btn-xs"
-              on:click={() => {
-                showReadContract = true
-                showWriteContract = false
-                activeFacet = facet
-              }}
-            >
-              <svg
-                class="w-4 h-4 mr-1"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
+          {#if facet.name}
+            <div class="card-actions bg-secondary rounded-md p-1 text-secondary-content">
+              <button
+                class="btn glass btn-xs"
+                on:click={() => {
+                  showReadContract = true
+                  showWriteContract = false
+                  activeFacet = facet
+                }}
               >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              Read
-            </button>
-            <button
-              class="btn glass btn-xs"
-              on:click={() => {
-                showReadContract = false
-                showWriteContract = true
-                activeFacet = facet
-              }}
-            >
-              <svg
-                class="w-4 h-4 mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+                <svg
+                  class="w-4 h-4 mr-1"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                Read
+              </button>
+              <button
+                class="btn glass btn-xs"
+                on:click={() => {
+                  showReadContract = false
+                  showWriteContract = true
+                  activeFacet = facet
+                }}
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              Write
-            </button>
-          </div>
+                <svg
+                  class="w-4 h-4 mr-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Write
+              </button>
+            </div>
+          {/if}
         </div>
       </div>
     {/each}

@@ -22,10 +22,9 @@ export default class DiamondContract implements Diamond {
 
   fetchContractDetails = async (): Promise<DiamondContract> => {
     // Fetch contract info
-    console.log(this.address, this.network)
     let res = await this.fetch('/api/contract', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ address: this.address, network: this.network })
     })
     const diamond = await res.json()
@@ -47,11 +46,36 @@ export default class DiamondContract implements Diamond {
       })
       const facetData = await res.json()
 
+      let methods: Method[] = []
       if (!facetData.abi.length) {
         this.isVerified = false
-      }
+        for (let j = 0; j < facets[i][1].length; j++) {
+          const selector = String(facets[i][1][j])
 
-      const methods: Method[] = await this.getMethods(facets[i][0], facetData.abi)
+          let signature = 'UNKNOWN'
+          // get info from 4bytes
+          res = await this.fetch(
+            `https://www.4byte.directory//api/v1/signatures/?hex_signature=${selector}`,
+            {
+              method: 'GET',
+              headers: { 'Content-Type': 'application/json' }
+            }
+          )
+          const data = await res.json()
+          
+          if (data.count) {
+            signature = data.results[0].text_signature
+          }
+
+          methods.push({
+            selector,
+            signature,
+            fragment: undefined
+          })
+        }
+      } else {
+        methods = await this.getMethods(facets[i][0], facetData.abi)
+      }
       const name = facetData.name
       const facet: Facet = {
         address: facets[i][0],

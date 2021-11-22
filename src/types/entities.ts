@@ -4,7 +4,7 @@ import type { FunctionFragment } from 'ethers/lib/utils'
 export interface Method {
   signature: string
   selector: string
-  fragment: FunctionFragment
+  fragment: FunctionFragment | undefined
 }
 
 export interface Facet {
