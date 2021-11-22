@@ -43,6 +43,7 @@
     <div>
       <a
         class="btn glass bg-primary"
+        download="abi.json"
         href={`data:application/octet-stream,${encodeURI(JSON.stringify(diamond.abi))}`}
       >
         <svg
