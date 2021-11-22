@@ -13,6 +13,7 @@ export default class DiamondContract implements Diamond {
   isVerified = true
   facetsToName: Record<string, string> = {}
   fetch: FetchFunction
+  abi = []
 
   constructor(address: string, network: string, fetch: FetchFunction) {
     this.address = address
@@ -62,7 +63,7 @@ export default class DiamondContract implements Diamond {
             }
           )
           const data = await res.json()
-          
+
           if (data.count) {
             signature = data.results[0].text_signature
           }
@@ -74,6 +75,9 @@ export default class DiamondContract implements Diamond {
           })
         }
       } else {
+        facetData.abi.forEach((a) => {
+          this.abi.push(a)
+        })
         methods = await this.getMethods(facets[i][0], facetData.abi)
       }
       const name = facetData.name

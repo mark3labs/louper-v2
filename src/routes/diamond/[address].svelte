@@ -34,12 +34,33 @@
   <Search />
 
   <h1 class="text-4xl text-center">{diamond.name}</h1>
-  <div>
+  <div class="flex justify-between">
     {#if diamond.isFinal}
       <div class="badge badge-success badge-lg">Final</div>
     {:else}
       <div class="badge badge-warning badge-lg">Upgradable</div>
     {/if}
+    <div>
+      <a
+        class="btn glass bg-primary"
+        href={`data:application/octet-stream,${encodeURI(JSON.stringify(diamond.abi))}`}
+      >
+        <svg
+          class="w-6 h-6 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+          /></svg
+        >
+        Download ABI
+      </a>
+    </div>
   </div>
   <div class="grid lg:grid-cols-2 gap-3">
     {#each diamond.facets as facet}

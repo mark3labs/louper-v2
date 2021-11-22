@@ -20,7 +20,7 @@
     {
       name: 'Beanstalk',
       icon: '/img/beanstalk-logo.png',
-      url: '/diamond/0xC1E088fC1323b20BCBee9bd1B9fC9546db5624C5',
+      url: '/diamond/0xC1E088fC1323b20BCBee9bd1B9fC9546db5624C5'
     },
     {
       name: 'PieDAO',
@@ -36,7 +36,9 @@
 </script>
 
 <div class="text-center text-4xl">Featured Diamonds</div>
-<div class="grid  grid-cols-2 lg:grid-cols-3 bg-base-300 p-5 gap-5 rounded-box lg:w-1/2 place-self-center">
+<div
+  class="grid  grid-cols-2 lg:grid-cols-3 bg-base-300 p-5 gap-5 rounded-box lg:w-1/2 place-self-center"
+>
   {#each diamonds as diamond}
     <div class="card glass shadow-xl text-center cursor-pointer" on:click={() => goto(diamond.url)}>
       <div class="justify-end card-body">
