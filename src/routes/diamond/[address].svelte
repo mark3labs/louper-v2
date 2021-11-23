@@ -30,10 +30,14 @@
   let activeFacet: Facet
 </script>
 
+<svelte:head>
+  <title>Louper - {diamond.name || 'UNKNOWN'}</title>
+</svelte:head>
+
 <div class="flex flex-col w-full space-y-10 my-5 mx-auto">
   <Search />
 
-  <h1 class="text-4xl text-center">{diamond.name}</h1>
+  <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN' }</h1>
   <div class="flex justify-between">
     {#if diamond.isFinal}
       <div class="badge badge-success badge-lg">Final</div>
