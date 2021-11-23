@@ -37,7 +37,7 @@
 <div class="flex flex-col w-full space-y-10 my-5 mx-auto">
   <Search />
 
-  <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN' }</h1>
+  <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN'}</h1>
   <div class="flex justify-between">
     {#if diamond.isFinal}
       <div class="badge badge-success badge-lg">Final</div>
@@ -56,13 +56,14 @@
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
-          ><path
+        >
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-          /></svg
-        >
+          />
+        </svg>
         Download ABI
       </a>
     </div>
