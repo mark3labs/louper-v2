@@ -46,12 +46,12 @@
     {/if}
     <div>
       <a
-        class="btn glass bg-primary"
+        class="btn btn-sm glass bg-secondary"
         download="abi.json"
         href={`data:application/octet-stream,${encodeURI(JSON.stringify(diamond.abi))}`}
       >
         <svg
-          class="w-6 h-6 mr-2"
+          class="w-4 h-4 mr-2"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
