@@ -58,6 +58,12 @@
       <img src="/img/mark3labslogo.png" alt="Mark III Labs, LLC" class="h-6 invert" />
       <p>All right reserved</p>
     </div>
+    <div class="grid-flow-col">
+      <p>Powered by</p>
+      <a href="https://quicknode.com" target="_blank">
+        <img src="/img/quicknode-logo.svg" alt="Powered by Quicknode" class="h-6" />
+      </a>
+    </div>
     <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
       <a href="https://twitter.com/louper_dev" target="_blank">
         <svg
