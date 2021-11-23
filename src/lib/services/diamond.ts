@@ -91,23 +91,23 @@ export default class DiamondContract implements Diamond {
     }
 
     // Fetch diamond events
-    try {
-      res = await this.fetch('/api/events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ address: this.address, network: this.network })
-      })
-      this.events = await res.json()
+    // try {
+    //   res = await this.fetch('/api/events', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ address: this.address, network: this.network })
+    //   })
+    //   this.events = await res.json()
 
-      // await axios.post('/api/leaderboard', {
-      //   address: this.address,
-      //   network: this.network,
-      //   name: this.name
-      // })
-    } catch (e) {
-      console.error(e)
-      this.events = []
-    }
+    //   // await axios.post('/api/leaderboard', {
+    //   //   address: this.address,
+    //   //   network: this.network,
+    //   //   name: this.name
+    //   // })
+    // } catch (e) {
+    //   console.error(e)
+    //   this.events = []
+    // }
 
     return this
   }

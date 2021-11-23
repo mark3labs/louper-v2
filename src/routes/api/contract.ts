@@ -14,7 +14,6 @@ const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE
 export const post: RequestHandler<void, { network: string; address: string }> = async ({
   body
 }) => {
-  console.log(body)
   const network = body.network || 'mainnet'
   const address = body.address
 
