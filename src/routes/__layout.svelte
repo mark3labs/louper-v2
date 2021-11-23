@@ -43,7 +43,7 @@
     </div>
     <div class="navbar-end" />
   </div>
-  <div class="container md:mx-auto mt-24">
+  <div class="container md:mx-auto mt-24 p-2">
     <main>
       {#if $navigationState === 'loading'}
         <Loading />
