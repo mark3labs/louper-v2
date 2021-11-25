@@ -21,7 +21,7 @@
   import ReadContract from '$lib/components/ReadContract.svelte'
   import WriteContract from '$lib/components/WriteContract.svelte'
   import DiamondContract from '$lib/services/diamond'
-  import { getExplorerAddressUrl } from '$lib/utils'
+  import { getExplorerAddressUrl, getVerifyContractUrl } from '$lib/utils'
 
   export let diamond: DiamondContract
 
@@ -38,6 +38,27 @@
   <Search />
 
   <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN'}</h1>
+  <div class="flex justify-center">
+    <div
+      class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
+      on:click={() => window.open(getExplorerAddressUrl(diamond.address, diamond.network))}
+    >
+      {diamond.address}
+      <svg
+        class="w-3 h-3 md:w-4 md:h-4 inline ml-2"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+        />
+        <path
+          d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+        />
+      </svg>
+    </div>
+  </div>
   <div class="flex justify-between">
     {#if diamond.isFinal}
       <div class="badge badge-success badge-lg">Final</div>
@@ -72,7 +93,31 @@
     {#each diamond.facets as facet}
       <div class="card shadow mockup-code bg-base-300 text-base-content">
         <div class="card-body">
-          <h2 class="card-title text-primary-focus font-bold">{facet.name || 'UNVERIFIED'}</h2>
+          <div class="flex justify-between">
+            <h2 class="card-title text-primary-focus font-bold">{facet.name || 'UNVERIFIED'}</h2>
+            {#if !facet.name}
+              <a
+                class="inline-block text-primary uppercase font-bold"
+                href={getVerifyContractUrl(facet.address, diamond.network)}
+                target="_blank"
+              >
+                Verify
+                <svg
+                  class="w-3 h-3 md:w-4 md:h-4 inline mb-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+                  />
+                  <path
+                    d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+                  />
+                </svg>
+              </a>
+            {/if}
+          </div>
           <div
             class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
             on:click={() => window.open(getExplorerAddressUrl(facet.address, diamond.network))}
