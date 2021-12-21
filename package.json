@@ -40,7 +40,7 @@
     "dotenv": "^10.0.0",
     "ethers": "^5.5.1",
     "redaxios": "^0.4.1",
-    "web3w": "^0.3.2-beta.7",
+    "web3w": "^0.3.2-beta.21",
     "web3w-walletconnect-loader": "^0.3.2"
   }
 }

@@ -2,7 +2,7 @@
   import { fade } from 'svelte/transition'
   import Loading from './Loading.svelte'
   import type { Facet, Method } from '../../types/entities'
-  import WalletStores from 'web3w'
+  import { initWeb3W }  from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { getExplorerAddressUrl } from '../utils'
 
@@ -30,7 +30,7 @@
     })
   })
 
-  const { wallet, builtin, flow, transactions } = WalletStores({
+  const { wallet, builtin, flow, transactions } = initWeb3W({
     builtin: { autoProbe: true },
     chainConfigs: {
       contracts: {
