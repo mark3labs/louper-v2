@@ -36,15 +36,13 @@
   const { wallet, builtin, flow, transactions, chain } = initWeb3W({
     builtin: { autoProbe: true },
     chainConfigs: {
-      [CHAIN_IDS[network]]: {
-        contracts: {
-          facet: {
-            address: address,
-            abi: abi,
-          },
+      contracts: {
+        facet: {
+          address: address,
+          abi: abi,
         },
-        chainId: CHAIN_IDS[network],
       },
+      chainId: CHAIN_IDS[network],
     },
     options: [
       'builtin',
