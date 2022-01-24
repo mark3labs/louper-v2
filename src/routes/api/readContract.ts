@@ -12,7 +12,7 @@ export const post: RequestHandler<
   { network: string; address: string; fragment: string; args: [] }
 > = async ({ body }) => {
   console.info(
-    `Reading contract data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`
+    `Reading contract data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`,
   )
 
   const address = body.address
@@ -34,8 +34,8 @@ export const post: RequestHandler<
       body: {
         reason: e.reason,
         code: e.code,
-        value: e.value
-      }
+        value: e.value,
+      },
     }
   }
 }

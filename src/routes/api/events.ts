@@ -10,7 +10,7 @@ const abi = ['event DiamondCut(tuple(address,uint8,bytes4[])[],address,bytes)']
 const INFURA_API_KEY = process.env['INFURA_API_KEY']
 
 export const post: RequestHandler<void, { network: string; address: string }> = async ({
-  body
+  body,
 }) => {
   console.info(`Fetching events for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`)
   const address = body.address
@@ -22,7 +22,7 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
   const diamondContract = new ethers.Contract(address, abi, provider)
 
   const events: ethers.Event[] = await diamondContract.queryFilter(
-    diamondContract.filters.DiamondCut()
+    diamondContract.filters.DiamondCut(),
     // request.body.network === 'polygon' ? 11516320 : undefined
   )
 
@@ -32,7 +32,7 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
     const block = await events[i].getBlock()
     const louperEvent: LouperEvent = {
       ...events[i],
-      timestamp: block.timestamp
+      timestamp: block.timestamp,
     }
     louperEvents.push(louperEvent)
   }

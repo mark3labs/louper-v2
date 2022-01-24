@@ -32,6 +32,7 @@
           class="font-semibold">🟡 xDAI</option
         >
         <option value="polygon" class="font-semibold">🔵 Polygon (Matic)</option>
+        <option value="mumbai" class="font-semibold">🧪 Mumbai</option>
         <option value="binance" class="font-semibold">🟠 Binance (BSC)</option>
       </select>
       <button

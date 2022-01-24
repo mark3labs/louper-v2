@@ -26,7 +26,7 @@ export default class DiamondContract implements Diamond {
     let res = await this.fetch('/api/contract', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ address: this.address, network: this.network })
+      body: JSON.stringify({ address: this.address, network: this.network }),
     })
     const diamond = await res.json()
     this.name = diamond.name
@@ -35,7 +35,7 @@ export default class DiamondContract implements Diamond {
     res = await this.fetch('/api/facets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ address: this.address, network: this.network })
+      body: JSON.stringify({ address: this.address, network: this.network }),
     })
     const facets = await res.json()
 
@@ -43,7 +43,7 @@ export default class DiamondContract implements Diamond {
       res = await this.fetch('/api/contract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ address: facets[i][0], network: this.network })
+        body: JSON.stringify({ address: facets[i][0], network: this.network }),
       })
       const facetData = await res.json()
 
@@ -59,8 +59,8 @@ export default class DiamondContract implements Diamond {
             `https://www.4byte.directory//api/v1/signatures/?hex_signature=${selector}`,
             {
               method: 'GET',
-              headers: { 'Content-Type': 'application/json' }
-            }
+              headers: { 'Content-Type': 'application/json' },
+            },
           )
           const data = await res.json()
 
@@ -71,7 +71,7 @@ export default class DiamondContract implements Diamond {
           methods.push({
             selector,
             signature,
-            fragment: undefined
+            fragment: undefined,
           })
         }
       } else {
@@ -84,7 +84,7 @@ export default class DiamondContract implements Diamond {
       const facet: Facet = {
         address: facets[i][0],
         name,
-        methods
+        methods,
       }
       this.facets.push(facet)
       this.facetsToName[facet.address] = facet.name
@@ -124,7 +124,7 @@ export default class DiamondContract implements Diamond {
       const method: Method = {
         signature: f,
         selector: utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10),
-        fragment: val
+        fragment: val,
       }
       methods.push(method)
     }

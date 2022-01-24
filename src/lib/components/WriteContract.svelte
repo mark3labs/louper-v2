@@ -2,7 +2,7 @@
   import { fade } from 'svelte/transition'
   import Loading from './Loading.svelte'
   import type { Facet, Method } from '../../types/entities'
-  import { initWeb3W }  from 'web3w'
+  import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { getExplorerAddressUrl } from '../utils'
 
@@ -19,7 +19,8 @@
     kovan: '42',
     goerli: '420',
     xdai: '100',
-    polygon: '137'
+    polygon: '137',
+    mumbai: '80001',
   }
 
   let abi: any[] = []
@@ -36,18 +37,18 @@
       contracts: {
         facet: {
           address: address,
-          abi: abi
-        }
+          abi: abi,
+        },
       },
-      chainId: CHAIN_IDS[network]
+      chainId: CHAIN_IDS[network],
     },
     options: [
       'builtin',
       new WalletConnectModuleLoader({
         chainId: CHAIN_IDS[network],
-        infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4'
-      })
-    ]
+        infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
+      }),
+    ],
   })
 
   let selectedMethod: Method | null = null

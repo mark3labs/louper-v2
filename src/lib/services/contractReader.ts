@@ -15,7 +15,7 @@ export default class ContractReader {
       address: this.address,
       network: this.network,
       fragment: fragment.format('json'),
-      args: args
+      args: args,
     })
   }
 }

@@ -10,7 +10,7 @@ const abi = ['function facets() external view returns (tuple(address,bytes4[])[]
 const INFURA_API_KEY = process.env['INFURA_API_KEY']
 
 export const post: RequestHandler<void, { network: string; address: string }> = async ({
-  body
+  body,
 }) => {
   console.info(`Fetching data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`)
   const address = body.address

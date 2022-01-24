@@ -7,15 +7,15 @@ const config = {
   // for more information about preprocessors
   preprocess: [
     preprocess({
-      postcss: true
-    })
+      postcss: true,
+    }),
   ],
 
   kit: {
     // hydrate the <div id="svelte"> element in src/app.html
     target: '#svelte',
-    adapter: vercel()
-  }
+    adapter: vercel(),
+  },
 }
 
 export default config

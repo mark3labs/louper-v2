@@ -40,7 +40,7 @@
           Github
         </a>
         <a
-          class="btn btn-ghost btn-sm rounded-btn" 
+          class="btn btn-ghost btn-sm rounded-btn"
           href="https://gitcoin.co/grants/1988/louper-tool-for-inspecting-diamond-eip-2535-smart"
           target="_blank"
         >

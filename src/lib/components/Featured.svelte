@@ -5,33 +5,33 @@
     {
       name: 'Aavegotchi',
       icon: '/img/aavegotchi-polygon-logo.jpg',
-      url: '/diamond/0x86935F11C86623deC8a25696E1C19a8659CbF95d?network=polygon'
+      url: '/diamond/0x86935F11C86623deC8a25696E1C19a8659CbF95d?network=polygon',
     },
     {
       name: 'Aavegotchi Staking',
       icon: '/img/aavegotchi-mainnet-logo.png',
-      url: '/diamond/0x93eA6ec350Ace7473f7694D43dEC2726a515E31A'
+      url: '/diamond/0x93eA6ec350Ace7473f7694D43dEC2726a515E31A',
     },
     {
       name: 'BarnBridge',
       icon: '/img/barnbridge-logo.jpg',
-      url: '/diamond/0x10e138877df69Ca44Fdc68655f86c88CDe142D7F'
+      url: '/diamond/0x10e138877df69Ca44Fdc68655f86c88CDe142D7F',
     },
     {
       name: 'Beanstalk',
       icon: '/img/beanstalk-logo.png',
-      url: '/diamond/0xC1E088fC1323b20BCBee9bd1B9fC9546db5624C5'
+      url: '/diamond/0xC1E088fC1323b20BCBee9bd1B9fC9546db5624C5',
     },
     {
       name: 'PieDAO',
       icon: '/img/piedao-logo.png',
-      url: '/diamond/0x17525E4f4Af59fbc29551bC4eCe6AB60Ed49CE31'
+      url: '/diamond/0x17525E4f4Af59fbc29551bC4eCe6AB60Ed49CE31',
     },
     {
       name: 'Gelato V2',
       icon: '/img/gelato-logo.png',
-      url: '/diamond/0x3CACa7b48D0573D793d3b0279b5F0029180E83b6'
-    }
+      url: '/diamond/0x3CACa7b48D0573D793d3b0279b5F0029180E83b6',
+    },
   ]
 </script>
 

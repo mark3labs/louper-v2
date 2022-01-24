@@ -12,7 +12,7 @@ import { createClient } from '@supabase/supabase-js'
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_ANON_KEY'])
 
 export const post: RequestHandler<void, { network: string; address: string }> = async ({
-  body
+  body,
 }) => {
   const network = body.network || 'mainnet'
   const address = body.address
@@ -38,8 +38,8 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
     return {
       body: {
         abi: res.abi,
-        name: res.name
-      }
+        name: res.name,
+      },
     }
   }
 
@@ -56,8 +56,8 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
   return {
     body: {
       name,
-      abi
-    }
+      abi,
+    },
   }
 }
 
@@ -89,8 +89,8 @@ const cacheAbi = async (network: string, address: string, name: string, abi: any
       network,
       address,
       name: name || '',
-      abi
-    }
+      abi,
+    },
   ])
 
   if (error) {

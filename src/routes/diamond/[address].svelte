@@ -5,13 +5,13 @@
     const diamond = await new DiamondContract(
       page.params.address,
       page.query.get('network') || 'mainnet',
-      fetch
+      fetch,
     ).fetchContractDetails()
 
     return {
       props: {
-        diamond
-      }
+        diamond,
+      },
     }
   }
 </script>
