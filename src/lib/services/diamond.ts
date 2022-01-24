@@ -55,6 +55,7 @@ export default class DiamondContract implements Diamond {
 
           let signature = 'UNKNOWN'
           // get info from 4bytes
+          console.log('Fetching selector info from 4bytes...')
           res = await this.fetch(
             `https://www.4byte.directory//api/v1/signatures/?hex_signature=${selector}`,
             {
@@ -62,6 +63,7 @@ export default class DiamondContract implements Diamond {
               headers: { 'Content-Type': 'application/json' },
             },
           )
+          console.log('Fetched info from 4bytes.')
           const data = await res.json()
 
           if (data.count) {
