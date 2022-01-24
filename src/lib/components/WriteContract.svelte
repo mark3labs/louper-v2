@@ -196,6 +196,7 @@
               selectedMethod = null
               readResult = ''
               args = []
+              wallet.disconnect()
             }}
           >
             Close
