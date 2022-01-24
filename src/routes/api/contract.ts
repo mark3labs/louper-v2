@@ -50,12 +50,12 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
   const resp = await axios.get(fullUrl)
   const abi = resp.data.result[0].SourceCode ? JSON.parse(resp.data.result[0].ABI) : []
   const name = resp.data.result[0].ContractName || ''
-  
+
   if (abi.length) {
     console.log(`Fetched ABI for ${name}. Caching...`)
     await cacheAbi(network, address, name, abi)
   } else {
-    console.log("Contract not verified...")
+    console.log('Contract not verified...')
   }
   return {
     body: {
