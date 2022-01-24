@@ -86,8 +86,7 @@
                 </div>
               {:then res}
                 {#if res}
-                  <pre
-                    class="text-xs md:text-base text-info">
+                  <pre class="text-xs md:text-base text-info">
                     <code>
                     {JSON.stringify(res.data, undefined, 2)}
                     </code>
