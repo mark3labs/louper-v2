@@ -22,6 +22,7 @@
     xdai: '100',
     polygon: '137',
     mumbai: '80001',
+    binance: '56',
   }
 
   let abi: any[] = []
@@ -35,13 +36,15 @@
   const { wallet, builtin, flow, transactions, chain } = initWeb3W({
     builtin: { autoProbe: true },
     chainConfigs: {
-      contracts: {
-        facet: {
-          address: address,
-          abi: abi,
+      [CHAIN_IDS[network]]: {
+        contracts: {
+          facet: {
+            address: address,
+            abi: abi,
+          },
         },
+        chainId: CHAIN_IDS[network],
       },
-      chainId: CHAIN_IDS[network],
     },
     options: [
       'builtin',
@@ -53,7 +56,6 @@
   })
 
   let selectedMethod: Method | null = null
-  let readResult: Promise<object> | string = ''
   let args: any[] = []
 
   const connect = async (option = 'builtin') => {
@@ -62,7 +64,6 @@
     } catch (e) {
       wallet.acknowledgeError()
       await wallet.disconnect()
-      alert(`Please make sure your wallet is connected to ${network}`)
     }
   }
 
@@ -81,6 +82,8 @@
     }
   })
   onDestroy(() => {
+    error = null
+    args = []
     chainUnsub()
   })
 </script>
@@ -119,7 +122,7 @@
               bind:value={selectedMethod}
               on:change={() => {
                 args = []
-                readResult = ''
+                error = null
               }}
             >
               <option value={null}> Select a method </option>
@@ -209,8 +212,8 @@
             on:click={() => {
               showModal = false
               selectedMethod = null
-              readResult = ''
               args = []
+              error = null
               wallet.disconnect()
             }}
           >
