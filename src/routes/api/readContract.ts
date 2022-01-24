@@ -10,7 +10,8 @@ const INFURA_API_KEY = process.env['INFURA_API_KEY']
 export const post: RequestHandler<
   void,
   { network: string; address: string; fragment: string; args: [] }
-> = async ({ body }) => {
+> = async ({ request }) => {
+  const body = await request.json()
   console.info(
     `Reading contract data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`,
   )

@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
 
-  export const load: Load = async ({ page, fetch }) => {
+  export const load: Load = async ({ params, url, fetch }) => {
     const diamond = await new DiamondContract(
-      page.params.address,
-      page.query.get('network') || 'mainnet',
+      params.address,
+      url.searchParams.get('network') || 'mainnet',
       fetch,
     ).fetchContractDetails()
 
