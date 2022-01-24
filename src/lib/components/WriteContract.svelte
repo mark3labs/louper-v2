@@ -122,7 +122,7 @@
               bind:value={selectedMethod}
               on:change={() => {
                 args = []
-                readResult = ''
+                error = null
               }}
             >
               <option value={null}> Select a method </option>
@@ -212,8 +212,8 @@
             on:click={() => {
               showModal = false
               selectedMethod = null
-              readResult = ''
               args = []
+              error = null
               wallet.disconnect()
             }}
           >
