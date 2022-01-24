@@ -5,6 +5,7 @@
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { getExplorerAddressUrl } from '../utils'
+import { onDestroy } from 'svelte';
 
   export let address: string
   export let network: string
@@ -31,7 +32,7 @@
     })
   })
 
-  const { wallet, builtin, flow, transactions } = initWeb3W({
+  const { wallet, builtin, flow, transactions, chain } = initWeb3W({
     builtin: { autoProbe: true },
     chainConfigs: {
       contracts: {
@@ -72,6 +73,16 @@
     flow.cancel()
     wallet.acknowledgeError()
   }
+
+  let chainUnsub = chain.subscribe(async (c) => {
+    if (!$wallet.disconnecting && c.chainId && CHAIN_IDS[network] !== c.chainId) {
+      await wallet.disconnect()
+      alert(`Invalid network. Pleae connect to ${network}.`)
+    }
+  })
+  onDestroy(() => {
+    chainUnsub()
+  })
 </script>
 
 {#if showModal && facet}
