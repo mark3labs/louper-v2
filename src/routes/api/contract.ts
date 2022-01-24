@@ -12,8 +12,9 @@ import { createClient } from '@supabase/supabase-js'
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_ANON_KEY'])
 
 export const post: RequestHandler<void, { network: string; address: string }> = async ({
-  body,
+  request,
 }) => {
+  const body = await request.json()
   const network = body.network || 'mainnet'
   const address = body.address
 
