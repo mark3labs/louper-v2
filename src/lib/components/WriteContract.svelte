@@ -5,7 +5,7 @@
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { getExplorerAddressUrl } from '../utils'
-import { onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte'
 
   export let address: string
   export let network: string
@@ -147,12 +147,16 @@ import { onDestroy } from 'svelte';
                 <label for={input.name} class="label">
                   <span class="label-text">{input.name}</span>
                 </label>
-                <input
-                  type="text"
-                  name={input.name}
-                  bind:value={args[i]}
-                  class="border-2 rounded m-2 input input-primary input-bordered"
-                />
+                {#if input.type === 'bool'}
+                  <input type="checkbox" name={input.name} bind:checked={args[i]} />
+                {:else}
+                  <input
+                    type="text"
+                    name={input.name}
+                    bind:value={args[i]}
+                    class="border-2 rounded m-2 input input-primary input-bordered"
+                  />
+                {/if}
               </div>
             {/each}
             <button type="submit" class="btn btn-sm glass bg-primary mt-3"> Execute </button>
