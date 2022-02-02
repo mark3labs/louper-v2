@@ -23,6 +23,8 @@
     polygon: '137',
     mumbai: '80001',
     binance: '56',
+    avalanche: '43114',
+    fuji: '43113'
   }
 
   let abi: any[] = []
@@ -36,15 +38,13 @@
   const { wallet, builtin, flow, transactions, chain } = initWeb3W({
     builtin: { autoProbe: true },
     chainConfigs: {
-      [CHAIN_IDS[network]]: {
-        contracts: {
-          facet: {
-            address: address,
-            abi: abi,
-          },
+      contracts: {
+        facet: {
+          address: address,
+          abi: abi.filter(i => i !== undefined),
         },
-        chainId: CHAIN_IDS[network],
       },
+      chainId: CHAIN_IDS[network],
     },
     options: [
       'builtin',

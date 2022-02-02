@@ -51,4 +51,14 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://bscscan.com',
     explorerApiUrl: 'https://api.bscscan.com/api',
   },
+  avalanche: {
+    rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
+    explorerUrl: 'https://snowtrace.io',
+    explorerApiUrl: 'https://snowtrace.io/api',
+  },
+  fuji: {
+    rpcUrl: 'https://api.avax-test.network/ext/bc/C/rpc',
+    explorerUrl: 'https://testnet.snowtrace.io',
+    explorerApiUrl: 'https://testnet.snowtrace.io',
+  },
 }
