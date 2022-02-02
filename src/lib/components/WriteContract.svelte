@@ -39,7 +39,7 @@
       contracts: {
         facet: {
           address: address,
-          abi: abi,
+          abi: abi.filter(i => i !== undefined),
         },
       },
       chainId: CHAIN_IDS[network],
@@ -71,6 +71,10 @@
     error = $flow.executionError
     flow.cancel()
     wallet.acknowledgeError()
+  }
+
+  $: if ($flow.inProgress) {
+    console.log(abi.filter(i => i !== undefined))
   }
 
   let chainUnsub = chain.subscribe(async (c) => {
