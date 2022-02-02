@@ -23,6 +23,8 @@
     polygon: '137',
     mumbai: '80001',
     binance: '56',
+    avalanche: '43114',
+    fuji: '43113'
   }
 
   let abi: any[] = []

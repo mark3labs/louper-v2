@@ -32,8 +32,10 @@
           class="font-semibold">🟡 xDAI</option
         >
         <option value="polygon" class="font-semibold">🔵 Polygon (Matic)</option>
-        <option value="mumbai" class="font-semibold">🧪 Mumbai</option>
+        <option value="mumbai" class="font-semibold">🧪 Polygon Mumbai Testnet</option>
         <option value="binance" class="font-semibold">🟠 Binance (BSC)</option>
+        <option value="avalanche" class="font-semibold">⛰️ Avalanche</option>
+        <option value="fuji" class="font-semibold">⛰️ Avalanche Fuji Testnet</option>
       </select>
       <button
         class="absolute top-0 right-0 btn border-0 bg-gradient-to-r from-primary to-secondary"

@@ -34,7 +34,7 @@
         </a>
         <a
           class="btn btn-ghost btn-sm rounded-btn"
-          href="https://github.com/mark3labs/louper"
+          href="https://github.com/mark3labs/louper-v2"
           target="_blank"
         >
           Github
