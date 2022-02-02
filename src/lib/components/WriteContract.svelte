@@ -73,10 +73,6 @@
     wallet.acknowledgeError()
   }
 
-  $: if ($flow.inProgress) {
-    console.log(abi.filter(i => i !== undefined))
-  }
-
   let chainUnsub = chain.subscribe(async (c) => {
     if (!$wallet.disconnecting && c.chainId && CHAIN_IDS[network] !== c.chainId) {
       await wallet.disconnect()
