@@ -4,28 +4,15 @@
   import type { Facet, Method } from '../../types/entities'
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
-  import { getExplorerAddressUrl } from '../utils'
+  import { getExplorerTxUrl } from '../utils'
   import { onDestroy } from 'svelte'
+  import { NETWORKS } from '$lib/config'
 
   export let address: string
   export let network: string
   export let showModal = false
   export let facet: Facet | undefined = undefined
   export let allFacets: Facet[] = []
-
-  const CHAIN_IDS: Record<string, string> = {
-    mainnet: '1',
-    ropsten: '3',
-    rinkeby: '4',
-    kovan: '42',
-    goerli: '420',
-    xdai: '100',
-    polygon: '137',
-    mumbai: '80001',
-    binance: '56',
-    avalanche: '43114',
-    fuji: '43113'
-  }
 
   let abi: any[] = []
 
@@ -44,12 +31,12 @@
           abi: abi.filter(i => i !== undefined),
         },
       },
-      chainId: CHAIN_IDS[network],
+      chainId: NETWORKS[network].chainId ,
     },
     options: [
       'builtin',
       new WalletConnectModuleLoader({
-        chainId: CHAIN_IDS[network],
+        chainId: NETWORKS[network].chainId,
         infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
       }),
     ],
@@ -76,7 +63,7 @@
   }
 
   let chainUnsub = chain.subscribe(async (c) => {
-    if (!$wallet.disconnecting && c.chainId && CHAIN_IDS[network] !== c.chainId) {
+    if (!$wallet.disconnecting && c.chainId && NETWORKS[network].chainId !== c.chainId) {
       await wallet.disconnect()
       alert(`Invalid network. Pleae connect to ${network}.`)
     }
@@ -190,7 +177,7 @@
               {#each $transactions as transaction}
                 TX Hash: <a
                   class="text-info"
-                  href={getExplorerAddressUrl(transaction.hash, network)}
+                  href={getExplorerTxUrl(transaction.hash, network)}
                   target="_blank"
                 >
                   {transaction.hash}
