@@ -28,7 +28,7 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
       API_KEY = process.env['BSCSCAN_API_KEY']
       break
     default:
-      API_KEY = process.env['VITE_ETHERSCAN_API_KEY']
+      API_KEY = process.env['ETHERSCAN_API_KEY']
   }
 
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)

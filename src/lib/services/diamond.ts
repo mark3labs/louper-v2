@@ -58,20 +58,28 @@ export default class DiamondContract implements Diamond {
           if (!this.selectors.includes(selector)) continue
 
           let signature = 'UNKNOWN'
-          // get info from 4bytes
-          console.log('Fetching selector info from 4bytes...')
-          res = await this.fetch(
-            `https://www.4byte.directory//api/v1/signatures/?hex_signature=${selector}`,
-            {
-              method: 'GET',
-              headers: { 'Content-Type': 'application/json' },
-            },
-          )
-          console.log('Fetched info from 4bytes.')
-          const data = await res.json()
+          try {
+            // get info from 4bytes
+            console.log('Fetching selector info from 4bytes...')
+            res = await this.fetch(
+              `https://www.4byte.directory/api/v1/signatures/?hex_signature=${selector}`,
+              {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+              },
+            )
+            console.log('Fetched info from 4bytes.')
+            let data
+            
+            if (res.ok) {
+              data = await res.json()
+            }
 
-          if (data.count) {
-            signature = data.results[0].text_signature
+            if (data && data.count) {
+              signature = data.results[0].text_signature
+            }
+          } catch (e) {
+            console.log(e)
           }
 
           methods.push({
