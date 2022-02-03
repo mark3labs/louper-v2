@@ -5,7 +5,7 @@
 
   export let diamond: DiamondContract
 
-  export let facet
+  export let facet: Facet
 
   export let showReadContract
   export let showWriteContract

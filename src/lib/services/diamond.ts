@@ -8,6 +8,7 @@ export default class DiamondContract implements Diamond {
   network = ''
   name = ''
   facets: Facet[] = []
+  selectors: string[] = []
   events: LouperEvent[] = []
   isFinal = true
   isVerified = true
@@ -40,6 +41,7 @@ export default class DiamondContract implements Diamond {
     const facets = await res.json()
 
     for (let i = 0; i < facets.length; i++) {
+      this.selectors = this.selectors.concat(facets[i][1])
       res = await this.fetch('/api/contract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -52,6 +54,8 @@ export default class DiamondContract implements Diamond {
         this.isVerified = false
         for (let j = 0; j < facets[i][1].length; j++) {
           const selector = String(facets[i][1][j])
+
+          if (!this.selectors.includes(selector)) continue
 
           let signature = 'UNKNOWN'
           // get info from 4bytes
@@ -123,11 +127,17 @@ export default class DiamondContract implements Diamond {
       if (f === 'diamondCut((address,uint8,bytes4[])[],address,bytes)') {
         this.isFinal = false
       }
+
+      const selector = utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10)
+
+      if (!this.selectors.includes(selector)) continue
+
       const method: Method = {
         signature: f,
-        selector: utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10),
+        selector,
         fragment: val,
       }
+
       methods.push(method)
     }
 
