@@ -69,13 +69,13 @@ export default class DiamondContract implements Diamond {
               },
             )
             console.log('Fetched info from 4bytes.')
-            let data = {}
+            let data
             
             if (res.ok) {
               data = await res.json()
             }
 
-            if (data.count) {
+            if (data && data.count) {
               signature = data.results[0].text_signature
             }
           } catch (e) {
