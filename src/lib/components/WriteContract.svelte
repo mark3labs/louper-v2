@@ -21,7 +21,7 @@
   const connect = async (option = 'builtin') => {
     try {
       await wallet.connect(option)
-      chain.updateContracts({
+      await chain.updateContracts({
         chainId: NETWORKS[network].chainId,
         contracts: {
           facet: {

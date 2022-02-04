@@ -78,6 +78,11 @@ export default class DiamondContract implements Diamond {
             if (data && data.count) {
               signature = data.results[0].text_signature
             }
+
+            if (signature === 'diamondCut((address,uint8,bytes4[])[],address,bytes)') {
+              this.isFinal = false
+            }
+
           } catch (e) {
             console.log(e)
           }

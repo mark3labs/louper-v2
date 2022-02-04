@@ -2,19 +2,20 @@
   import { fade } from 'svelte/transition'
   import Loading from '$lib/components/Loading.svelte'
   import type { Facet } from '../../types/entities'
-  import { constants, Contract } from 'ethers'
+  import { constants } from 'ethers'
   import { initWeb3W } from 'web3w'
-  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
   import { getExplorerTxUrl } from '../utils'
+  import { utils } from 'ethers'
 
   export let facet: Facet | undefined = undefined
   export let address: string
   export let network: string
   export let showModal = false
 
-  let pending = false
+  let error: any = null
+  let args: any = {}
 
   const FacetCutAction = {
     Add: 0,
@@ -22,53 +23,57 @@
     Remove: 2,
   }
 
-  const { wallet, builtin, chain, transactions } = initWeb3W({
-    builtin: { autoProbe: true },
-    options: [
-      'builtin',
-      new WalletConnectModuleLoader({
-        chainId: NETWORKS[network].chainId,
-        infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
-      }),
-    ],
-  })
+  const { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
-  const removeFacet = async () => {
-    const ABI = [
-      'function diamondCut(tuple(address facetAddress, uint8 action, bytes4[] functionSelectors)[],address,bytes) external',
+  const iface = new utils.Interface([
+    'function diamondCut(tuple(address facetAddress, uint8 action, bytes4[] functionSelectors)[],address initAddress, bytes callData) external',
+  ])
+
+  $: if (facet) {
+    args = [
+      [
+        {
+          facetAddress: constants.AddressZero,
+          action: FacetCutAction.Remove,
+          functionSelectors: facet.methods.map((m) => m.selector),
+        },
+      ],
+      constants.AddressZero,
+      '0x',
     ]
-
-    const contract = new Contract(address, ABI, wallet.provider.getSigner())
-
-    const cut = [
-      {
-        facetAddress: constants.AddressZero,
-        action: FacetCutAction.Remove,
-        functionSelectors: facet.methods.map((m) => m.selector),
-      },
-    ]
-
-    try {
-      const tx = await contract.diamondCut(cut, constants.AddressZero, '0x')
-      await tx.wait()
-    } catch (e) {
-      console.log(e)
-      error = 'Error removing facet!'
-    } finally {
-      pending = false
-    }
   }
 
   const connect = async (option = 'builtin') => {
     try {
       await wallet.connect(option)
+      await chain.updateContracts({
+        chainId: NETWORKS[network].chainId,
+        contracts: {
+          facet: {
+            address,
+            abi: iface.fragments.map((f) => f),
+          },
+        },
+      })
     } catch (e) {
       wallet.acknowledgeError()
       await wallet.disconnect()
     }
   }
 
-  let error: any = null
+  const closeModal = async () => {
+    showModal = false
+    error = null
+    wallet.disconnect()
+    $transactions.forEach((t) => transactions.acknowledge(t.hash, t.status))
+    chainUnsub()
+  }
+
+  $: if ($flow.executionError) {
+    error = $flow.executionError
+    flow.cancel()
+    wallet.acknowledgeError()
+  }
 
   let chainUnsub = chain.subscribe(async (c) => {
     if (!$wallet.disconnecting && c.chainId && NETWORKS[network].chainId !== c.chainId) {
@@ -98,22 +103,10 @@
 
         <div class="alert alert-error">
           <div class="flex-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              class="w-6 h-6 mx-2 stroke-current"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-              />
-            </svg>
-            <label>
-              This is a BETA feature and may break your diamond contract.
-              This will remove this facet and all selectors from this contract!
+            <span class="text-2xl mr-2">💀</span>
+            <label for="">
+              This is a BETA feature and may break your diamond contract. This will remove this
+              facet and all selectors from this contract!
             </label>
           </div>
         </div>
@@ -141,7 +134,7 @@
               Please check and approve the transaction in your wallet.
             {/if}
 
-            {#if pending}
+            {#if $flow.inProgress}
               <div class="self-center">
                 <Loading />
               </div>
@@ -168,9 +161,14 @@
             {/each}
           </p>
         </div>
+      {/if}
 
+      {#if $wallet.state === 'Ready'}
         <div class="flex justify-center">
-          <button class="btn btn-xl glass bg-error" on:click={removeFacet}>
+          <button
+            class="btn btn-xl glass bg-error"
+            on:click={() => flow.execute((contracts) => contracts.facet['diamondCut'](...args))}
+          >
             <svg
               class="w-6 h-6 mr-1"
               fill="none"
@@ -193,9 +191,7 @@
       <!-- One big close button.  --->
       <div class="mt-5 sm:mt-6">
         <div class="flex rounded-md w-full justify-center">
-          <button class="btn btn-sm glass bg-primary" on:click={() => (showModal = false)}>
-            Close
-          </button>
+          <button class="btn btn-sm glass bg-primary" on:click={closeModal}>Close</button>
         </div>
       </div>
     </div>

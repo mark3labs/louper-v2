@@ -30,13 +30,14 @@
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { NETWORKS } from '$lib/config'
-  import type { Fragment } from 'ethers/lib/utils'
+import AddFacet from '$lib/components/AddFacet.svelte';
 
   export let diamond: DiamondContract
 
   let showReadContract = false
   let showWriteContract = false
   let showRemoveFacet = false
+  let showAddFacet = false
   let activeFacet: Facet | null = null
 
   $: if (diamond) {
@@ -88,7 +89,7 @@
     {:else}
       <div class="badge badge-warning badge-lg">Upgradable</div>
     {/if}
-    <div>
+    <div class="flex justify-between gap-2">
       <a
         class="btn btn-sm glass bg-secondary"
         download="abi.json"
@@ -110,6 +111,23 @@
         </svg>
         Download ABI
       </a>
+      <button class="btn btn-sm glass bg-primary" on:click={() => showAddFacet = true}>
+        <svg
+          class="w-4 h-4 mr-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
+          />
+        </svg>
+        Add Facet
+      </button>
     </div>
   </div>
   <div class="grid lg:grid-cols-2 gap-3">
@@ -141,5 +159,11 @@
     network={diamond.network}
     bind:showModal={showRemoveFacet}
     bind:facet={activeFacet}
+  />
+  <AddFacet
+    allFacets={diamond.facets}
+    address={diamond.address}
+    network={diamond.network}
+    bind:showModal={showAddFacet}
   />
 </div>
