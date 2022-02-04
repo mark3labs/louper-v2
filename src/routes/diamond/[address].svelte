@@ -20,20 +20,37 @@
 
 <script lang="ts">
   import FacetCard from '../../lib/components/FacetCard.svelte'
-
   import Search from '$lib/components/Search.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
   import WriteContract from '$lib/components/WriteContract.svelte'
   import DiamondContract from '$lib/services/diamond'
-  import { getExplorerAddressUrl, getVerifyContractUrl } from '$lib/utils'
+  import { getExplorerAddressUrl } from '$lib/utils'
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
+  import type { Facet } from '../../types/entities'
+  import { initWeb3W } from 'web3w'
+  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
+  import { NETWORKS } from '$lib/config'
+  import type { Fragment } from 'ethers/lib/utils'
 
   export let diamond: DiamondContract
 
   let showReadContract = false
   let showWriteContract = false
   let showRemoveFacet = false
-  let activeFacet: Facet
+  let activeFacet: Facet | null = null
+
+  $: if (diamond) {
+    initWeb3W({
+      builtin: { autoProbe: true },
+      options: [
+        'builtin',
+        new WalletConnectModuleLoader({
+          chainId: NETWORKS[diamond.network].chainId,
+          infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
+        }),
+      ],
+    })
+  }
 </script>
 
 <svelte:head>
@@ -116,7 +133,6 @@
   <WriteContract
     address={diamond.address}
     network={diamond.network}
-    allFacets={diamond.facets}
     bind:showModal={showWriteContract}
     bind:facet={activeFacet}
   />

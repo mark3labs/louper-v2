@@ -3,7 +3,6 @@
   import Loading from './Loading.svelte'
   import type { Facet, Method } from '../../types/entities'
   import { initWeb3W } from 'web3w'
-  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { getExplorerTxUrl } from '../utils'
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
@@ -12,49 +11,40 @@
   export let network: string
   export let showModal = false
   export let facet: Facet | undefined = undefined
-  export let allFacets: Facet[] = []
 
-  let abi: any[] = []
-
-  allFacets.forEach((f) => {
-    f.methods.forEach((m: Method) => {
-      abi.push(m.fragment)
-    })
-  })
-
-  const { wallet, builtin, flow, transactions, chain } = initWeb3W({
-    builtin: { autoProbe: true },
-    chainConfigs: {
-      contracts: {
-        facet: {
-          address: address,
-          abi: abi.filter(i => i !== undefined),
-        },
-      },
-      chainId: NETWORKS[network].chainId ,
-    },
-    options: [
-      'builtin',
-      new WalletConnectModuleLoader({
-        chainId: NETWORKS[network].chainId,
-        infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
-      }),
-    ],
-  })
+  const { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
   let selectedMethod: Method | null = null
   let args: any[] = []
+  let error: any = null
 
   const connect = async (option = 'builtin') => {
     try {
       await wallet.connect(option)
+      chain.updateContracts({
+        chainId: NETWORKS[network].chainId,
+        contracts: {
+          facet: {
+            address,
+            abi: facet.methods.map((m) => m.fragment),
+          },
+        },
+      })
     } catch (e) {
       wallet.acknowledgeError()
       await wallet.disconnect()
     }
   }
 
-  let error: any = null
+  const closeModal = async () => {
+    showModal = false
+    selectedMethod = null
+    args = []
+    error = null
+    wallet.disconnect()
+    $transactions.forEach((t) => transactions.acknowledge(t.hash, t.status))
+    chainUnsub()
+  }
 
   $: if ($flow.executionError) {
     error = $flow.executionError
@@ -68,7 +58,7 @@
       alert(`Invalid network. Pleae connect to ${network}.`)
     }
   })
-  onDestroy(() => {
+  onDestroy(async () => {
     error = null
     args = []
     chainUnsub()
@@ -194,18 +184,7 @@
       <!-- One big close button.  --->
       <div class="mt-5 sm:mt-6">
         <div class="flex rounded-md w-full justify-center">
-          <button
-            class="btn btn-sm glass bg-primary"
-            on:click={() => {
-              showModal = false
-              selectedMethod = null
-              args = []
-              error = null
-              wallet.disconnect()
-            }}
-          >
-            Close
-          </button>
+          <button class="btn btn-sm glass bg-primary" on:click={closeModal}>Close</button>
         </div>
       </div>
     </div>
