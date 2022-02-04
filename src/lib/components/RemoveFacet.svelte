@@ -98,22 +98,10 @@
 
         <div class="alert alert-error">
           <div class="flex-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              class="w-6 h-6 mx-2 stroke-current"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-              />
-            </svg>
-            <label>
-              This is a BETA feature and may break your diamond contract.
-              This will remove this facet and all selectors from this contract!
+            <span class="text-2xl mr-2">💀</span>
+            <label for="">
+              This is a BETA feature and may break your diamond contract. This will remove this
+              facet and all selectors from this contract!
             </label>
           </div>
         </div>
@@ -132,7 +120,7 @@
         {/if}
       </div>
 
-      {#if $wallet.state === 'Ready'}
+      {#if $wallet.state === 'Ready' && pending}
         <div class="mb-2">
           <p
             class="leading-5 bg-neutral-focus text-neutral-content w-full p-5 rounded-box overflow-auto"
@@ -168,7 +156,9 @@
             {/each}
           </p>
         </div>
+      {/if}
 
+      {#if $wallet.state === 'Ready'}
         <div class="flex justify-center">
           <button class="btn btn-xl glass bg-error" on:click={removeFacet}>
             <svg
