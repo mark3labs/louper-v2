@@ -85,7 +85,7 @@ export const NETWORKS: Record<string, Network> = {
     title: 'Avalanche',
     rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
     explorerUrl: 'https://snowtrace.io',
-    explorerApiUrl: 'https://snowtrace.io/api',
+    explorerApiUrl: 'https://api.snowtrace.io',
     emoji: '⛰️',
     chainId: '43114'
   },
