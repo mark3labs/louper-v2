@@ -27,6 +27,9 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
     case 'binance':
       API_KEY = process.env['BSCSCAN_API_KEY']
       break
+    case 'avalanche':
+      API_KEY = process.env['SNOWSCAN_API_KEY']
+      break
     default:
       API_KEY = process.env['ETHERSCAN_API_KEY']
   }
