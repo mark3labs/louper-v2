@@ -11,3 +11,8 @@ export const getExplorerTxUrl = (hash: string, network: string): string => {
 export const getVerifyContractUrl = (address: string, network = 'mainnet'): string => {
   return `${NETWORKS[network].explorerUrl}/verifyContract?a=${address}`
 }
+
+export const getEtherscanApiKey = (network: string): string => {
+  const key = process.env[`${network.toUpperCase()}_ETHERSCAN_APIKEY`]
+  return key ? key : process.env.ETHERSCAN_API_KEY
+}
