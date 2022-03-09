@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import { createClient } from '@supabase/supabase-js'
+import { getEtherscanApiKey } from '$lib/utils'
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_ANON_KEY'])
@@ -18,21 +19,7 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
   const network = body.network || 'mainnet'
   const address = body.address
 
-  let API_KEY
-
-  switch (network) {
-    case 'polygon':
-      API_KEY = process.env['POLYGONSCAN_API_KEY']
-      break
-    case 'binance':
-      API_KEY = process.env['BSCSCAN_API_KEY']
-      break
-    case 'avalanche':
-      API_KEY = process.env['SNOWSCAN_API_KEY']
-      break
-    default:
-      API_KEY = process.env['ETHERSCAN_API_KEY']
-  }
+  const API_KEY = getEtherscanApiKey(network)
 
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)
 
