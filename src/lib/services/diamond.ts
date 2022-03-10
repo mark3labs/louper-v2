@@ -72,7 +72,11 @@ export default class DiamondContract implements Diamond {
             let data
             
             if (res.ok) {
-              data = await res.json()
+              try {
+                data = await res.json()
+              } catch (e) {
+                console.log('Could not parse data')
+              }
             }
 
             if (data && data.count) {

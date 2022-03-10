@@ -1,9 +1,10 @@
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
 import type { RequestHandler } from '@sveltejs/kit'
-import SourcifyJS from 'sourcify-js'
 
 import dotenv from 'dotenv'
+
+const SOURCIFY_REPO_URL = 'https://repo.sourcify.dev'
 
 dotenv.config()
 
@@ -24,7 +25,6 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)
 
-  const sourcify = new SourcifyJS()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res: any = await fetchCachedAbi(network, address)
@@ -40,12 +40,26 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
   // Try Sourcify first
   try {
     console.log('Trying Sourcify...')
-    const sourcifyRes = await sourcify.getABI(address, parseInt(NETWORKS[network].chainId))
-    if (sourcifyRes) {
+    const metadata = await axios.get(
+      `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${address}/metadata.json`,
+    ) 
+    if (metadata) {
+      console.log(
+        `Fetched ABI for ${
+          Object.values(metadata.data.settings.compilationTarget)[0] as string
+        }. Caching...`,
+      )
+      await cacheAbi(
+        network,
+        address,
+        Object.values(metadata.data.settings.compilationTarget)[0] as string,
+        metadata.data.output.abi,
+      )
       return {
         body: {
-          ...sourcifyRes
-        }
+          abi: metadata.data.output.abi,
+          name: Object.values(metadata.data.settings.compilationTarget)[0] as string,
+        },
       }
     }
   } catch (e) {
