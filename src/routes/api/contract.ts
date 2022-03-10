@@ -1,9 +1,10 @@
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
 import type { RequestHandler } from '@sveltejs/kit'
-import SourcifyJS from 'sourcify-js'
 
 import dotenv from 'dotenv'
+
+const SOURCIFY_REPO_URL = 'https://repo.sourcify.dev'
 
 dotenv.config()
 
@@ -38,14 +39,16 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   // Try Sourcify first
   try {
-    const sourcify = new SourcifyJS()
     console.log('Trying Sourcify...')
-    const sourcifyRes = await sourcify.getABI(address, parseInt(NETWORKS[network].chainId))
-    if (sourcifyRes) {
+    const metadata = await axios.get(
+      `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${address}/metadata.json`,
+    ) 
+    if (metadata) {
       return {
         body: {
-          ...sourcifyRes
-        }
+          abi: metadata.data.output.abi,
+          name: Object.values(metadata.data.settings.compilationTarget)[0] as string,
+        },
       }
     }
   } catch (e) {
