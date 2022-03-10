@@ -44,6 +44,17 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
       `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${address}/metadata.json`,
     ) 
     if (metadata) {
+      console.log(
+        `Fetched ABI for ${
+          Object.values(metadata.data.settings.compilationTarget)[0] as string
+        }. Caching...`,
+      )
+      await cacheAbi(
+        network,
+        address,
+        Object.values(metadata.data.settings.compilationTarget)[0] as string,
+        metadata.data.output.abi,
+      )
       return {
         body: {
           abi: metadata.data.output.abi,
