@@ -1,6 +1,7 @@
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
 import type { RequestHandler } from '@sveltejs/kit'
+import SourcifyJS from 'sourcify-js'
 
 import dotenv from 'dotenv'
 
@@ -23,6 +24,8 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)
 
+  const sourcify = new SourcifyJS()
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res: any = await fetchCachedAbi(network, address)
   if (res.abi) {
@@ -32,6 +35,21 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
         name: res.name,
       },
     }
+  }
+
+  // Try Sourcify first
+  try {
+    console.log('Trying Sourcify...')
+    const sourcifyRes = await sourcify.getABI(address, parseInt(NETWORKS[network].chainId))
+    if (sourcifyRes) {
+      return {
+        body: {
+          ...sourcifyRes
+        }
+      }
+    }
+  } catch (e) {
+    console.log('Nothing found on Sourcify.')
   }
 
   const apiUrl = NETWORKS[network].explorerApiUrl
