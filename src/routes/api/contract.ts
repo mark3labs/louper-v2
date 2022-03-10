@@ -24,7 +24,6 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)
 
-  const sourcify = new SourcifyJS()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res: any = await fetchCachedAbi(network, address)
@@ -39,6 +38,7 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   // Try Sourcify first
   try {
+    const sourcify = new SourcifyJS()
     console.log('Trying Sourcify...')
     const sourcifyRes = await sourcify.getABI(address, parseInt(NETWORKS[network].chainId))
     if (sourcifyRes) {
