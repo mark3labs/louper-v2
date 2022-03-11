@@ -13,6 +13,7 @@ export const getVerifyContractUrl = (address: string, network = 'mainnet'): stri
 }
 
 export const getEtherscanApiKey = (network: string): string => {
-  const key = process.env[`${network.toUpperCase()}_ETHERSCAN_APIKEY`]
+  const key = process.env[`${network.toUpperCase()}_ETHERSCAN_API_KEY`]
+  console.log(key)
   return key ? key : process.env.ETHERSCAN_API_KEY
 }
