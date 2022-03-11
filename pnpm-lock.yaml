@@ -24,6 +24,7 @@ specifiers:
   svelte: ^3.46.4
   svelte-check: ^2.4.5
   svelte-preprocess: ^4.10.4
+  svelte-tags-input: ^2.9.0
   tailwindcss: ^2.2.19
   tslib: ^2.3.1
   typescript: ^4.6.2
@@ -39,6 +40,7 @@ dependencies:
   dotenv: 10.0.0
   ethers: 5.6.0
   redaxios: 0.4.1
+  svelte-tags-input: 2.9.0
   web3w: 0.3.2-beta.22
   web3w-walletconnect-loader: 0.3.2
 
@@ -730,6 +732,12 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
+
+  /acorn/8.7.0:
+    resolution: {integrity: sha512-V/LGr1APy+PXIwKebEWrkZPwoeoF+w1jiOBUmuxuiUIaOHtob8Qc9BTrYo7VuI5fR8tqsy+buA2WFooR5olqvQ==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: false
 
   /aes-js/3.0.0:
     resolution: {integrity: sha1-4h3xCtbCBTKVvLuNq0Cwnb6ofk0=}
@@ -3031,6 +3039,12 @@ packages:
       svelte: 3.46.4
       typescript: 4.6.2
     dev: true
+
+  /svelte-tags-input/2.9.0:
+    resolution: {integrity: sha512-Yyi15BVlVoX/3C7VPBtUFTmFRnLIPr3e7Kov7dRyvo8wR04QfZpF2x4qQGdNDB2rw49TJBO+uopN2+Fdpv44PA==}
+    dependencies:
+      acorn: 8.7.0
+    dev: false
 
   /svelte/3.46.4:
     resolution: {integrity: sha512-qKJzw6DpA33CIa+C/rGp4AUdSfii0DOTCzj/2YpSKKayw5WGSS624Et9L1nU1k2OVRS9vaENQXp2CVZNU+xvIg==}

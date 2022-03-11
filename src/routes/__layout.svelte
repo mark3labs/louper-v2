@@ -1,19 +1,18 @@
 <script>
+  import { afterNavigate, beforeNavigate } from '$app/navigation'
   import Loading from '$lib/components/Loading.svelte'
-  import { fade } from 'svelte/transition'
-
   import '../app.css'
   import navigationState from '../stores/navigationState'
+
+  beforeNavigate(() => {
+    $navigationState = 'loading'
+  })
+
+  afterNavigate(() => {
+    $navigationState = 'loaded'
+  })
 </script>
 
-<svelte:window
-  on:sveltekit:navigation-start={() => {
-    $navigationState = 'loading'
-  }}
-  on:sveltekit:navigation-end={() => {
-    $navigationState = 'loaded'
-  }}
-/>
 <div class="flex flex-col h-screen justify-between bg-base-100 text-base-content">
   <div class="navbar shadow-lg bg-base text-base-content fixed w-full z-20 bg-base-100">
     <div class="px-2 mx-2 navbar-start">

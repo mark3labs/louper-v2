@@ -3,6 +3,7 @@
   import Loading from '$lib/components/Loading.svelte'
   import type { Facet, Method } from '../../types/entities'
   import ContractReader from '../services/contractReader'
+  import Tags from 'svelte-tags-input'
 
   export let address: string
   export let network: string
@@ -63,13 +64,24 @@
               <div class="ml-2 inline-block mr-2 form-control">
                 <label for={input.name} class="label">
                   <span class="label-text">{input.name}</span>
+                  <span class="badge font-mono font-thin">{input.type}</span>
                 </label>
-                <input
-                  type="text"
-                  name={input.name}
-                  bind:value={args[i]}
-                  class="border-2 rounded m-2 input input-primary input-bordered"
-                />
+                {#if input.type.indexOf('[]') > -1}
+                  <Tags
+                    on:tags={(event) => args[i] = event.detail.tags} 
+                    allowPaste 
+                    class="border-2 rounded m-2 input input-primary input-bordered"
+                  />
+                {:else if input.type === 'bool'}
+                  <input type="checkbox" name={input.name} bind:checked={args[i]} />
+                {:else}
+                  <input
+                    type="text"
+                    name={input.name}
+                    bind:value={args[i]}
+                    class="border-2 rounded m-2 input input-primary input-bordered"
+                  />
+                {/if}
               </div>
             {/each}
             <button type="submit" class="btn btn-sm bg-primary glass mt-3">Read</button>
