@@ -30,7 +30,7 @@
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { NETWORKS } from '$lib/config'
-import AddFacet from '$lib/components/AddFacet.svelte';
+  import AddFacet from '$lib/components/AddFacet.svelte'
 
   export let diamond: DiamondContract
 
@@ -111,7 +111,7 @@ import AddFacet from '$lib/components/AddFacet.svelte';
         </svg>
         Download ABI
       </a>
-      <button class="btn btn-sm glass bg-primary" on:click={() => showAddFacet = true}>
+      <button class="btn btn-sm glass bg-primary" on:click={() => (showAddFacet = true)}>
         <svg
           class="w-4 h-4 mr-1"
           fill="none"

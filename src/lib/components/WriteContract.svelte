@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade } from 'svelte/transition'
   import Loading from './Loading.svelte'
+  import Tags from 'svelte-tags-input'
   import type { Facet, Method } from '../../types/entities'
   import { initWeb3W } from 'web3w'
   import { getExplorerTxUrl } from '../utils'
@@ -126,8 +127,15 @@
               <div class="ml-2 inline-block mr-2 form-control">
                 <label for={input.name} class="label">
                   <span class="label-text">{input.name}</span>
+                  <span class="badge font-mono font-thin">{input.type}</span>
                 </label>
-                {#if input.type === 'bool'}
+                {#if input.type.indexOf('[]') > -1}
+                  <Tags
+                    on:tags={(event) => args[i] = event.detail.tags} 
+                    allowPaste 
+                    class="border-2 rounded m-2 input input-primary input-bordered"
+                  />
+                {:else if input.type === 'bool'}
                   <input type="checkbox" name={input.name} bind:checked={args[i]} />
                 {:else}
                   <input
@@ -141,7 +149,6 @@
             {/each}
             <button type="submit" class="btn btn-sm glass bg-primary mt-3"> Execute </button>
           </form>
-
           <h2 class="text-lg font-semibold mt-5">Result</h2>
           <div class="mt-2 flex justify-center h-72">
             <p

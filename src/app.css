@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.svelte-tags-input-layout {
+    @apply border-2 rounded m-2 input input-primary input-bordered !important;
+}
+
+.svelte-tags-input {
+    @apply bg-base-100;
+}
+
+.svelte-tags-input-tag {
+    @apply badge-primary !important;
+}
