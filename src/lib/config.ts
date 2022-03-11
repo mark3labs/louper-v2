@@ -93,7 +93,7 @@ export const NETWORKS: Record<string, Network> = {
     title: 'Avalanche Fuji Testnet',
     rpcUrl: 'https://api.avax-test.network/ext/bc/C/rpc',
     explorerUrl: 'https://testnet.snowtrace.io',
-    explorerApiUrl: 'https://testnet.snowtrace.io/api',
+    explorerApiUrl: 'https://api-testnet.snowtrace.io/api',
     emoji: '🧪',
     chainId: '43113'
   },
