@@ -59,7 +59,7 @@
 </svelte:head>
 
 <div class="flex flex-col w-full space-y-10 my-5 mx-auto">
-  <Search />
+  <Search address={diamond.address}  network={diamond.network} />
 
   <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN'}</h1>
   <div class="flex justify-center">
