@@ -81,6 +81,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🟠',
     chainId: '56',
   },
+  binance_testnet : {
+    title: 'Binance Smart Chain Testnet',
+    rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+    explorerUrl: 'https://testnet.bscscan.com/',
+    explorerApiUrl: 'https://api.bscscan.com/api',
+    emoji: '🟠',
+    chainId: '97'
+  },
   avalanche: {
     title: 'Avalanche',
     rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
