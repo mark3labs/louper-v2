@@ -14,7 +14,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://etherscan.io',
     explorerApiUrl: 'https://api.etherscan.io/api',
     emoji: '🟢',
-    chainId: '1'
+    chainId: '1',
   },
   ropsten: {
     title: 'Ropsten Testnet',
@@ -22,7 +22,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://ropsten.etherscan.io',
     explorerApiUrl: 'https://api-ropsten.etherscan.io/api',
     emoji: '🧪',
-    chainId: '3'
+    chainId: '3',
   },
   kovan: {
     title: 'Kovan Testnet',
@@ -30,7 +30,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://kovan.etherscan.io',
     explorerApiUrl: 'https://api-kovan.etherscan.io/api',
     emoji: '🧪',
-    chainId: '42'
+    chainId: '42',
   },
   rinkeby: {
     title: 'Rinkeby Testnet',
@@ -38,7 +38,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://rinkeby.etherscan.io',
     explorerApiUrl: 'https://api-rinkeby.etherscan.io/api',
     emoji: '🧪',
-    chainId: '4'
+    chainId: '4',
   },
   goerli: {
     title: 'Goerli Testnet',
@@ -46,7 +46,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://goerli.etherscan.io',
     explorerApiUrl: 'https://api-goerli.etherscan.io/api',
     emoji: '🧪',
-    chainId: '420'
+    chainId: '420',
   },
   xdai: {
     title: 'Gnosis (XDai)',
@@ -54,7 +54,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://blockscout.com/xdai/mainnet',
     explorerApiUrl: 'https://blockscout.com/poa/xdai/api',
     emoji: '🟡',
-    chainId: '100'
+    chainId: '100',
   },
   polygon: {
     title: 'Polygon',
@@ -62,8 +62,8 @@ export const NETWORKS: Record<string, Network> = {
       'https://polished-restless-wind.matic.quiknode.pro/7d84ed2f3469de6a923c646c40778ab1022ab999/',
     explorerUrl: 'https://polygonscan.com',
     explorerApiUrl: 'https://api.polygonscan.com/api',
-    emoji: '🔵',
-    chainId: '137'
+    emoji: '🟣',
+    chainId: '137',
   },
   mumbai: {
     title: 'Polygon Mumbai Testnet',
@@ -71,7 +71,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://mumbai.polygonscan.com/',
     explorerApiUrl: 'https://api-testnet.polygonscan.com/api',
     emoji: '🧪',
-    chainId: '80001'
+    chainId: '80001',
   },
   binance: {
     title: 'Binance Smart Chain',
@@ -79,7 +79,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://bscscan.com',
     explorerApiUrl: 'https://api.bscscan.com/api',
     emoji: '🟠',
-    chainId: '56'
+    chainId: '56',
   },
   avalanche: {
     title: 'Avalanche',
@@ -87,7 +87,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://snowtrace.io',
     explorerApiUrl: 'https://api.snowtrace.io/api',
     emoji: '⛰️',
-    chainId: '43114'
+    chainId: '43114',
   },
   fuji: {
     title: 'Avalanche Fuji Testnet',
@@ -95,6 +95,54 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://testnet.snowtrace.io',
     explorerApiUrl: 'https://api-testnet.snowtrace.io/api',
     emoji: '🧪',
-    chainId: '43113'
+    chainId: '43113',
+  },
+  optimism: {
+    title: 'Optimism',
+    rpcUrl: 'https://mainnet.optimism.io',
+    explorerUrl: 'https://optimistic.etherscan.io/',
+    explorerApiUrl: 'https://api-optimistic.etherscan.io/api',
+    emoji: '🔴',
+    chainId: '10',
+  },
+  abritrum: {
+    title: 'Arbitrum',
+    rpcUrl: 'https://arb1.arbitrum.io/rpc',
+    explorerUrl: 'https://arbiscan.io/',
+    explorerApiUrl: 'https://api.arbiscan.io/api',
+    emoji: '🔵',
+    chainId: '42161',
+  },
+  moon_river: {
+    title: 'Moonriver',
+    rpcUrl: 'https://rpc.moonriver.moonbeam.network',
+    explorerUrl: 'https://moonriver.moonscan.io/',
+    explorerApiUrl: 'https://api-moonriver.moonscan.io/api',
+    emoji: '🌕',
+    chainId: '1285',
+  },
+  celo: {
+    title: 'Celo',
+    rpcUrl: 'https://forno.celo.org',
+    explorerUrl: 'https://explorer.celo.org/',
+    explorerApiUrl: 'https://explorer.celo.org/api',
+    emoji: '🟩',
+    chainId: '42220',
+  },
+  fantom: {
+    title: 'Fantom',
+    rpcUrl: 'https://rpc.ftm.tools/',
+    explorerUrl: 'https://ftmscan.com/',
+    explorerApiUrl: 'https://api.ftmscan.com/api',
+    emoji: '👻',
+    chainId: '250',
+  },
+  boba: {
+    title: 'Boba',
+    rpcUrl: 'https://mainnet.boba.network',
+    explorerUrl: 'https://blockexplorer.boba.network',
+    explorerApiUrl: 'https://blockexplorer.boba.network/api',
+    emoji: '🧋',
+    chainId: '288',
   },
 }
