@@ -59,7 +59,7 @@ export const NETWORKS: Record<string, Network> = {
   polygon: {
     title: 'Polygon',
     rpcUrl:
-      'https://polished-restless-wind.matic.quiknode.pro/7d84ed2f3469de6a923c646c40778ab1022ab999/',
+      'https://polygon-rpc.com/',
     explorerUrl: 'https://polygonscan.com',
     explorerApiUrl: 'https://api.polygonscan.com/api',
     emoji: '🟣',
