@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ethers } from 'ethers'
   import { fade } from 'svelte/transition'
   import Loading from './Loading.svelte'
   import Tags from 'svelte-tags-input'
@@ -116,7 +117,10 @@
           <form
             on:submit|preventDefault={() => {
               error = null
-              flow.execute((contracts) => contracts.facet[selectedMethod.fragment.name](...args))
+              flow.execute(async (contracts) => {
+                const method = selectedMethod.fragment.format(ethers.utils.FormatTypes.minimal).split(' ')[1]
+                await contracts.facet[method](...args)
+              })
             }}
             class="py-3"
           >
