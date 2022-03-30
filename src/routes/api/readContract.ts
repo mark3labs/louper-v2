@@ -28,7 +28,10 @@ export const post: RequestHandler<
   const diamondContract = new ethers.Contract(address, abi, provider)
 
   try {
-    const data = await diamondContract[fragment.name](...args)
+    const funcFragment = ethers.utils.FunctionFragment.from(fragment)
+    const method = funcFragment.format(ethers.utils.FormatTypes.minimal).split(' ')[1]
+    console.log(method)
+    const data = await diamondContract[method](...args)
     return { body: data }
   } catch (e) {
     return {
