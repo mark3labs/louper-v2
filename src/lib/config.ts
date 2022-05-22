@@ -145,6 +145,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '👻',
     chainId: '250',
   },
+  fantom_testnet: {
+    title: 'Fantom Testnet',
+    rpcUrl: 'https://rpc.testnet.fantom.network/',
+    explorerUrl: 'https://testnet.ftmscan.com/',
+    explorerApiUrl: 'https://api-testnet.ftmscan.com/api',
+    emoji: '🧪',
+    chainId: '4002',
+  },
   boba: {
     title: 'Boba',
     rpcUrl: 'https://mainnet.boba.network',
