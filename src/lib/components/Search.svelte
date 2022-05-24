@@ -9,7 +9,7 @@
 <div class="card flex flex-col justify-around h-full bg-base-200 shadow-xl">
   <div class="card-body">
     <div class="card-title">Search by Address</div>
-    <div class="grid grid-flow-col card bg-base-300 rounded-box p-2">
+    <div class="grid grid-flow-col card bg-base-300 rounded-box p-1 lg:p-2">
       <div class="form-control">
         <div class="relative">
           <input
@@ -19,7 +19,7 @@
             class="w-full pr-16 input text-2xl bg-base-300 text-base-content"
           />
           <select
-            class="select select-sm absolute top-2 right-14 mr-3 bg-base-300"
+            class="select select-sm absolute top-2 right-14 mr-3 bg-base-300 w-1/5 lg:w-full"
             bind:value={network}
           >
             {#each Object.keys(NETWORKS) as network}
