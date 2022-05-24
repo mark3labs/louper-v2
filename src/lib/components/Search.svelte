@@ -19,7 +19,7 @@
             class="w-full pr-16 input text-2xl bg-base-300 text-base-content"
           />
           <select
-            class="select select-sm absolute top-2 right-14 mr-3 bg-base-300 w-1/5 lg:w-full"
+            class="select select-sm absolute top-2 right-14 mr-3 bg-base-300 w-1/5 lg:w-auto"
             bind:value={network}
           >
             {#each Object.keys(NETWORKS) as network}
