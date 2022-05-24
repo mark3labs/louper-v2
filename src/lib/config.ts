@@ -58,8 +58,7 @@ export const NETWORKS: Record<string, Network> = {
   },
   polygon: {
     title: 'Polygon',
-    rpcUrl:
-      'https://polygon-rpc.com/',
+    rpcUrl: 'https://polygon-rpc.com/',
     explorerUrl: 'https://polygonscan.com',
     explorerApiUrl: 'https://api.polygonscan.com/api',
     emoji: '🟣',
@@ -67,7 +66,7 @@ export const NETWORKS: Record<string, Network> = {
   },
   mumbai: {
     title: 'Polygon Mumbai Testnet',
-    rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
+    rpcUrl: 'https://matic-mumbai.chainstacklabs.com/',
     explorerUrl: 'https://mumbai.polygonscan.com/',
     explorerApiUrl: 'https://api-testnet.polygonscan.com/api',
     emoji: '🧪',
@@ -81,13 +80,13 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🟠',
     chainId: '56',
   },
-  binance_testnet : {
+  binance_testnet: {
     title: 'Binance Smart Chain Testnet',
     rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
     explorerUrl: 'https://testnet.bscscan.com/',
     explorerApiUrl: 'https://api.bscscan.com/api',
     emoji: '🟠',
-    chainId: '97'
+    chainId: '97',
   },
   avalanche: {
     title: 'Avalanche',
