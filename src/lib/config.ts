@@ -120,6 +120,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🔵',
     chainId: '42161',
   },
+  arbutrum_testnet: {
+    title: 'Arbitrum Testnet',
+    rpcUrl: 'https://rinkeby.arbitrum.io/rpc',
+    explorerUrl: 'https://testnet.arbiscan.io/',
+    explorerApiUrl: 'https://api-testnet.arbiscan.io/api',
+    emoji: '🧪',
+    chainId: '421611'
+  },
   moon_river: {
     title: 'Moonriver',
     rpcUrl: 'https://rpc.moonriver.moonbeam.network',
