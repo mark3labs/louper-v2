@@ -13,9 +13,32 @@ A simple UI for viewing details about EVM smart contracts using EIP-2535 (Diamon
 
 ### Prerequisites
 
-**You will need the following**
+You will need a Subabase local db instance. Follow the [instructions](https://supabase.com/docs/guides/local-development) to get set up.
 
-### TODO
+Run:
+```sh
+supabase init
+supabase start
+supabase db reset
+```
+
+You should now have a working DB.
+
+Run:
+```sh
+cp .env.example .env
+supabase status
+```
+
+Copy the `service_role key` and paste that as the value of `SUPABASE_KEY` in `.env`
+
+Run:
+
+```sh
+pnpm run dev
+```
+
+You should now have a working dev environment.
 
 ## License
 
