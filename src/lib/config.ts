@@ -112,6 +112,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🔴',
     chainId: '10',
   },
+  optimism_kovan: {
+    title: 'Optimism Kovan Testnet',
+    rpcUrl: 'https://kovan.optimism.io',
+    explorerUrl: 'https://kovan-optimistic.etherscan.io/',
+    explorerApiUrl: 'https://api-kovan-optimistic.etherscan.io/api',
+    emoji: '🧪',
+    chainId: '69',
+  },
   abritrum: {
     title: 'Arbitrum',
     rpcUrl: 'https://arb1.arbitrum.io/rpc',
@@ -126,15 +134,23 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://testnet.arbiscan.io/',
     explorerApiUrl: 'https://api-testnet.arbiscan.io/api',
     emoji: '🧪',
-    chainId: '421611'
+    chainId: '421611',
   },
-  moon_river: {
+  moonriver: {
     title: 'Moonriver',
     rpcUrl: 'https://rpc.moonriver.moonbeam.network',
     explorerUrl: 'https://moonriver.moonscan.io/',
     explorerApiUrl: 'https://api-moonriver.moonscan.io/api',
     emoji: '🌕',
     chainId: '1285',
+  },
+  moonbeam: {
+    title: 'Moonbeam',
+    rpcUrl: 'https://rpc.api.moonbeam.network',
+    explorerUrl: 'https://moonbeam.moonscan.io/',
+    explorerApiUrl: 'https://api-moonbeam.moonscan.io/api',
+    emoji: '🌕',
+    chainId: '1284',
   },
   celo: {
     title: 'Celo',
@@ -167,5 +183,37 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://blockexplorer.boba.network/api',
     emoji: '🧋',
     chainId: '288',
+  },
+  okex: {
+    title: 'OKEx',
+    rpcUrl: 'https://exchainrpc.okex.org',
+    explorerUrl: 'https://www.oklink.com/en/okc',
+    explorerApiUrl: '',
+    emoji: '🔵',
+    chainId: '66',
+  },
+  fuse: {
+    title: 'Fuse',
+    rpcUrl: 'https://rpc.fuse.io',
+    explorerUrl: 'https://explorer.fuse.io/',
+    explorerApiUrl: 'https://explorer.fuse.io/api',
+    emoji: '🧨',
+    chainId: '122',
+  },
+  harmony: {
+    title: 'Harmony',
+    rpcUrl: 'https://rpc.hermesdefi.io',
+    explorerUrl: 'https://explorer.harmony.one',
+    explorerApiUrl: '',
+    emoji: '1️⃣',
+    chainId: '1666600000',
+  },
+  aurora: {
+    title: 'Aurora',
+    rpcUrl: 'https://mainnet.aurora.dev',
+    explorerUrl: 'https://aurorascan.dev',
+    explorerApiUrl: 'https://api.aurorascan.dev/api',
+    emoji: '🅰️',
+    chainId: '1313161554',
   },
 }
