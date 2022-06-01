@@ -216,4 +216,12 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🅰️',
     chainId: '1313161554',
   },
+  aurora_testnet: {
+    title: 'Aurora Testnet',
+    rpcUrl: 'https://betanet.aurora.dev',
+    explorerUrl: 'https://testnet.aurorascan.dev',
+    explorerApiUrl: 'https://api-testnet.aurorascan.dev/api',
+    emoji: '🧪',
+    chainId: '1313161556',
+  },
 }
