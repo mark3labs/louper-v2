@@ -133,11 +133,11 @@
                   <span class="label-text">{input.name}</span>
                   <span class="badge font-mono font-thin">{input.type}</span>
                 </label>
-                {#if input.type.indexOf('[]') > -1}
+                {#if input.type.indexOf('[') > -1 && input.type.indexOf(']') > -1}
                   <Tags
                     on:tags={(event) => args[i] = event.detail.tags} 
                     allowPaste 
-                    class="border-2 rounded m-2 input input-primary input-bordered"
+                    class="input"
                   />
                 {:else if input.type === 'bool'}
                   <input type="checkbox" name={input.name} bind:checked={args[i]} />
