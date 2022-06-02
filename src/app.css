@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 .svelte-tags-input-layout {
-    @apply border-2 rounded m-2 input input-primary input-bordered !important;
+    @apply border-2 border-primary rounded m-2 bg-base-100 !important;
 }
 
 .svelte-tags-input {
