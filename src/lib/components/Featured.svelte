@@ -9,9 +9,9 @@
       url: '/diamond/0x86935F11C86623deC8a25696E1C19a8659CbF95d?network=polygon',
     },
     {
-      name: 'Aavegotchi Staking',
-      icon: '/img/aavegotchi-mainnet-logo.png',
-      url: '/diamond/0x93eA6ec350Ace7473f7694D43dEC2726a515E31A',
+      name: 'EscaBro',
+      icon: '/img/escabro-logo.png',
+      url: '/diamond/0xa06FdBA8774806654bc8b09F81Ea74d8C98C1560',
     },
     {
       name: 'BarnBridge',
