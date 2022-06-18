@@ -45,6 +45,13 @@
         >
           Support Us On Gitcoin
         </a>
+        <a
+          class="btn btn-ghost btn-sm rounded-btn"
+          href="https://discord.com/channels/730508054143172710/951483625092816976"
+          target="_blank"
+        >
+          Discord
+        </a>
       </div>
     </div>
     <div class="navbar-end" />
