@@ -16,10 +16,14 @@
 <div class="flex flex-col h-screen justify-between bg-base-100 text-base-content">
   <div class="navbar shadow-lg bg-base text-base-content fixed w-full z-20 bg-base-100">
     <div class="px-2 mx-2 navbar-start">
-      <span class="text-lg font-bold hidden lg:inline-block"
-        >💎 Louper - The Ethereum Diamond Inspector</span
-      >
-      <span class="text-lg font-bold lg:hidden">💎 Louper</span>
+      <span class="text-lg font-bold hidden lg:inline-block">
+        <img src="/louper-logo.png" alt="Louper" class="h-12 inline" />
+        Louper - The Ethereum Diamond Inspector
+      </span>
+      <span class="text-lg font-bold lg:hidden">
+        <img src="/louper-logo.png" alt="Louper" class="h-10 inline" />
+        Louper
+      </span>
     </div>
     <div class="hidden px-2 mx-2 navbar-center lg:flex">
       <div class="flex items-stretch">
