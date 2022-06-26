@@ -1,7 +1,9 @@
 <div class="flex items-center justify-center">
   <div class="px-40 py-20 bg-base-300 rounded-md shadow-xl">
     <div class="flex flex-col items-center">
-      <h1 class="font-bold text-base-content text-4xl">💀</h1>
+      <h1 class="font-bold text-base-content text-4xl">
+        <img src="/louper-logo-transparent.png" alt="Louper" class="h-24 mask mask-circle m-2">
+      </h1>
 
       <h6 class="mb-2 text-2xl font-bold text-center text-base-content md:text-3xl">
         <span class="text-error">Oops!</span> Could not load diamond
