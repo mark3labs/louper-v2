@@ -89,11 +89,9 @@
             </div>
           {:then res}
             {#if res}
-              <pre class="text-xs md:text-base text-info">
-                    <code>
-                    {JSON.stringify(res.data, undefined, 2)}
-                    </code>
-                </pre>
+              <pre class="text-xs md:text-base text-base-content">
+                {JSON.stringify(res.data, null, 2)}
+              </pre>
             {/if}
           {:catch error}
             Whoops! Something went wrong...
