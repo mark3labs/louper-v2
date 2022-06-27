@@ -59,7 +59,7 @@
 </svelte:head>
 
 <div class="flex flex-col w-full space-y-10 my-5 mx-auto">
-  <Header address={diamond.address}  network={diamond.network} />
+  <Header address={diamond.address} network={diamond.network} />
 
   <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN'}</h1>
   <div class="flex justify-center">
@@ -83,65 +83,67 @@
       </svg>
     </div>
   </div>
-  <div class="flex justify-between">
-    {#if diamond.isFinal}
-      <div class="badge badge-success badge-lg">Final</div>
-    {:else}
-      <div class="badge badge-warning badge-lg">Upgradable</div>
-    {/if}
-    <div class="flex justify-between gap-2">
-      <a
-        class="btn btn-sm glass bg-secondary"
-        download="abi.json"
-        href={`data:application/octet-stream,${encodeURI(JSON.stringify(diamond.abi))}`}
-      >
-        <svg
-          class="w-4 h-4 mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+  {#if !showReadContract && !showWriteContract}
+    <div class="flex justify-between">
+      {#if diamond.isFinal}
+        <div class="badge badge-success badge-lg">Final</div>
+      {:else}
+        <div class="badge badge-warning badge-lg">Upgradable</div>
+      {/if}
+      <div class="flex justify-between gap-2">
+        <a
+          class="btn btn-sm glass bg-secondary"
+          download="abi.json"
+          href={`data:application/octet-stream,${encodeURI(JSON.stringify(diamond.abi))}`}
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-          />
-        </svg>
-        Download ABI
-      </a>
-      <button class="btn btn-sm glass bg-primary" on:click={() => (showAddFacet = true)}>
-        <svg
-          class="w-4 h-4 mr-1"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
-          />
-        </svg>
-        Add Facet
-      </button>
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+            />
+          </svg>
+          Download ABI
+        </a>
+        <button class="btn btn-sm glass bg-primary" on:click={() => (showAddFacet = true)}>
+          <svg
+            class="w-4 h-4 mr-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
+            />
+          </svg>
+          Add Facet
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="grid lg:grid-cols-2 gap-3">
-    {#each diamond.facets as facet}
-      <FacetCard
-        {facet}
-        {diamond}
-        bind:activeFacet
-        bind:showReadContract
-        bind:showWriteContract
-        bind:showRemoveFacet
-      />
-    {/each}
-  </div>
+    <div class="grid lg:grid-cols-2 gap-3">
+      {#each diamond.facets as facet}
+        <FacetCard
+          {facet}
+          {diamond}
+          bind:activeFacet
+          bind:showReadContract
+          bind:showWriteContract
+          bind:showRemoveFacet
+        />
+      {/each}
+    </div>
+  {/if}
   <ReadContract
     address={diamond.address}
     network={diamond.network}
