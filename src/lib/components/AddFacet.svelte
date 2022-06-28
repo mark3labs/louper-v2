@@ -5,8 +5,9 @@
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
   import { utils } from 'ethers'
-  import { getExplorerTxUrl } from '$lib/utils'
+  import { getExplorerTxUrl, getFacetMethods } from '$lib/utils'
   import Loading from './Loading.svelte'
+  import type { Method } from '../../types/entities'
 
   let facetAddress = ''
   let facet: any | undefined = undefined
@@ -19,6 +20,8 @@
   let fetchFacetError = ''
   let error: any = null
   let args: any = {}
+  let methods: Method[] = []
+  let selectors = []
 
   const FacetCutAction = {
     Add: 0,
@@ -39,17 +42,19 @@
         {
           facetAddress: facetAddress,
           action: FacetCutAction.Add,
-          functionSelectors: iface.fragments
-            .map((f) => {
-              if (f.type === 'function')
-                return iface.getSighash(f.format(utils.FormatTypes.sighash))
-            })
-            .filter((f) => f != undefined),
+          // functionSelectors: iface.fragments
+          //   .map((f) => {
+          //     if (f.type === 'function')
+          //       return iface.getSighash(f.format(utils.FormatTypes.sighash))
+          //   })
+          //   .filter((f) => f != undefined),
+          functionSelectors: selectors,
         },
       ],
       constants.AddressZero,
       '0x',
     ]
+    console.log(selectors)
   }
 
   const connect = async (option = 'builtin') => {
@@ -92,6 +97,7 @@
       const facetData = await res.json()
       if (facetData.abi.length) {
         facet = facetData
+        methods = getFacetMethods(facetAddress, facetData.abi)
         return
       }
       fetchFacetError = 'Facet is not verified.'
@@ -137,26 +143,11 @@
 </script>
 
 {#if showModal}
-  <div
-    transition:fade={{ duration: 250 }}
-    class="fixed mt-0 z-10 inset-0 overflow-y-auto flex items-center justify-center w-full h-full bg-black bg-opacity-75"
-  >
-    <!-- A basic modal dialog with title, body and one button to close -->
-    <div
-      class="h-auto text-left min-w-full fixed  md:min-w-0 md:w-1/2 rounded shadow-xl p-8 mx-12 bg-base-100 text-base-content"
-    >
+  <div class="flex justify-center">
+    <div class="rounded-box bg-base-300 p-10 w-2/3">
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
         <h3 class="text-2xl font-medium leading-6 mb-5">Add New Facet</h3>
 
-        <div class="alert alert-warning">
-          <div class="flex-1">
-            <span class="text-2xl mr-2">⚠️</span>
-            <label for="">
-              This is a BETA feature and may break your diamond contract. This will add a new facet
-              and functions to your contract.
-            </label>
-          </div>
-        </div>
         {#if fetchFacetError}
           <div class="alert alert-error mt-2">
             <div class="flex-1">
@@ -168,40 +159,56 @@
           </div>
         {/if}
       </div>
-
-      {#if !facet}
-        <div class="flex items-end">
-          <div class="form-control w-2/3">
-            <label class="label" for="">
-              <span class="label-text">Facet Address</span>
-            </label>
-            <input
-              type="text"
-              bind:value={facetAddress}
-              class="rounded-xl m-2 input input-primary input-bordered bg-base-200"
-            />
-          </div>
-          <button class="btn bg-primary btn-sm glass mb-4" on:click={fetchFacet}>
-            Fetch Facet Info
-          </button>
-        </div>
-      {/if}
-
-      {#if facet}
+      {#if $wallet.state !== 'Ready'}
         <div class="container flex justify-center mt-5 gap-2">
-          {#if $wallet.state !== 'Ready'}
-            {#if $builtin.available}
-              <button class="btn btn-sm glass bg-primary" on:click={() => connect()}>
-                Connect
-              </button>
-            {/if}
-            <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
-              Connect w/ WalletConnect
+          {#if $builtin.available}
+            <button class="btn btn-sm glass bg-primary" on:click={() => connect()}>
+              Connect
             </button>
           {/if}
+          <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
+            Connect w/ WalletConnect
+          </button>
         </div>
+      {:else}
+        {#if !facet}
+          <div class="flex items-end">
+            <div class="form-control w-2/3">
+              <label class="label" for="">
+                <span class="label-text">Facet Address</span>
+              </label>
+              <input
+                type="text"
+                bind:value={facetAddress}
+                class="rounded-xl m-2 input input-primary input-bordered bg-base-200"
+              />
+            </div>
+            <button class="btn bg-primary btn-sm glass mb-4" on:click={fetchFacet}>
+              Fetch Facet Info
+            </button>
+          </div>
+        {/if}
 
-        {#if $wallet.state === 'Ready'}
+        {#if facet}
+          <table class="table table-compact w-full">
+            <thead>
+              <tr>
+                <th>Add</th>
+                <th>Method</th>
+                <th class="text-right"><span class="mr-3">Selector</span></th>
+              </tr>
+            </thead>
+            {#each methods as method}
+              <tr>
+                <th><input type="checkbox" bind:group={selectors} value={method.selector} /></th>
+                <td>{method.signature}</td>
+                <td class="text-right">
+                  <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
+                </td>
+              </tr>
+            {/each}
+          </table>
+
           <div class="mb-2">
             <p
               class="leading-5 bg-neutral-focus text-neutral-content w-full p-5 rounded-box overflow-auto"
@@ -237,9 +244,7 @@
               {/each}
             </p>
           </div>
-        {/if}
 
-        {#if $wallet.state === 'Ready'}
           <div class="flex justify-center">
             <button
               class="btn btn-xl glass bg-primary"
