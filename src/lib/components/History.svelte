@@ -91,7 +91,7 @@
                     />
                   </svg>
                 </a>
-                <div class="font-semibold">{facetsToName[cut[0]]}</div>
+                <div class="font-semibold">{facetsToName[cut[0]] || ''}</div>
               </div>
               <div class="flex flex-wrap space-x-1 ml-16">
                 {#each cut[2] as selector}
