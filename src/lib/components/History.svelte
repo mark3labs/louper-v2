@@ -71,7 +71,7 @@
                   {ACTIONS[cut[1]]}
                 </div>
                 <a
-                  href={getExplorerAddressUrl(event.txHash, network)}
+                  href={getExplorerAddressUrl(cut[0], network)}
                   class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
                   target="_blank"
                 >
