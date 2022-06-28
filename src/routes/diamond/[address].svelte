@@ -132,7 +132,7 @@
         </button>
       </div>
     </div>
-    <History events={diamond.events} network={diamond.network} />
+    <History events={diamond.events} network={diamond.network} facetsToName={diamond.facetsToName} />
     <div class="grid lg:grid-cols-2 gap-3">
       {#each diamond.facets as facet}
         <FacetCard
