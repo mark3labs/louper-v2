@@ -2,7 +2,8 @@
   import type { LouperEvent } from '../../types/entities'
   import { getExplorerTxUrl, getExplorerAddressUrl } from '$lib/utils'
   export let events: LouperEvent[] = []
-  export let network
+  export let facetsToName: Record<string, string>
+  export let network: string
 
   const ACTIONS = ['Add', 'Replace', 'Remove']
 </script>
@@ -61,7 +62,7 @@
               </svg>
             </a>
             {#each event[0] as cut}
-              <div class="flex my-2 space-x-1 border-t border-gray-600 pt-3">
+              <div class="flex my-2 space-x-2 border-t border-gray-600 pt-3">
                 <div
                   class="badge badge-lg text-white uppercase font-semibold"
                   class:badge-primary={cut[1] == 0}
@@ -90,6 +91,7 @@
                     />
                   </svg>
                 </a>
+                <div class="font-semibold">{facetsToName[cut[0]]}</div>
               </div>
               <div class="flex flex-wrap space-x-1 ml-16">
                 {#each cut[2] as selector}
