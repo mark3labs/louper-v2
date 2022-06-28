@@ -70,7 +70,7 @@ export default class DiamondContract implements Diamond {
             )
             console.log('Fetched info from 4bytes.')
             let data
-            
+
             if (res.ok) {
               try {
                 data = await res.json()
@@ -86,7 +86,6 @@ export default class DiamondContract implements Diamond {
             if (signature === 'diamondCut((address,uint8,bytes4[])[],address,bytes)') {
               this.isFinal = false
             }
-
           } catch (e) {
             console.log(e)
           }
@@ -114,23 +113,23 @@ export default class DiamondContract implements Diamond {
     }
 
     // Fetch diamond events
-    // try {
-    //   res = await this.fetch('/api/events', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ address: this.address, network: this.network })
-    //   })
-    //   this.events = await res.json()
+    try {
+      res = await this.fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ address: this.address, network: this.network }),
+      })
+      this.events = await res.json()
 
-    //   // await axios.post('/api/leaderboard', {
-    //   //   address: this.address,
-    //   //   network: this.network,
-    //   //   name: this.name
-    //   // })
-    // } catch (e) {
-    //   console.error(e)
-    //   this.events = []
-    // }
+      //   // await axios.post('/api/leaderboard', {
+      //   //   address: this.address,
+      //   //   network: this.network,
+      //   //   name: this.name
+      //   // })
+    } catch (e) {
+      console.error(e)
+      this.events = []
+    }
 
     return this
   }

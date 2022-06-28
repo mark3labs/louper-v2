@@ -3,11 +3,13 @@ import { NETWORKS } from '$lib/config'
 import type { LouperEvent } from '../../types/entities'
 import dotenv from 'dotenv'
 import type { RequestHandler } from '@sveltejs/kit'
+import axios from 'redaxios'
+import { getEtherscanApiKey } from '$lib/utils'
 
 dotenv.config()
 
 const abi = ['event DiamondCut(tuple(address,uint8,bytes4[])[],address,bytes)']
-const INFURA_API_KEY = process.env['INFURA_API_KEY']
+const topic = '0x8faa70878671ccd212d20771b795c50af8fd3ff6cf27f4bde57e5d4de0aeb673'
 
 export const post: RequestHandler<void, { network: string; address: string }> = async ({
   request,
@@ -15,27 +17,41 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
   const body = await request.json()
   console.info(`Fetching events for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`)
   const address = body.address
+  const network = body.network
 
-  let rpcUrl = body.network ? NETWORKS[body.network].rpcUrl : NETWORKS['mainnet'].rpcUrl
-  rpcUrl = rpcUrl.replace('%INFURA_API_KEY%', INFURA_API_KEY)
-  const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+  const API_KEY = getEtherscanApiKey(network)
 
-  const diamondContract = new ethers.Contract(address, abi, provider)
+  const apiUrl = NETWORKS[network].explorerApiUrl
+  if (apiUrl) {
+    const fullUrl = `${apiUrl}?module=logs&action=getLogs&fromBlock=0&address=${address}&topic0=${topic}&apikey=${API_KEY}`
+    console.log(fullUrl)
+    const resp = await axios.get(fullUrl)
 
-  const events: ethers.Event[] = await diamondContract.queryFilter(
-    diamondContract.filters.DiamondCut(),
-    // request.body.network === 'polygon' ? 11516320 : undefined
-  )
+    const louperEvents: LouperEvent[] = []
 
-  const louperEvents: LouperEvent[] = []
-
-  for (let i = 0; i < events.length; i++) {
-    const block = await events[i].getBlock()
-    const louperEvent: LouperEvent = {
-      ...events[i],
-      timestamp: block.timestamp,
+    if (resp.data) {
+      const iface = new ethers.utils.Interface(abi)
+      for (let i = 0; i < resp.data.result.length; i++) {
+        const louperEvent: LouperEvent = {
+          ...iface.decodeEventLog('DiamondCut', resp.data.result[i].data),
+          timestamp: parseInt(resp.data.result[i].timeStamp, 16),
+          txHash: resp.data.result[i].transactionHash,
+        }
+        louperEvents.push(louperEvent)
+      }
     }
-    louperEvents.push(louperEvent)
+    return { body: louperEvents }
   }
-  return { body: louperEvents }
+
+  // const louperEvents: LouperEvent[] = []
+  //
+  // for (let i = 0; i < events.length; i++) {
+  //   const block = await events[i].getBlock()
+  //   const louperEvent: LouperEvent = {
+  //     ...events[i],
+  //     timestamp: block.timestamp,
+  //   }
+  //   louperEvents.push(louperEvent)
+  // }
+  // return { body: louperEvents }
 }

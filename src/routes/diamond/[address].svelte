@@ -23,6 +23,7 @@
   import Header from '$lib/components/Header.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
   import WriteContract from '$lib/components/WriteContract.svelte'
+  import History from '$lib/components/History.svelte'
   import DiamondContract from '$lib/services/diamond'
   import { getExplorerAddressUrl } from '$lib/utils'
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
@@ -131,6 +132,7 @@
         </button>
       </div>
     </div>
+    <History events={diamond.events} network={diamond.network} />
     <div class="grid lg:grid-cols-2 gap-3">
       {#each diamond.facets as facet}
         <FacetCard

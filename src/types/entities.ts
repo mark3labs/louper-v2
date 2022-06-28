@@ -15,6 +15,7 @@ export interface Facet {
 
 export interface LouperEvent extends Event {
   timestamp: number
+  txHash: string
 }
 
 export interface Diamond {
