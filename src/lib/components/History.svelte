@@ -26,7 +26,7 @@
     </svg>
     Upgrade History
   </div>
-  <div class="collapse-content">
+  <div class="collapse-content overflow-y-scroll">
     <ol class="relative border-l border-gray-200 m-10">
       {#each events.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1)) as event}
         <li class="mb-10 ml-6">
