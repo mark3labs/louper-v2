@@ -32,6 +32,9 @@
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { NETWORKS } from '$lib/config'
   import AddFacet from '$lib/components/AddFacet.svelte'
+  import { getNotificationsContext } from 'svelte-notifications'
+
+  const { addNotification } = getNotificationsContext()
 
   export let diamond: DiamondContract
 
@@ -40,6 +43,8 @@
   let showRemoveFacet = false
   let showAddFacet = false
   let activeFacet: Facet | null = null
+
+  let { transactions } = initWeb3W({})
 
   $: if (diamond) {
     initWeb3W({
@@ -52,6 +57,19 @@
         }),
       ],
     })
+  }
+
+  $: if ($transactions.length) {
+    for (let t of $transactions) {
+      if (t.acknowledged) continue
+      transactions.acknowledge(t.hash, t.status)
+      addNotification({
+        text: t.hash,
+        position: 'bottom-right',
+        status: t.status,
+        network: diamond.network,
+      })
+    }
   }
 </script>
 
@@ -132,7 +150,11 @@
         </button>
       </div>
     </div>
-    <History events={diamond.events} network={diamond.network} facetsToName={diamond.facetsToName} />
+    <History
+      events={diamond.events}
+      network={diamond.network}
+      facetsToName={diamond.facetsToName}
+    />
     <div class="grid lg:grid-cols-2 gap-3">
       {#each diamond.facets as facet}
         <FacetCard

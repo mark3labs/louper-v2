@@ -28,6 +28,7 @@ specifiers:
   redaxios: ^0.4.1
   svelte: ^3.46.4
   svelte-check: ^2.4.5
+  svelte-notifications: ^0.9.95
   svelte-preprocess: ^4.10.4
   svelte-tags-input: ^2.9.0
   tailwindcss: ^2.2.19
@@ -50,6 +51,7 @@ dependencies:
   ethers: 5.6.0
   lodash: 4.17.21
   redaxios: 0.4.1
+  svelte-notifications: 0.9.95
   svelte-tags-input: 2.9.0
   web3w: 0.3.2-beta.22_3hw4adqwudasrbiz75gt5fcadq
   web3w-walletconnect-loader: 0.3.2
@@ -2877,6 +2879,10 @@ packages:
     dependencies:
       svelte: 3.46.4
     dev: true
+
+  /svelte-notifications/0.9.95:
+    resolution: {integrity: sha512-lG+b9BH4cUDs6vjNI1vWfoAgsUca3POden08/ZlgyCSkUuuXGYPbhr3d9MF3piMjYWEA94fsyvZPDLFuxcacSg==}
+    dev: false
 
   /svelte-preprocess/4.10.4_rsemj4nxuvn47l6tqx2y54nlzu:
     resolution: {integrity: sha512-fuwol0N4UoHsNQolLFbMqWivqcJ9N0vfWO9IuPAiX/5okfoGXURyJ6nECbuEIv0nU3M8Xe2I1ONNje2buk7l6A==}
