@@ -210,9 +210,7 @@
           </table>
 
           <div class="mb-2">
-            <p
-              class="leading-5 bg-neutral-focus text-neutral-content w-full p-5 rounded-box overflow-auto"
-            >
+            <p class="leading-5 w-full p-5">
               {#if $wallet.pendingUserConfirmation}
                 Please check and approve the transaction in your wallet.
               {/if}
@@ -230,18 +228,6 @@
                   </p>
                 </div>
               {/if}
-              {#each $transactions as transaction}
-                TX Hash: <a
-                  class="text-info"
-                  href={getExplorerTxUrl(transaction.hash, network)}
-                  target="_blank"
-                >
-                  {transaction.hash}
-                </a>
-                <span class="uppercase font-semibold">
-                  {transaction.status}
-                </span>
-              {/each}
             </p>
           </div>
 
