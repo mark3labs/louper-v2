@@ -152,6 +152,14 @@
               <Loading />
             </div>
           {/if}
+
+          {#if error}
+            <div class="self-center">
+              <p class="text-red-500 font-semibold">
+                {error.message}
+              </p>
+            </div>
+          {/if}
         </p>
       </div>
     {/if}
