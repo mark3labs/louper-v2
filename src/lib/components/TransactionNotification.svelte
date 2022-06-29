@@ -94,6 +94,7 @@
       </div>
       <a
         href={getExplorerTxUrl(notification.text, notification.network)}
+        target="_blank"
         class="badge badge-secondary text-white p-3 cursor-pointer text-xs lg:text-base"
       >
         {notification.text.substring(0, 15)}...{notification.text.substring(
