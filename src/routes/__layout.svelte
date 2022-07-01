@@ -74,8 +74,10 @@
     </div>
     <footer class="items-center p-4 footer bg-base-300 text-base-content text-xs lg:text-base">
       <div class="items-center grid-flow-col">
-        <p>Copyright © 2021</p>
-        <img src="/img/mark3labslogo.png" alt="Mark III Labs, LLC" class="h-6 invert" />
+        <p>Copyright © 2022</p>
+        <a href="https://mark3labs.com" target="_blank">
+          <img src="/img/mark3labslogo.png" alt="Mark III Labs, LLC" class="h-6 invert" />
+        </a>
         <p>All right reserved</p>
       </div>
       <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
