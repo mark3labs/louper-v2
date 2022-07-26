@@ -46,7 +46,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://goerli.etherscan.io',
     explorerApiUrl: 'https://api-goerli.etherscan.io/api',
     emoji: '🧪',
-    chainId: '420',
+    chainId: '5',
   },
   xdai: {
     title: 'Gnosis (XDai)',
