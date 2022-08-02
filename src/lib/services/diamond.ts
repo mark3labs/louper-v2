@@ -13,6 +13,7 @@ export default class DiamondContract implements Diamond {
   isFinal = true
   isVerified = true
   facetsToName: Record<string, string> = {}
+  facetsToSelectors: Map<string, string[]> = new Map<string, string[]>()
   fetch: FetchFunction
   abi = []
 
@@ -41,6 +42,7 @@ export default class DiamondContract implements Diamond {
     const facets = await res.json()
 
     for (let i = 0; i < facets.length; i++) {
+      this.facetsToSelectors[facets[i][0]] = facets[i][1]
       this.selectors = this.selectors.concat(facets[i][1])
       res = await this.fetch('/api/contract', {
         method: 'POST',
@@ -144,9 +146,9 @@ export default class DiamondContract implements Diamond {
         this.isFinal = false
       }
 
-      const selector = utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10)
+      const selector = utils.keccak256(utils.toUtf8Bytes(f)).substring(0, 10)
 
-      if (!this.selectors.includes(selector)) continue
+      if (!this.facetsToSelectors[address].includes(selector)) continue
 
       const method: Method = {
         signature: f,
