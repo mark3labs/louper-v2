@@ -64,13 +64,13 @@ export default class DiamondContract implements Diamond {
             // get info from 4bytes
             console.log('Fetching selector info from 4bytes...')
             res = await this.fetch(
-              `https://www.4byte.directory/api/v1/signatures/?hex_signature=${selector}`,
+              `https://sig.eth.samczsun.com/api/v1/signatures?function=${selector}`,
               {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
               },
             )
-            console.log('Fetched info from 4bytes.')
+            console.log('Fetched info from sig.eth.samczsun.com.')
             let data
 
             if (res.ok) {
@@ -81,8 +81,9 @@ export default class DiamondContract implements Diamond {
               }
             }
 
-            if (data && data.count) {
-              signature = data.results[0].text_signature
+            if (data && data.result) {
+              console.log(data.result)
+              signature = data.result.function[selector][0].name
             }
 
             if (signature === 'diamondCut((address,uint8,bytes4[])[],address,bytes)') {
