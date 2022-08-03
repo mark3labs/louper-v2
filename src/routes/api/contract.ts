@@ -25,7 +25,6 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)
 
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res: any = await fetchCachedAbi(network, address)
   if (res.abi) {
@@ -42,7 +41,7 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
     console.log('Trying Sourcify...')
     const metadata = await axios.get(
       `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${address}/metadata.json`,
-    ) 
+    )
     if (metadata) {
       console.log(
         `Fetched ABI for ${
@@ -68,31 +67,35 @@ export const post: RequestHandler<void, { network: string; address: string }> = 
 
   const apiUrl = NETWORKS[network].explorerApiUrl
   if (apiUrl) {
-    const fullUrl = `${apiUrl}?module=contract&action=getsourcecode&address=${address}&apikey=${API_KEY}`
-    console.log(fullUrl)
-    const resp = await axios.get(fullUrl)
-    const abi = resp.data.result[0].SourceCode ? JSON.parse(resp.data.result[0].ABI) : []
-    const name = resp.data.result[0].ContractName || ''
+    try {
+      const fullUrl = `${apiUrl}?module=contract&action=getsourcecode&address=${address}&apikey=${API_KEY}`
+      console.log(fullUrl)
+      const resp = await axios.get(fullUrl)
+      const abi = resp.data.result[0].SourceCode ? JSON.parse(resp.data.result[0].ABI) : []
+      const name = resp.data.result[0].ContractName || ''
 
-    if (abi.length) {
-      console.log(`Fetched ABI for ${name}. Caching...`)
-      await cacheAbi(network, address, name, abi)
-    } else {
-      console.log('Contract not verified...')
-    }
-    return {
-      body: {
-        name,
-        abi,
-      },
+      if (abi.length) {
+        console.log(`Fetched ABI for ${name}. Caching...`)
+        await cacheAbi(network, address, name, abi)
+      } else {
+        console.log('Contract not verified...')
+      }
+      return {
+        body: {
+          name,
+          abi,
+        },
+      }
+    } catch (e) {
+      console.log('Nothing found on block explorer.')
     }
   }
 
   return {
     body: {
       name: '',
-      abi: []
-    }
+      abi: [],
+    },
   }
 }
 

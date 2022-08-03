@@ -1,5 +1,5 @@
 type Network = {
-  title: string,
+  title: string
   rpcUrl: string
   explorerUrl: string
   explorerApiUrl: string
@@ -223,5 +223,13 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-testnet.aurorascan.dev/api',
     emoji: '🧪',
     chainId: '1313161556',
+  },
+  metis: {
+    title: 'METIS',
+    rpcUrl: 'https://andromeda.metis.io/?owner=1088',
+    explorerUrl: 'https://andromeda-explorer.metis.io',
+    explorerApiUrl: 'https://andromeda-explorer.metis.io/api',
+    emoji: '🟩',
+    chainId: '1088',
   },
 }
