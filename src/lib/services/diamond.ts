@@ -82,7 +82,6 @@ export default class DiamondContract implements Diamond {
             }
 
             if (data && data.result) {
-              console.log(data.result)
               signature = data.result.function[selector][0].name
             }
 

@@ -102,7 +102,7 @@
       </svg>
     </div>
   </div>
-  {#if !showReadContract && !showWriteContract && !showAddFacet}
+  {#if !showReadContract && !showWriteContract && !showAddFacet && !showRemoveFacet}
     <div class="flex justify-between">
       {#if diamond.isFinal}
         <div class="badge badge-success badge-lg">Final</div>
