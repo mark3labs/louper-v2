@@ -62,7 +62,7 @@ export default class DiamondContract implements Diamond {
           let signature = 'UNKNOWN'
           try {
             // get info from 4bytes
-            console.log('Fetching selector info from 4bytes...')
+            console.log('Fetching selector info from sig.eth.samczsun.com...')
             res = await this.fetch(
               `https://sig.eth.samczsun.com/api/v1/signatures?function=${selector}`,
               {
@@ -81,7 +81,12 @@ export default class DiamondContract implements Diamond {
               }
             }
 
-            if (data && data.result) {
+            if (
+              data &&
+              data.result &&
+              data.result.function[selector] &&
+              data.result.function[selector].length
+            ) {
               signature = data.result.function[selector][0].name
             }
 
@@ -123,11 +128,15 @@ export default class DiamondContract implements Diamond {
       })
       this.events = await res.json()
 
-      //   // await axios.post('/api/leaderboard', {
-      //   //   address: this.address,
-      //   //   network: this.network,
-      //   //   name: this.name
-      //   // })
+      await this.fetch('/api/leaderboard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          address: this.address,
+          network: this.network,
+          name: this.name || 'Unknown',
+        }),
+      })
     } catch (e) {
       console.error(e)
       this.events = []
