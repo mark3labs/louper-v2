@@ -43,12 +43,23 @@ export const post: RequestHandler<
   }
 }
 
-export const get: RequestHandler = async () => {
-  const { data, error } = await supabase
-    .from('leaderboard')
-    .select()
-    .order('updated_at', { ascending: false })
-    .limit(5)
+export const get: RequestHandler = async ({ url }) => {
+  let data
+  let error
+
+  if (url.searchParams.get('ranked')) {
+    ;({ data, error } = await supabase
+      .from('leaderboard')
+      .select()
+      .order('hits', { ascending: false })
+      .limit(10))
+  } else {
+    ;({ data, error } = await supabase
+      .from('leaderboard')
+      .select()
+      .order('updated_at', { ascending: false })
+      .limit(10))
+  }
 
   if (error) {
     console.error(error)

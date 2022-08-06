@@ -18,7 +18,7 @@
     {#if diamondCount}
       <div class="stat-value">{diamondCount}</div>
     {:else}
-      <div class="stat-value rounded-lg bg-base-300 animate-pulse h-10 w-10" />
+      <div class="stat-value rounded-full bg-base-300 animate-pulse h-10 w-20" />
     {/if}
   </div>
 
@@ -28,18 +28,18 @@
     {#if contractCount}
       <div class="stat-value">{contractCount}</div>
     {:else}
-      <div class="stat-value rounded-lg bg-base-300 animate-pulse h-10 w-10" />
+      <div class="stat-value rounded-full bg-base-300 animate-pulse h-10 w-20" />
     {/if}
   </div>
 
   <div class="stat">
     <div class="stat-figure text-3xl">👀</div>
-    <div class="stat-title">Pages Views</div>
+    <div class="stat-title mb-2">Pages Views</div>
     {#if pageViews}
       <div class="stat-value">{pageViews}</div>
     {:else}
-      <div class="stat-value rounded-lg bg-base-300 animate-pulse h-10 w-10" />
+      <div class="stat-value rounded-full bg-base-300 animate-pulse h-10 w-20" />
     {/if}
-    <div class="stat-desc">Last 30 Days</div>
+    <div class="stat-desc mt-2">Last 30 Days</div>
   </div>
 </div>

@@ -6,14 +6,14 @@
   let diamonds = []
 
   onMount(async () => {
-    const res = await fetch('/api/leaderboard')
+    const res = await fetch('/api/leaderboard?ranked=true')
     ;({ diamonds } = await res.json())
   })
 </script>
 
 <div class="px-4 mx-auto sm:px-6 lg:px-8 w-full">
   <div>
-    <p class="text-base font-bold ">Recent Diamonds Inspected</p>
+    <p class="text-base font-bold ">Top Diamonds Inspected</p>
   </div>
 
   <div class="mt-6">
@@ -24,6 +24,7 @@
           <tr>
             <th>Name</th>
             <th>Address</th>
+            <th>Views</th>
             <th>Network</th>
           </tr>
         </thead>
@@ -35,6 +36,7 @@
             >
               <td>{diamond.name}</td>
               <td>{diamond.address}</td>
+              <td>{diamond.hits}</td>
               <td class="capitalize">
                 {NETWORKS[diamond.network].emoji}&nbsp;
                 {NETWORKS[diamond.network].title}
