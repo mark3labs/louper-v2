@@ -11,14 +11,14 @@
   })
 </script>
 
-<div class="px-4 mx-auto sm:px-6 lg:px-8 w-full">
+<div class="px-4 mx-auto sm:px-6 lg:px-8">
   <div>
     <p class="text-base font-bold ">Recent Diamonds Inspected</p>
   </div>
 
   <div class="mt-6">
     <div class="overflow-x-auto">
-      <table class="table table-compact w-full">
+      <table class="table table-compact">
         <!-- head -->
         <thead>
           <tr>
@@ -33,8 +33,8 @@
               class="hover cursor-pointer"
               on:click={() => goto(`/diamond/${diamond.address}?network=${diamond.network}`)}
             >
-              <td>{diamond.name}</td>
-              <td>{diamond.address}</td>
+              <td>{diamond.name.substring(0,25)}</td>
+              <td>{diamond.address.substring(0,20)}...{diamond.address.substring(36)}</td>
               <td class="capitalize">
                 {NETWORKS[diamond.network].emoji}&nbsp;
                 {NETWORKS[diamond.network].title}
