@@ -11,14 +11,14 @@
   })
 </script>
 
-<div class="px-4 mx-auto sm:px-6 lg:px-8">
+<div class="px-4 mx-auto sm:px-6 lg:px-8 w-full">
   <div>
     <p class="text-base font-bold ">Top Diamonds Inspected</p>
   </div>
 
   <div class="mt-6">
     <div class="overflow-x-auto">
-      <table class="table table-compact">
+      <table class="table table-compact w-full">
         <!-- head -->
         <thead>
           <tr>
