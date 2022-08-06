@@ -42,3 +42,26 @@ export const post: RequestHandler<
     console.error(error)
   }
 }
+
+export const get: RequestHandler = async () => {
+  const { data, error } = await supabase
+    .from('leaderboard')
+    .select()
+    .order('updated_at', { ascending: false })
+    .limit(5)
+
+  if (error) {
+    console.error(error)
+  }
+
+  let diamonds = []
+  if (data && data.length) {
+    diamonds = data
+  }
+
+  return {
+    body: {
+      diamonds,
+    },
+  }
+}
