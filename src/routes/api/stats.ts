@@ -1,11 +1,13 @@
 import dotenv from 'dotenv'
 import type { RequestHandler } from '@sveltejs/kit'
 import { createClient } from '@supabase/supabase-js'
+import axios from 'redaxios'
 
 dotenv.config()
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
+const SA_KEY = process.env['SIMPLE_ANALYTICS_API_KEY']
 
 export const get: RequestHandler = async () => {
   let { error, count } = await supabase
@@ -34,10 +36,25 @@ export const get: RequestHandler = async () => {
     diamondCount = count
   }
 
+  const res = await axios.get(
+    'https://simpleanalytics.com/louper.dev.json?version=5&fields=pageviews&end=today',
+    {
+      headers: {
+        'Api-key': SA_KEY,
+      },
+    },
+  )
+
+  let pageViews = 0
+  if (res.data) {
+    pageViews = res.data.pageviews
+  }
+
   return {
     body: {
       contractCount,
       diamondCount,
+      pageViews,
     },
   }
 }
