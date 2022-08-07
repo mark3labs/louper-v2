@@ -14,7 +14,7 @@ import { getEtherscanApiKey } from '$lib/utils'
 // Create a single supabase client for interacting with your database
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
 
-export const post: RequestHandler<void, { network: string; address: string }> = async ({
+export const POST: RequestHandler<void, { network: string; address: string }> = async ({
   request,
 }) => {
   const body = await request.json()
