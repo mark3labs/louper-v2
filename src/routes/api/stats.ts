@@ -9,7 +9,7 @@ dotenv.config()
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
 const SA_KEY = process.env['SIMPLE_ANALYTICS_API_KEY']
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
   let { error, count } = await supabase
     .from('contracts')
     .select('name', { count: 'exact', head: true })

@@ -11,7 +11,7 @@ dotenv.config()
 const abi = ['event DiamondCut(tuple(address,uint8,bytes4[])[],address,bytes)']
 const topic = '0x8faa70878671ccd212d20771b795c50af8fd3ff6cf27f4bde57e5d4de0aeb673'
 
-export const post: RequestHandler<void, { network: string; address: string }> = async ({
+export const POST: RequestHandler<void, { network: string; address: string }> = async ({
   request,
 }) => {
   const body = await request.json()
