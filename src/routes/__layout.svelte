@@ -5,6 +5,7 @@
   import '../app.css'
   import navigationState from '../stores/navigationState'
   import TransactionNotification from '$lib/components/TransactionNotification.svelte'
+  import ConnectToOrbis from '$lib/components/ConnectToOrbis.svelte'
 
   beforeNavigate(() => {
     $navigationState = 'loading'
@@ -61,7 +62,9 @@
           </a>
         </div>
       </div>
-      <div class="navbar-end" />
+      <div class="navbar-end">
+        <ConnectToOrbis />
+      </div>
     </div>
     <div class="container md:mx-auto mt-24 p-2">
       <main>

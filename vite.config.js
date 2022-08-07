@@ -14,6 +14,9 @@ const config = {
   build: {
     target: 'es2020',
   },
+  define: {
+    global: {},
+  },
 }
 
 export default config
