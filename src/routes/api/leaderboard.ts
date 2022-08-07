@@ -41,6 +41,10 @@ export const POST: RequestHandler<
   if (error) {
     console.error(error)
   }
+
+  return {
+    body: 'OK',
+  }
 }
 
 export const GET: RequestHandler = async ({ url }) => {
