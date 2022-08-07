@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite'
-import { UserConfig } from 'vite'
 
-const config: UserConfig = {
+/** @type {import('vite').UserConfig}
+const config = {
   plugins: [sveltekit()],
   server: {
     port: 3000,
