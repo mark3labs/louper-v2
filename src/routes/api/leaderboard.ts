@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js'
 // Create a single supabase client for interacting with your database
 const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
 
-export const post: RequestHandler<
+export const POST: RequestHandler<
   void,
   { network: string; address: string; name: string }
 > = async ({ request }) => {
@@ -41,9 +41,13 @@ export const post: RequestHandler<
   if (error) {
     console.error(error)
   }
+
+  return {
+    body: 'OK',
+  }
 }
 
-export const get: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url }) => {
   let data
   let error
 

@@ -9,7 +9,7 @@ const abi = ['function facets() external view returns (tuple(address,bytes4[])[]
 
 const INFURA_API_KEY = process.env['INFURA_API_KEY']
 
-export const post: RequestHandler<void, { network: string; address: string }> = async ({
+export const POST: RequestHandler<void, { network: string; address: string }> = async ({
   request,
 }) => {
   const body = await request.json()
