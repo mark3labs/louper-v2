@@ -33,3 +33,10 @@ GRANT ALL ON TABLE public.leaderboard TO authenticated;
 GRANT ALL ON TABLE public.leaderboard TO postgres;
 
 GRANT ALL ON TABLE public.leaderboard TO service_role;
+
+create extension if not exists moddatetime schema extensions;
+
+-- assuming the table name is "todos", and a timestamp column "updated_at"
+-- this trigger will set the "updated_at" column to the current timestamp for every update
+create trigger handle_updated_at before update on leaderboard
+  for each row execute procedure moddatetime (updated_at);
