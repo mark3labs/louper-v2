@@ -2,39 +2,23 @@
   import { browser } from '$app/env'
   import { Orbis } from '@orbisclub/orbis-sdk'
   import { onMount } from 'svelte'
+  import profile from '$lib/stores/profile'
 
   let orbis = new Orbis()
-  let isConnected = false
-  let details = {}
 
   const connect = async () => {
     const res = await orbis.connect()
-    details = res.details
-    isConnected = true
-  }
-
-  const disconnect = async () => {
-    localStorage.removeItem('ceramic-session')
-    isConnected = false
+    $profile = res.details
   }
 
   onMount(async () => {
     if (browser) {
       const res = await orbis.isConnected()
       if (res.details) {
-        details = res.details
-        isConnected = true
+        $profile = res.details
       }
-      console.log(details)
-      console.log(orbis)
     }
   })
 </script>
 
-{#if !isConnected}
-  <button class="btn btn-sm btn-primary" on:click={connect}> Sign In </button>
-{:else}
-  <button class="btn btn-sm btn-secondary" on:click={disconnect}>
-    {details && details.profile ? details.profile.username : 'Anonymous'}
-  </button>
-{/if}
+<button class="btn btn-sm btn-primary" on:click={connect}> Sign In </button>

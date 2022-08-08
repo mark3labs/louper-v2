@@ -19,7 +19,7 @@
 </script>
 
 <script lang="ts">
-  import FacetCard from '../../lib/components/FacetCard.svelte'
+  import FacetCard from '$lib/components/FacetCard.svelte'
   import Header from '$lib/components/Header.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
   import WriteContract from '$lib/components/WriteContract.svelte'
@@ -33,6 +33,8 @@
   import { NETWORKS } from '$lib/config'
   import AddFacet from '$lib/components/AddFacet.svelte'
   import { getNotificationsContext } from 'svelte-notifications'
+  import Bookmark from '$lib/components/Bookmark.svelte'
+  import profile from '$lib/stores/profile'
 
   const { addNotification } = getNotificationsContext()
 
@@ -148,6 +150,9 @@
           </svg>
           Upgrade Facet
         </button>
+        {#if $profile}
+          <Bookmark {diamond} />
+        {/if}
       </div>
     </div>
     <History

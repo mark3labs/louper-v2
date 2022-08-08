@@ -11,8 +11,8 @@ export const POST: RequestHandler<
   { network: string; address: string; name: string }
 > = async ({ request }) => {
   const body = await request.json()
-  const network = body.network
-  const address = body.address
+  const network = body.network.toLowerCase()
+  const address = body.address.toLowerCase()
   const name = body.name
 
   let record = {

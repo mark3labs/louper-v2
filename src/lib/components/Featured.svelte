@@ -1,6 +1,6 @@
 <script>
   import { goto } from '$app/navigation'
-  import navigationState from '../../stores/navigationState'
+  import navigationState from '$lib/stores/navigationState'
 
   const diamonds = [
     {
