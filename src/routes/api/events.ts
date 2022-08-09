@@ -16,8 +16,8 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
 }) => {
   const body = await request.json()
   console.info(`Fetching events for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`)
-  const address = body.address
-  const network = body.network
+  const address = body.address.toLowerCase()
+  const network = body.network.toLowerCase()
 
   const API_KEY = getEtherscanApiKey(network)
 

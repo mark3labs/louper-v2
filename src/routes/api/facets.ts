@@ -14,7 +14,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
 }) => {
   const body = await request.json()
   console.info(`Fetching data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`)
-  const address = body.address
+  const address = body.address.toLowerCase()
 
   let rpcUrl = body.network ? NETWORKS[body.network].rpcUrl : NETWORKS['mainnet'].rpcUrl
   rpcUrl = rpcUrl.replace('%INFURA_API_KEY%', INFURA_API_KEY)

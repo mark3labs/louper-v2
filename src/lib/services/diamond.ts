@@ -111,7 +111,7 @@ export default class DiamondContract implements Diamond {
       }
       const name = facetData.name
       const facet: Facet = {
-        address: facets[i][0],
+        address: facets[i][0].toLowerCase(),
         name,
         methods,
       }

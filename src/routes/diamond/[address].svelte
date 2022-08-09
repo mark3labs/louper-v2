@@ -19,7 +19,7 @@
 </script>
 
 <script lang="ts">
-  import FacetCard from '../../lib/components/FacetCard.svelte'
+  import FacetCard from '$lib/components/FacetCard.svelte'
   import Header from '$lib/components/Header.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
   import WriteContract from '$lib/components/WriteContract.svelte'
@@ -29,10 +29,11 @@
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
   import type { Facet } from '../../types/entities'
   import { initWeb3W } from 'web3w'
-  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { NETWORKS } from '$lib/config'
   import AddFacet from '$lib/components/AddFacet.svelte'
   import { getNotificationsContext } from 'svelte-notifications'
+  import Bookmark from '$lib/components/Bookmark.svelte'
+  import profile from '$lib/stores/profile'
 
   const { addNotification } = getNotificationsContext()
 
@@ -49,13 +50,7 @@
   $: if (diamond) {
     initWeb3W({
       builtin: { autoProbe: true },
-      options: [
-        'builtin',
-        new WalletConnectModuleLoader({
-          chainId: NETWORKS[diamond.network].chainId,
-          infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
-        }),
-      ],
+      options: ['builtin'],
     })
   }
 
@@ -148,6 +143,9 @@
           </svg>
           Upgrade Facet
         </button>
+        {#if $profile}
+          <Bookmark {diamond} />
+        {/if}
       </div>
     </div>
     <History
