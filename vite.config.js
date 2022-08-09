@@ -9,7 +9,6 @@ const config = {
     alias: {
       events: 'rollup-plugin-node-polyfills/polyfills/events',
       buffer: 'rollup-plugin-node-polyfills/polyfills/buffer-es6',
-      process: 'rollup-plugin-node-polyfills/polyfills/process-es6',
     },
   },
   plugins: [sveltekit()],
@@ -24,7 +23,6 @@ const config = {
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          process: true,
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
@@ -34,7 +32,6 @@ const config = {
   build: {
     target: 'es2020',
     rollupOptions: {
-      external: ['web3w'],
       plugins: [rollupNodePolyFill()],
     },
   },
