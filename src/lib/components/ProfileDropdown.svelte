@@ -1,27 +1,24 @@
 <script>
-  import profile from '$lib/stores/profile'
+  import user from '$lib/stores/user'
+  import { shortProfile } from '$lib/utils'
 
-  console.log($profile)
+  console.log($user)
 
   const disconnect = () => {
     localStorage.removeItem('ceramic-session')
-    $profile = null
+    $user = null
   }
 </script>
 
-{#if $profile}
+{#if $user}
   <div class="dropdown dropdown-end">
     <label tabindex="0" class="btn m-1" for>
-      {#if $profile.profile}
-        <img src={$profile.profile.pfp} alt="" class="rounded-full bg-base-300 h-8 w-8 mr-3" />
+      {#if $user.profile}
+        <img src={$user.profile.pfp} alt="" class="rounded-full bg-base-300 h-8 w-8 mr-3" />
       {:else}
         <div class="rounded-full h-8 w-8 bg-gray-500 mr-3" />
       {/if}
-      {$profile.profile
-        ? $profile.profile.username
-        : `${$profile.metadata.address.substring(0, 5)}-${$profile.metadata.address.substring(
-            $profile.metadata.address.length - 5,
-          )}`}
+      {$user.profile ? $user.profile.username : shortProfile($user.metadata.address)}
     </label>
     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
       <li>

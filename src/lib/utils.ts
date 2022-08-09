@@ -1,5 +1,5 @@
 import { NETWORKS } from './config'
-import {ethers, utils} from 'ethers'
+import { ethers, utils } from 'ethers'
 import type { Method } from '../types/entities'
 
 export const getExplorerAddressUrl = (address: string, network = 'mainnet'): string => {
@@ -36,4 +36,8 @@ export const getFacetMethods = (address: string, abi: any): Method[] => {
     methods.push(method)
   }
   return methods
+}
+
+export const shortProfile = (address: string) => {
+  return `${address.substring(0, 5)}-${address.substring(address.length - 5)}`
 }

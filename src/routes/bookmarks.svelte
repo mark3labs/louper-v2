@@ -1,16 +1,15 @@
 <script context="module">
-  import profile from '$lib/stores/profile'
+  import user from '$lib/stores/user'
 
   export async function load() {
-    let profileValue
+    let userValue
 
-    profile.subscribe((p) => {
-      profileValue = p
+    user.subscribe((u) => {
+      userValue = u
     })
 
-    if (!profileValue) {
+    if (!userValue) {
       return {
-        status: 302,
         redirect: '/',
       }
     }
@@ -31,12 +30,11 @@
   onMount(async () => {
     await orbis.isConnected()
     bookmarks = await getBookmarks()
-    console.log(bookmarks)
   })
 
   const getBookmarks = async () => {
     const doc = await TileDocument.deterministic(orbis.ceramic, {
-      controllers: [$profile.did],
+      controllers: [$user.did],
       family: 'louper.dev.bookmarks.document',
     })
 

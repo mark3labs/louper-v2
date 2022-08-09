@@ -7,7 +7,19 @@
   import TransactionNotification from '$lib/components/TransactionNotification.svelte'
   import ConnectToOrbis from '$lib/components/ConnectToOrbis.svelte'
   import ProfileDropdown from '$lib/components/ProfileDropdown.svelte'
-  import profile from '$lib/stores/profile'
+  import user from '$lib/stores/user'
+  import orbis from '$lib/stores/orbis'
+  import { onMount } from 'svelte'
+  import { browser } from '$app/env'
+
+  onMount(async () => {
+    if (browser) {
+      const res = await $orbis.isConnected()
+      if (res.details) {
+        $user = res.details
+      }
+    }
+  })
 
   beforeNavigate(() => {
     $navigationState = 'loading'
@@ -65,11 +77,11 @@
         </div>
       </div>
       <div class="navbar-end">
-      {#if $profile !== null}
-        <ProfileDropdown />
-      {:else}
-        <ConnectToOrbis />
-      {/if}
+        {#if $user !== null}
+          <ProfileDropdown />
+        {:else}
+          <ConnectToOrbis />
+        {/if}
       </div>
     </div>
     <div class="container md:mx-auto mt-24 p-2">

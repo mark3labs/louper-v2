@@ -29,11 +29,11 @@
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
   import type { Facet } from '../../types/entities'
   import { initWeb3W } from 'web3w'
-  import { NETWORKS } from '$lib/config'
   import AddFacet from '$lib/components/AddFacet.svelte'
   import { getNotificationsContext } from 'svelte-notifications'
   import Bookmark from '$lib/components/Bookmark.svelte'
-  import profile from '$lib/stores/profile'
+  import user from '$lib/stores/user'
+  import Comments from '$lib/components/Comments.svelte'
 
   const { addNotification } = getNotificationsContext()
 
@@ -143,11 +143,12 @@
           </svg>
           Upgrade Facet
         </button>
-        {#if $profile}
+        {#if $user}
           <Bookmark {diamond} />
         {/if}
       </div>
     </div>
+    <Comments {diamond} />
     <History
       events={diamond.events}
       network={diamond.network}
