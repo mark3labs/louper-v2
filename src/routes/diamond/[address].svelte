@@ -33,7 +33,7 @@
   import AddFacet from '$lib/components/AddFacet.svelte'
   import { getNotificationsContext } from 'svelte-notifications'
   import Bookmark from '$lib/components/Bookmark.svelte'
-  import profile from '$lib/stores/profile'
+  import user from '$lib/stores/user'
 
   const { addNotification } = getNotificationsContext()
 
@@ -143,7 +143,7 @@
           </svg>
           Upgrade Facet
         </button>
-        {#if $profile}
+        {#if $user}
           <Bookmark {diamond} />
         {/if}
       </div>

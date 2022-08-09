@@ -1,24 +1,21 @@
 <script>
   import { TileDocument } from '@ceramicnetwork/stream-tile'
-  import { Orbis } from '@orbisclub/orbis-sdk'
+  import user from '$lib/stores/user'
+  import orbis from '$lib/stores/orbis'
   import { onMount } from 'svelte'
-  import profile from '$lib/stores/profile'
 
   export let diamond
-  let orbis = new Orbis()
   let bookmarks = []
   let bookmarked = false
 
   onMount(async () => {
-    await orbis.isConnected()
     bookmarks = await getBookmarks()
     bookmarked = await isBookmarked()
-    console.log(bookmarks)
   })
 
   const getBookmarks = async () => {
-    const doc = await TileDocument.deterministic(orbis.ceramic, {
-      controllers: [$profile.did],
+    const doc = await TileDocument.deterministic($orbis.ceramic, {
+      controllers: [$user.did],
       family: 'louper.dev.bookmarks.document',
     })
 
@@ -38,8 +35,8 @@
       return
     }
 
-    const doc = await TileDocument.deterministic(orbis.ceramic, {
-      controllers: [$profile.did],
+    const doc = await TileDocument.deterministic($orbis.ceramic, {
+      controllers: [$user.did],
       family: 'louper.dev.bookmarks.document',
     })
 
