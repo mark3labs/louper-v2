@@ -18,9 +18,12 @@
 </script>
 
 <script>
+  import { NETWORKS } from '$lib/config'
+
   import { TileDocument } from '@ceramicnetwork/stream-tile'
   import { Orbis } from '@orbisclub/orbis-sdk'
-  import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
+  import { goto } from '$app/navigation'
 
   let orbis = new Orbis()
   let bookmarks = []
@@ -40,3 +43,41 @@
     return doc.content.bookmarks ? doc.content.bookmarks : []
   }
 </script>
+
+<div class="flex flex-row py-5 bg-base-300 sm:py-10 lg:py-10 rounded-box">
+  <div class="px-4 mx-auto sm:px-6 lg:px-8 w-full">
+    <div>
+      <p class="text-base font-bold ">Bookmarked Diamonds</p>
+    </div>
+
+    <div class="mt-6">
+      <div class="overflow-x-auto">
+        <table class="table table-compact w-full">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Network</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each bookmarks as diamond}
+              <tr
+                class="hover cursor-pointer"
+                on:click={() => goto(`/diamond/${diamond.address}?network=${diamond.network}`)}
+              >
+                <td>{diamond.name.substring(0, 25)}</td>
+                <td>{diamond.address.substring(0, 20)}...{diamond.address.substring(36)}</td>
+                <td class="capitalize">
+                  {NETWORKS[diamond.network].emoji}&nbsp;
+                  {NETWORKS[diamond.network].title}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

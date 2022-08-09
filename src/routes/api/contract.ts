@@ -18,8 +18,8 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
   request,
 }) => {
   const body = await request.json()
-  const network = body.network || 'mainnet'
-  const address = body.address
+  const network = body.network.toLowerCase() || 'mainnet'
+  const address = body.address.toLowerCase()
 
   const API_KEY = getEtherscanApiKey(network)
 

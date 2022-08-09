@@ -27,15 +27,16 @@
 
   const isBookmarked = async () => {
     return bookmarks.find(
-        (b) =>
-          b.address.toLowerCase() === diamond.address.toLowerCase() &&
-          b.network.toLowerCase() === diamond.network.toLowerCase(),
-      )
+      (b) =>
+        b.address.toLowerCase() === diamond.address.toLowerCase() &&
+        b.network.toLowerCase() === diamond.network.toLowerCase(),
+    )
   }
 
   const addBookmark = async () => {
-
-    if (await isBookmarked()) { return }
+    if (await isBookmarked()) {
+      return
+    }
 
     const doc = await TileDocument.deterministic(orbis.ceramic, {
       controllers: [$profile.did],
@@ -43,6 +44,7 @@
     })
 
     bookmarks.push({
+      name: diamond.name,
       address: diamond.address.toLowerCase(),
       network: diamond.network.toLowerCase(),
     })
