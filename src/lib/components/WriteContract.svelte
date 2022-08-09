@@ -1,11 +1,9 @@
 <script lang="ts">
   import { ethers } from 'ethers'
-  import { fade } from 'svelte/transition'
   import Loading from './Loading.svelte'
   import Tags from 'svelte-tags-input'
   import type { Facet, Method } from '../../types/entities'
   import { initWeb3W } from 'web3w'
-  import { getExplorerTxUrl } from '../utils'
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
 
@@ -76,9 +74,6 @@
       {#if $builtin.available}
         <button class="btn btn-sm glass bg-primary" on:click={() => connect()}> Connect </button>
       {/if}
-      <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
-        Connect w/ WalletConnect
-      </button>
     {/if}
 
     {#if $wallet.state === 'Ready'}

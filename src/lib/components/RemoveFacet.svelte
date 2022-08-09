@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition'
   import Loading from '$lib/components/Loading.svelte'
   import type { Facet } from '../../types/entities'
   import { constants } from 'ethers'
   import { initWeb3W } from 'web3w'
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
-  import { getExplorerTxUrl } from '../utils'
   import { utils } from 'ethers'
 
   export let facet: Facet | undefined = undefined
@@ -109,9 +107,6 @@
       {#if $builtin.available}
         <button class="btn btn-sm glass bg-primary" on:click={() => connect()}> Connect </button>
       {/if}
-      <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
-        Connect w/ WalletConnect
-      </button>
     {/if}
   </div>
 

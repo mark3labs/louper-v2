@@ -3,8 +3,11 @@
   import Notifications from 'svelte-notifications'
   import Loading from '$lib/components/Loading.svelte'
   import '../app.css'
-  import navigationState from '../stores/navigationState'
+  import navigationState from '$lib/stores/navigationState'
   import TransactionNotification from '$lib/components/TransactionNotification.svelte'
+  import ConnectToOrbis from '$lib/components/ConnectToOrbis.svelte'
+  import ProfileDropdown from '$lib/components/ProfileDropdown.svelte'
+  import profile from '$lib/stores/profile'
 
   beforeNavigate(() => {
     $navigationState = 'loading'
@@ -61,7 +64,13 @@
           </a>
         </div>
       </div>
-      <div class="navbar-end" />
+      <div class="navbar-end">
+      {#if $profile !== null}
+        <ProfileDropdown />
+      {:else}
+        <ConnectToOrbis />
+      {/if}
+      </div>
     </div>
     <div class="container md:mx-auto mt-24 p-2">
       <main>

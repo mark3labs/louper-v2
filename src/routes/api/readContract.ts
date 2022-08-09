@@ -16,7 +16,7 @@ export const POST: RequestHandler<
     `Reading contract data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`,
   )
 
-  const address = body.address
+  const address = body.address.toLowerCase()
   const abi = []
   const fragment = JSON.parse(body.fragment)
   abi.push(fragment)
