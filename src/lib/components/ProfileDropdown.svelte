@@ -1,5 +1,6 @@
 <script>
   import user from '$lib/stores/user'
+  import { shortProfile } from '$lib/utils'
 
   console.log($user)
 
@@ -17,11 +18,7 @@
       {:else}
         <div class="rounded-full h-8 w-8 bg-gray-500 mr-3" />
       {/if}
-      {$user.profile
-        ? $user.profile.username
-        : `${$user.metadata.address.substring(0, 5)}-${$user.metadata.address.substring(
-            $user.metadata.address.length - 5,
-          )}`}
+      {$user.profile ? $user.profile.username : shortProfile($user.metadata.address)}
     </label>
     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
       <li>
