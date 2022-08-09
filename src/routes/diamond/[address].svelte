@@ -29,7 +29,6 @@
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
   import type { Facet } from '../../types/entities'
   import { initWeb3W } from 'web3w'
-  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { NETWORKS } from '$lib/config'
   import AddFacet from '$lib/components/AddFacet.svelte'
   import { getNotificationsContext } from 'svelte-notifications'
@@ -51,13 +50,7 @@
   $: if (diamond) {
     initWeb3W({
       builtin: { autoProbe: true },
-      options: [
-        'builtin',
-        new WalletConnectModuleLoader({
-          chainId: NETWORKS[diamond.network].chainId,
-          infuraId: 'bc0bdd4eaac640278cdebc3aa91fabe4',
-        }),
-      ],
+      options: ['builtin'],
     })
   }
 

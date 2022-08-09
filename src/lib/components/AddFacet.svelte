@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition'
   import { constants } from 'ethers'
   import { initWeb3W } from 'web3w'
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
   import { utils } from 'ethers'
-  import { getExplorerTxUrl, getFacetMethods } from '$lib/utils'
+  import { getFacetMethods } from '$lib/utils'
   import Loading from './Loading.svelte'
   import type { Method } from '../../types/entities'
 
@@ -36,18 +35,11 @@
   ])
 
   $: if (facet) {
-    const iface = new utils.Interface(facet.abi)
     args = [
       [
         {
           facetAddress: facetAddress,
           action: FacetCutAction.Add,
-          // functionSelectors: iface.fragments
-          //   .map((f) => {
-          //     if (f.type === 'function')
-          //       return iface.getSighash(f.format(utils.FormatTypes.sighash))
-          //   })
-          //   .filter((f) => f != undefined),
           functionSelectors: selectors,
         },
       ],
@@ -166,9 +158,6 @@
               Connect
             </button>
           {/if}
-          <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
-            Connect w/ WalletConnect
-          </button>
         </div>
       {:else}
         {#if !facet}
