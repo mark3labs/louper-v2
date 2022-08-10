@@ -3,8 +3,10 @@
   import { onMount } from 'svelte'
   import user from '$lib/stores/user'
   import { shortProfile } from '$lib/utils'
+  import ConnectToOrbis from './ConnectToOrbis.svelte'
+  import type DiamondContract from '$lib/services/diamond';
 
-  export let diamond
+  export let diamond: DiamondContract
   let comments = []
   let newComment = null
   let context = `https://louper.dev/diamond/${diamond.address}?network=${diamond.network}`
@@ -72,17 +74,17 @@
     Comments
   </div>
   <div class="collapse-content overflow-y-auto">
+    {#each comments as comment}
+      <div class="p-3 text-xs font-bold">
+        {comment.creator_details.profile
+          ? comment.creator_details.profile.username
+          : shortProfile(comment.creator_details.metadata.address)}
+      </div>
+      <div class="border-b border-base-300 p-3 text-xl">
+        {comment.content.body}
+      </div>
+    {/each}
     {#if $user}
-      {#each comments as comment}
-        <div class="p-3 text-xs font-bold">
-          {comment.creator_details.profile
-            ? comment.creator_details.profile.username
-            : shortProfile(comment.creator_details.metadata.address)}
-        </div>
-        <div class="border-b border-base-300 p-3 text-xl">
-          {comment.content.body}
-        </div>
-      {/each}
       <div class="p-2">
         <textarea
           name="comment"
@@ -96,6 +98,11 @@
             Post
           </button>
         </div>
+      </div>
+    {:else}
+      <div class="text-center p-5">
+        <span class="font-bold text-xl mr-2">You must sign in to post a comment.</span>
+        <ConnectToOrbis />
       </div>
     {/if}
   </div>
