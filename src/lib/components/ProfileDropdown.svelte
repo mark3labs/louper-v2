@@ -1,18 +1,17 @@
-<script>
+<script lang="ts">
   import user from '$lib/stores/user'
   import { shortProfile } from '$lib/utils'
+  import orbis from '$lib/stores/orbis'
 
-  console.log($user)
-
-  const disconnect = () => {
-    localStorage.removeItem('ceramic-session')
+  const disconnect = async () => {
+    await $orbis.logout()
     $user = null
   }
 </script>
 
 {#if $user}
   <div class="dropdown dropdown-end">
-    <label tabindex="0" class="btn m-1" for>
+    <label tabindex="0" class="btn m-1" for="">
       {#if $user.profile}
         <img src={$user.profile.pfp} alt="" class="rounded-full bg-base-300 h-8 w-8 mr-3" />
       {:else}
@@ -40,8 +39,8 @@
           Bookmarks
         </a>
       </li>
-      <li on:click={disconnect}>
-        <a href>
+      <li >
+        <a href="*" on:click|preventDefault={disconnect}>
           <svg
             class="w-6 h-6 mr-2"
             fill="none"
