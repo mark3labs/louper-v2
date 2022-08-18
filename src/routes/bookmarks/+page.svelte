@@ -1,19 +1,21 @@
 <script context="module">
-  import user from '$lib/stores/user'
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function load() {
-    let userValue
+  // import user from '$lib/stores/user'
 
-    user.subscribe((u) => {
-      userValue = u
-    })
+  // export async function load() {
+  //   let userValue
 
-    if (!userValue) {
-      return {
-        redirect: '/',
-      }
-    }
-  }
+  //   user.subscribe((u) => {
+  //     userValue = u
+  //   })
+
+  //   if (!userValue) {
+  //     return {
+  //       redirect: '/',
+  //     }
+  //   }
+  // }
 </script>
 
 <script>

@@ -1,3 +1,4 @@
+import { json as json$1 } from '@sveltejs/kit'
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
 import type { RequestHandler } from '@sveltejs/kit'
@@ -28,12 +29,10 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res: any = await fetchCachedAbi(network, address)
   if (res.abi) {
-    return {
-      body: {
-        abi: res.abi,
-        name: res.name,
-      },
-    }
+    return json$1({
+      abi: res.abi,
+      name: res.name,
+    })
   }
 
   // Try Sourcify first
@@ -54,12 +53,10 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
         Object.values(metadata.data.settings.compilationTarget)[0] as string,
         metadata.data.output.abi,
       )
-      return {
-        body: {
-          abi: metadata.data.output.abi,
-          name: Object.values(metadata.data.settings.compilationTarget)[0] as string,
-        },
-      }
+      return json$1({
+        abi: metadata.data.output.abi,
+        name: Object.values(metadata.data.settings.compilationTarget)[0] as string,
+      })
     }
   } catch (e) {
     console.log('Nothing found on Sourcify.')
@@ -80,23 +77,19 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
       } else {
         console.log('Contract not verified...')
       }
-      return {
-        body: {
-          name,
-          abi,
-        },
-      }
+      return json$1({
+        name,
+        abi,
+      })
     } catch (e) {
       console.log('Nothing found on block explorer.')
     }
   }
 
-  return {
-    body: {
-      name: '',
-      abi: [],
-    },
-  }
+  return json$1({
+    name: '',
+    abi: [],
+  })
 }
 
 const fetchCachedAbi = async (network: string, address: string) => {

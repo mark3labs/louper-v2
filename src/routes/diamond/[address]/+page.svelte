@@ -1,24 +1,8 @@
-<script context="module" lang="ts">
-  import type { Load } from '@sveltejs/kit'
-
-  export const load: Load = async ({ params, url, fetch }) => {
-    console.log('Fetching diamond details...')
-    const diamond = await new DiamondContract(
-      params.address,
-      url.searchParams.get('network') || 'mainnet',
-      fetch,
-    ).fetchContractDetails()
-    console.log('Diamond details fetched...')
-
-    return {
-      props: {
-        diamond,
-      },
-    }
-  }
-</script>
-
 <script lang="ts">
+  throw new Error(
+    '@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)',
+  )
+
   import FacetCard from '$lib/components/FacetCard.svelte'
   import Header from '$lib/components/Header.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
@@ -27,7 +11,7 @@
   import DiamondContract from '$lib/services/diamond'
   import { getExplorerAddressUrl } from '$lib/utils'
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
-  import type { Facet } from '../../types/entities'
+  import type { Facet } from '../../../types/entities'
   import { initWeb3W } from 'web3w'
   import AddFacet from '$lib/components/AddFacet.svelte'
   import { getNotificationsContext } from 'svelte-notifications'
@@ -37,7 +21,8 @@
 
   const { addNotification } = getNotificationsContext()
 
-  export let diamond: DiamondContract
+  export let data
+  diamond = data.diamond
 
   let showReadContract = false
   let showWriteContract = false

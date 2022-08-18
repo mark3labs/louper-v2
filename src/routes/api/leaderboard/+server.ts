@@ -1,3 +1,4 @@
+import { json as json$1 } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -42,9 +43,7 @@ export const POST: RequestHandler<
     console.error(error)
   }
 
-  return {
-    body: 'OK',
-  }
+  return new Response('OK')
 }
 
 export const GET: RequestHandler = async ({ url }) => {
@@ -74,9 +73,7 @@ export const GET: RequestHandler = async ({ url }) => {
     diamonds = data
   }
 
-  return {
-    body: {
-      diamonds,
-    },
-  }
+  return json$1({
+  diamonds,
+})
 }
