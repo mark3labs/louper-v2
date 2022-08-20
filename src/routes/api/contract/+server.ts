@@ -1,4 +1,4 @@
-import { json as json$1 } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit'
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
 import type { RequestHandler } from '@sveltejs/kit'
@@ -29,7 +29,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const res: any = await fetchCachedAbi(network, address)
   if (res.abi) {
-    return json$1({
+    return json({
       abi: res.abi,
       name: res.name,
     })
@@ -53,7 +53,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
         Object.values(metadata.data.settings.compilationTarget)[0] as string,
         metadata.data.output.abi,
       )
-      return json$1({
+      return json({
         abi: metadata.data.output.abi,
         name: Object.values(metadata.data.settings.compilationTarget)[0] as string,
       })
@@ -77,7 +77,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
       } else {
         console.log('Contract not verified...')
       }
-      return json$1({
+      return json({
         name,
         abi,
       })
@@ -86,7 +86,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
     }
   }
 
-  return json$1({
+  return json({
     name: '',
     abi: [],
   })

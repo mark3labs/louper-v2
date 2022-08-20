@@ -1,4 +1,4 @@
-import { json as json$1 } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit'
 import { ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
 import type { LouperEvent } from '../../../types/entities'
@@ -41,10 +41,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
         louperEvents.push(louperEvent)
       }
     }
-    throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)");
-    // Suggestion (check for correctness before using):
-    // return json$1(louperEvents);
-    return { body: louperEvents }
+    return json(louperEvents)
   }
 
   // const louperEvents: LouperEvent[] = []

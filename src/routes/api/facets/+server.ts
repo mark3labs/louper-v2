@@ -1,4 +1,4 @@
-import { json as json$1 } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit'
 import { ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
 import dotenv from 'dotenv'
@@ -24,8 +24,5 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
 
   const data = await diamondContract.facets()
 
-  throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)");
-  // Suggestion (check for correctness before using):
-  // return json$1(data);
-  return { body: data }
+  return json(data)
 }

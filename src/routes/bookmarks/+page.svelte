@@ -1,26 +1,6 @@
-<script context="module">
-  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
-
-  // import user from '$lib/stores/user'
-
-  // export async function load() {
-  //   let userValue
-
-  //   user.subscribe((u) => {
-  //     userValue = u
-  //   })
-
-  //   if (!userValue) {
-  //     return {
-  //       redirect: '/',
-  //     }
-  //   }
-  // }
-</script>
-
 <script>
   import { NETWORKS } from '$lib/config'
-
+  import user from '$lib/stores/user'
   import { TileDocument } from '@ceramicnetwork/stream-tile'
   import { Orbis } from '@orbisclub/orbis-sdk'
   import { onMount } from 'svelte'

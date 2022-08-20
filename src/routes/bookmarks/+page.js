@@ -1,4 +1,5 @@
 import user from '$lib/stores/user'
+import { redirect } from '@sveltejs/kit'
 
 export async function load() {
   let userValue
@@ -8,9 +9,6 @@ export async function load() {
   })
 
   if (!userValue) {
-    throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292693)");
-    return {
-      redirect: '/',
-    }
+    throw redirect(307, '/')
   }
 }

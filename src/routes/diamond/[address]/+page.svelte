@@ -1,8 +1,4 @@
 <script lang="ts">
-  throw new Error(
-    '@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)',
-  )
-
   import FacetCard from '$lib/components/FacetCard.svelte'
   import Header from '$lib/components/Header.svelte'
   import ReadContract from '$lib/components/ReadContract.svelte'
@@ -22,7 +18,7 @@
   const { addNotification } = getNotificationsContext()
 
   export let data
-  diamond = data.diamond
+  let diamond = data.diamond
 
   let showReadContract = false
   let showWriteContract = false
