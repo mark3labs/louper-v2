@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit'
 import dotenv from 'dotenv'
 import type { RequestHandler } from '@sveltejs/kit'
 import { createClient } from '@supabase/supabase-js'
@@ -50,11 +51,9 @@ export const GET: RequestHandler = async () => {
     pageViews = res.data.pageviews
   }
 
-  return {
-    body: {
-      contractCount,
-      diamondCount,
-      pageViews,
-    },
-  }
+  return json({
+    contractCount,
+    diamondCount,
+    pageViews,
+  })
 }

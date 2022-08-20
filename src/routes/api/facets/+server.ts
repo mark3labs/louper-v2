@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit'
 import { ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
 import dotenv from 'dotenv'
@@ -23,5 +24,5 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
 
   const data = await diamondContract.facets()
 
-  return { body: data }
+  return json(data)
 }

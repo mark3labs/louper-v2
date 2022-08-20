@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit'
 import { ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
 import dotenv from 'dotenv'
@@ -32,14 +33,12 @@ export const POST: RequestHandler<
     const method = funcFragment.format(ethers.utils.FormatTypes.minimal).split(' ')[1]
     console.log(method)
     const data = await diamondContract[method](...args)
-    return { body: data }
+    return json(data)
   } catch (e) {
-    return {
-      body: {
-        reason: e.reason,
-        code: e.code,
-        value: e.value,
-      },
-    }
+    return json({
+      reason: e.reason,
+      code: e.code,
+      value: e.value,
+    })
   }
 }
