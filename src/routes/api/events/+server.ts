@@ -1,6 +1,7 @@
+import { json } from '@sveltejs/kit'
 import { ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
-import type { LouperEvent } from '../../types/entities'
+import type { LouperEvent } from '../../../types/entities'
 import dotenv from 'dotenv'
 import type { RequestHandler } from '@sveltejs/kit'
 import axios from 'redaxios'
@@ -40,7 +41,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
         louperEvents.push(louperEvent)
       }
     }
-    return { body: louperEvents }
+    return json(louperEvents)
   }
 
   // const louperEvents: LouperEvent[] = []

@@ -1,24 +1,6 @@
-<script context="module">
-  import user from '$lib/stores/user'
-
-  export async function load() {
-    let userValue
-
-    user.subscribe((u) => {
-      userValue = u
-    })
-
-    if (!userValue) {
-      return {
-        redirect: '/',
-      }
-    }
-  }
-</script>
-
 <script>
   import { NETWORKS } from '$lib/config'
-
+  import user from '$lib/stores/user'
   import { TileDocument } from '@ceramicnetwork/stream-tile'
   import { Orbis } from '@orbisclub/orbis-sdk'
   import { onMount } from 'svelte'
