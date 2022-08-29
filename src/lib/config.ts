@@ -84,7 +84,7 @@ export const NETWORKS: Record<string, Network> = {
     title: 'Binance Smart Chain Testnet',
     rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
     explorerUrl: 'https://testnet.bscscan.com/',
-    explorerApiUrl: 'https://api-testnet.bscscan.com/api,
+    explorerApiUrl: 'https://api-testnet.bscscan.com/api',
     emoji: '🟠',
     chainId: '97',
   },
