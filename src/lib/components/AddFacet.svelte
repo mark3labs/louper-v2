@@ -6,7 +6,7 @@
   import { utils } from 'ethers'
   import { getFacetMethods } from '$lib/utils'
   import Loading from './Loading.svelte'
-  import type { Method } from '../../types/entities'
+  import type { Method } from './../types/entities'
 
   let facetAddress = ''
   let facet: any | undefined = undefined
@@ -21,6 +21,8 @@
   let args: any = {}
   let methods: Method[] = []
   let selectors = []
+  let initContract
+  let initCalldata
 
   const FacetCutAction = {
     Add: 0,
@@ -43,8 +45,8 @@
           functionSelectors: selectors,
         },
       ],
-      constants.AddressZero,
-      '0x',
+      utils.isAddress(initContract) ? initContract : constants.AddressZero,
+      initCalldata ? initCalldata : '0x',
     ]
     console.log(selectors)
   }
@@ -197,6 +199,27 @@
               </tr>
             {/each}
           </table>
+          <div class="divider" />
+          <div>
+            <label class="label" for="">
+              <span class="label-text">Init Contract Address</span>
+            </label>
+            <input
+              type="text"
+              bind:value={initContract}
+              class="rounded-xl m-2 input input-primary input-bordered bg-base-200 w-full"
+            />
+          </div>
+          <div>
+            <label class="label" for="">
+              <span class="label-text">Init Calldata</span>
+            </label>
+            <input
+              type="text"
+              bind:value={initCalldata}
+              class="rounded-xl m-2 input input-primary input-bordered bg-base-200 w-full"
+            />
+          </div>
 
           <div class="mb-2">
             <p class="leading-5 w-full p-5">
