@@ -1,6 +1,7 @@
 import { json } from '@sveltejs/kit'
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
+import { utils } from 'ethers'
 import type { RequestHandler } from '@sveltejs/kit'
 
 import dotenv from 'dotenv'
@@ -39,7 +40,9 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
   try {
     console.log('Trying Sourcify...')
     const metadata = await axios.get(
-      `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${address}/metadata.json`,
+      `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${utils.getAddress(
+        address,
+      )}/metadata.json`,
     )
     if (metadata) {
       console.log(
@@ -59,6 +62,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
       })
     }
   } catch (e) {
+    console.log(e)
     console.log('Nothing found on Sourcify.')
   }
 
