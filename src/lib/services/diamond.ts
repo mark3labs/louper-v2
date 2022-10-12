@@ -1,5 +1,6 @@
 import type { Diamond, Method, Facet, LouperEvent } from '../../types/entities'
 import { ethers, utils } from 'ethers'
+import { getFacetMethods } from '$lib/utils'
 
 type FetchFunction = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 
@@ -16,6 +17,7 @@ export default class DiamondContract implements Diamond {
   facetsToSelectors: Map<string, string[]> = new Map<string, string[]>()
   fetch: FetchFunction
   abi = []
+  abiSelectorsTemp = []
 
   constructor(address: string, network: string, fetch: FetchFunction) {
     this.address = address
@@ -104,8 +106,17 @@ export default class DiamondContract implements Diamond {
           })
         }
       } else {
-        facetData.abi.forEach((a) => {
-          this.abi.push(a)
+        facetData.abi.forEach((abi) => {
+          const method = getFacetMethods(this.address, [abi])
+          // Method should be an active selector
+          if (method.length > 0 && this.selectors.includes(method[0].selector)) {
+            // New facets will contain already existing selectors, prevent those from being duplicated
+            if (!this.abiSelectorsTemp.includes(method[0].selector)) {
+              this.abi.push(abi)
+              // A Diamond allows duplicate names (but not selectors), so we can't use the ABI name
+              this.abiSelectorsTemp.push(method[0].selector)
+            }
+          }
         })
         methods = await this.getMethods(facets[i][0], facetData.abi)
       }
