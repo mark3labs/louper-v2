@@ -84,7 +84,7 @@
         >
           Launch a Diamond With
           <img
-            class="h-5 ml-2"
+            class="h-6 ml-2"
             src="https://flair.dev/_next/static/media/logo-text-color.53b661c5.svg"
             alt="Launch a Diamond With Flair"
           />
