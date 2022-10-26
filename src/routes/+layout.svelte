@@ -76,7 +76,19 @@
           </a>
         </div>
       </div>
-      <div class="navbar-end">
+      <div class="navbar-end space-x-3">
+        <a
+          href="https://flair.dev?utm=louper"
+          target="_blank"
+          class="btn text-purple-800 bg-gradient-to-l from-yellow-200 via-pink-200 to-pink-400 font-bold"
+        >
+          Launch a Diamond With
+          <img
+            class="h-5 ml-2"
+            src="https://flair.dev/_next/static/media/logo-text-color.53b661c5.svg"
+            alt="Launch a Diamond With Flair"
+          />
+        </a>
         {#if $user !== null}
           <ProfileDropdown />
         {:else}
