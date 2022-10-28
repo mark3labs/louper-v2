@@ -43,48 +43,15 @@
           Louper
         </span>
       </div>
-      <div class="hidden px-2 mx-2 navbar-center lg:flex">
-        <div class="flex items-stretch">
-          <a class="btn btn-ghost btn-sm rounded-btn" href="/"> Home </a>
-          <a
-            class="btn btn-ghost btn-sm rounded-btn"
-            href="https://eips.ethereum.org/EIPS/eip-2535"
-            target="_blank"
-          >
-            Diamond Standard (EIP-2535)
-          </a>
-          <a
-            class="btn btn-ghost btn-sm rounded-btn"
-            href="https://github.com/mark3labs/louper-v2"
-            target="_blank"
-          >
-            Github
-          </a>
-          <a
-            class="btn btn-ghost btn-sm rounded-btn"
-            href="https://gitcoin.co/grants/1988/louper-tool-for-inspecting-diamond-eip-2535-smart"
-            target="_blank"
-          >
-            Support Us On Gitcoin
-          </a>
-          <a
-            class="btn btn-ghost btn-sm rounded-btn"
-            href="https://discord.com/channels/730508054143172710/951483625092816976"
-            target="_blank"
-          >
-            Discord
-          </a>
-        </div>
-      </div>
-      <div class="navbar-end space-x-3">
+      <div class="navbar-end space-x-3 w-full">
         <a
           href="https://flair.dev?utm=louper"
           target="_blank"
           class="btn text-purple-800 bg-gradient-to-l from-yellow-200 via-pink-200 to-pink-400 font-bold"
         >
-          Launch a Diamond With
+          <span class="hidden md:inline-block"> Launch a Diamond With </span>
           <img
-            class="h-6 ml-2"
+            class="h-4 md:h-6 md:ml-2"
             src="https://flair.dev/_next/static/media/logo-text-color.53b661c5.svg"
             alt="Launch a Diamond With Flair"
           />
@@ -96,7 +63,39 @@
         {/if}
       </div>
     </div>
-    <div class="container md:mx-auto mt-24 p-2">
+    <div class="container md:mx-auto mt-24 p-2 text-sm">
+      <div class="flex flex-col md:flex-row">
+        <a class="btn btn-ghost btn-sm rounded-btn" href="/"> Home </a>
+        <a
+          class="btn btn-ghost btn-sm rounded-btn"
+          href="https://eips.ethereum.org/EIPS/eip-2535"
+          target="_blank"
+        >
+          Diamond Standard (EIP-2535)
+        </a>
+        <a
+          class="btn btn-ghost btn-sm rounded-btn"
+          href="https://github.com/mark3labs/louper-v2"
+          target="_blank"
+        >
+          Github
+        </a>
+        <a
+          class="btn btn-ghost btn-sm rounded-btn"
+          href="https://gitcoin.co/grants/1988/louper-tool-for-inspecting-diamond-eip-2535-smart"
+          target="_blank"
+        >
+          Support Us On Gitcoin
+        </a>
+        <a
+          class="btn btn-ghost btn-sm rounded-btn"
+          href="https://discord.com/channels/730508054143172710/951483625092816976"
+          target="_blank"
+        >
+          Discord
+        </a>
+      </div>
+
       <main>
         {#if $navigationState === 'loading'}
           <Loading />
