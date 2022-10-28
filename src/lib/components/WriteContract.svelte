@@ -4,6 +4,7 @@
   import Tags from 'svelte-tags-input'
   import type { Facet, Method } from '../../types/entities'
   import { initWeb3W } from 'web3w'
+  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
 
@@ -12,7 +13,14 @@
   export let showModal = false
   export let facet: Facet | undefined = undefined
 
-  const { wallet, builtin, flow, transactions, chain } = initWeb3W({})
+  const { wallet, builtin, flow, transactions, chain } = initWeb3W({
+    options: [
+      new WalletConnectModuleLoader({
+        nodeUrl: NETWORKS[network].rpcUrl,
+        chainId: NETWORKS[network].chainId,
+      }),
+    ],
+  })
 
   let selectedMethod: Method | null = null
   let args: any[] = []
@@ -72,7 +80,12 @@
     </h3>
     {#if $wallet.state !== 'Ready'}
       {#if $builtin.available}
-        <button class="btn btn-sm glass bg-primary" on:click={() => connect()}> Connect </button>
+        <button class="btn btn-sm glass bg-primary" on:click={() => connect()}>
+          Connect With Metamask
+        </button>
+        <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
+          Connect With WalletConnect
+        </button>
       {/if}
     {/if}
 
