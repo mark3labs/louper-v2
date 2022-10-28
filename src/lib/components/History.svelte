@@ -26,6 +26,9 @@
       />
     </svg>
     Upgrade History
+    {#if events.length}
+      <div class="badge badge-accent ml-2">{events.length}</div>
+    {/if}
   </div>
   <div class="collapse-content overflow-y-auto">
     <ol class="relative border-l border-gray-200 m-10">

@@ -4,7 +4,7 @@
   import user from '$lib/stores/user'
   import { shortProfile } from '$lib/utils'
   import ConnectToOrbis from './ConnectToOrbis.svelte'
-  import type DiamondContract from '$lib/services/diamond';
+  import type DiamondContract from '$lib/services/diamond'
 
   export let diamond: DiamondContract
   let comments = []
@@ -72,6 +72,9 @@
       />
     </svg>
     Comments
+    {#if comments.length}
+      <div class="badge badge-secondary ml-2">{comments.length}</div>
+    {/if}
   </div>
   <div class="collapse-content overflow-y-auto">
     {#each comments as comment}
