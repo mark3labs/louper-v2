@@ -77,7 +77,7 @@
   let chainUnsub = chain.subscribe(async (c) => {
     if (!$wallet.disconnecting && c.chainId && NETWORKS[network].chainId !== c.chainId) {
       await wallet.disconnect()
-      alert(`Invalid network. Pleae connect to ${network}.`)
+      alert(`Invalid network. Please connect to ${network}.`)
     }
   })
 
