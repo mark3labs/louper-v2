@@ -89,10 +89,10 @@
         <button class="btn btn-sm glass bg-primary" on:click={() => connect()}>
           Connect With Metamask
         </button>
-        <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
-          Connect With WalletConnect
-        </button>
       {/if}
+      <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
+        Connect With WalletConnect
+      </button>
     {/if}
 
     {#if $wallet.state === 'Ready'}
