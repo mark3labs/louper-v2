@@ -1,7 +1,8 @@
 <script lang="ts">
   import { constants } from 'ethers'
   import { initWeb3W } from 'web3w'
-  import { onDestroy } from 'svelte'
+  import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
+  import { onMount, onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
   import { utils } from 'ethers'
   import { getFacetMethods } from '$lib/utils'
@@ -30,7 +31,7 @@
     Remove: 2,
   }
 
-  const { wallet, builtin, flow, transactions, chain } = initWeb3W({})
+  let { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
   const iface = new utils.Interface([
     'function diamondCut(tuple(address facetAddress, uint8 action, bytes4[] functionSelectors)[],address initAddress, bytes callData) external',
@@ -130,6 +131,18 @@
       alert(`Invalid network. Pleae connect to ${network}.`)
     }
   })
+
+  onMount(() => {
+    ;({ wallet, builtin, flow, transactions, chain } = initWeb3W({
+      options: [
+        new WalletConnectModuleLoader({
+          nodeUrl: NETWORKS[network].rpcUrl,
+          chainId: NETWORKS[network].chainId,
+        }),
+      ],
+    }))
+  })
+
   onDestroy(() => {
     error = null
     chainUnsub()
@@ -139,7 +152,7 @@
 {#if showModal}
   <div class="flex justify-center">
     <div class="rounded-box bg-base-300 p-10 w-2/3">
-      <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+      <div class="mt-3 text-center sm:mt-0 sm:text-left">
         <h3 class="text-2xl font-medium leading-6 mb-5">Add New Facet</h3>
 
         {#if fetchFacetError}
@@ -154,10 +167,15 @@
         {/if}
       </div>
       {#if $wallet.state !== 'Ready'}
-        <div class="container flex justify-center mt-5 gap-2">
-          {#if $builtin.available}
-            <button class="btn btn-sm glass bg-primary" on:click={() => connect()}>
-              Connect
+        <div class="container flex mt-5 gap-2">
+          {#if $wallet.state !== 'Ready'}
+            {#if $builtin.available}
+              <button class="btn btn-sm glass bg-primary" on:click={() => connect()}>
+                Connect With Metamask
+              </button>
+            {/if}
+            <button class="btn btn-sm glass bg-primary" on:click={() => connect('walletconnect')}>
+              Connect With WalletConnect
             </button>
           {/if}
         </div>
@@ -243,9 +261,9 @@
             </p>
           </div>
 
-          <div class="flex justify-center">
+          <div class="flex justify-end">
             <button
-              class="btn btn-xl glass bg-primary"
+              class="btn btn-sm glass bg-primary"
               on:click={() => flow.execute((contracts) => contracts.facet['diamondCut'](...args))}
             >
               <svg
@@ -267,13 +285,12 @@
           </div>
         {/if}
       {/if}
-
-      <!-- One big close button.  --->
-      <div class="mt-5 sm:mt-6">
-        <div class="flex rounded-md w-full justify-center">
-          <button class="btn btn-sm glass bg-primary" on:click={closeModal}>Close</button>
-        </div>
-      </div>
+    </div>
+  </div>
+  <!-- One big close button.  --->
+  <div class="mt-5 sm:mt-6">
+    <div class="flex rounded-md w-full justify-center">
+      <button class="btn btn-sm glass bg-primary" on:click={closeModal}>Close</button>
     </div>
   </div>
 {/if}
