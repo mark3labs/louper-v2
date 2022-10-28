@@ -5,7 +5,7 @@
   import type { Facet, Method } from '../../types/entities'
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
-  import { onDestroy } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { NETWORKS } from '$lib/config'
 
   export let address: string
@@ -13,14 +13,8 @@
   export let showModal = false
   export let facet: Facet | undefined = undefined
 
-  const { wallet, builtin, flow, transactions, chain } = initWeb3W({
-    options: [
-      new WalletConnectModuleLoader({
-        nodeUrl: NETWORKS[network].rpcUrl,
-        chainId: NETWORKS[network].chainId,
-      }),
-    ],
-  })
+  // Initialize the stores
+  let { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
   let selectedMethod: Method | null = null
   let args: any[] = []
@@ -66,6 +60,18 @@
       alert(`Invalid network. Pleae connect to ${network}.`)
     }
   })
+
+  onMount(() => {
+    ;({ wallet, builtin, flow, transactions, chain } = initWeb3W({
+      options: [
+        new WalletConnectModuleLoader({
+          nodeUrl: NETWORKS[network].rpcUrl,
+          chainId: NETWORKS[network].chainId,
+        }),
+      ],
+    }))
+  })
+
   onDestroy(async () => {
     error = null
     args = []
@@ -149,8 +155,8 @@
         {/each}
         <button type="submit" class="btn btn-sm glass bg-primary mt-3"> Execute </button>
       </form>
-      <div class="mt-2 flex justify-center h-72">
-        <p class="w-full p-5">
+      <div class="mt-5">
+        <p class="w-full">
           {#if $wallet.pendingUserConfirmation}
             Please check and approve the transaction in your wallet.
           {/if}
