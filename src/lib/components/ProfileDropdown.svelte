@@ -11,15 +11,15 @@
 
 {#if $user}
   <div class="dropdown dropdown-end">
-    <label tabindex="0" class="btn m-1" for="">
+    <label tabindex="0" class="btn m-1 bg-gradient-to-r from-primary to-secondary text-xs" for="">
       {#if $user.profile}
-        <img src={$user.profile.pfp} alt="" class="rounded-full bg-base-300 h-8 w-8 mr-3" />
+        <img src={$user.profile.pfp} alt="" class="rounded-full bg-base-300 h-6 w-6 mr-3" />
       {:else}
         <div class="rounded-full h-8 w-8 bg-gray-500 mr-3" />
       {/if}
       {$user.profile ? $user.profile.username : shortProfile($user.metadata.address)}
     </label>
-    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-52">
       <li>
         <a href="/bookmarks">
           <svg
@@ -39,7 +39,7 @@
           Bookmarks
         </a>
       </li>
-      <li >
+      <li>
         <a href="*" on:click|preventDefault={disconnect}>
           <svg
             class="w-6 h-6 mr-2"
