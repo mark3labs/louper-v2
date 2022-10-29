@@ -131,7 +131,12 @@
       <div class="flex">
         <button
           class="btn btn-sm glass mt-3 bg-error"
-          on:click={() => flow.execute((contracts) => contracts.facet['diamondCut'](...args))}
+          on:click={() =>
+            flow.execute(async (contracts) => {
+              const tx = await contracts.facet['diamondCut'](...args)
+              await tx.wait()
+              window.location.reload()
+            })}
         >
           <svg
             class="w-6 h-6 mr-1"

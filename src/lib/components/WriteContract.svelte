@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ethers } from 'ethers'
+  import { ethers, utils } from 'ethers'
   import Loading from './Loading.svelte'
   import Tags from 'svelte-tags-input'
   import type { Facet, Method } from '../../types/entities'
@@ -19,6 +19,7 @@
   let selectedMethod: Method | null = null
   let args: any[] = []
   let error: any = null
+  let value: number = 0
 
   const connect = async (option = 'builtin') => {
     try {
@@ -42,6 +43,7 @@
     showModal = false
     selectedMethod = null
     args = []
+    value = 0
     error = null
     wallet.disconnect()
     $transactions.forEach((t) => transactions.acknowledge(t.hash, t.status))
@@ -74,6 +76,7 @@
 
   onDestroy(async () => {
     error = null
+    value = 0
     args = []
     chainUnsub()
   })
@@ -125,7 +128,7 @@
             const method = selectedMethod.fragment
               .format(ethers.utils.FormatTypes.minimal)
               .split(' ')[1]
-            await contracts.facet[method](...args)
+            await contracts.facet[method](...args, { value: utils.parseEther(value.toString()) })
           })
         }}
         class="py-3"
@@ -153,6 +156,21 @@
             {/if}
           </div>
         {/each}
+        {#if selectedMethod.fragment.payable}
+          <div class="ml-2 inline-block mr-2 form-control">
+            <label for="valu" class="label">
+              <span class="label-text">value</span>
+              <span class="badge font-mono font-thin">ETH</span>
+            </label>
+            <input
+              name="value"
+              type="number"
+              step="any"
+              bind:value
+              class="border-2 rounded m-2 input input-primary input-bordered"
+            />
+          </div>
+        {/if}
         <button type="submit" class="btn btn-sm glass bg-primary mt-3"> Execute </button>
       </form>
       <div class="mt-5">
