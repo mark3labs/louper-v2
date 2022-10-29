@@ -79,13 +79,13 @@
     </div>
   </div>
   {#if !showReadContract && !showWriteContract && !showAddFacet && !showRemoveFacet}
-    <div class="flex justify-between">
+    <div class="flex flex-col md:flex-row space-y-3 justify-between">
       {#if diamond.isFinal}
         <div class="badge badge-success badge-lg">Final</div>
       {:else}
         <div class="badge badge-warning badge-lg">Upgradable</div>
       {/if}
-      <div class="flex justify-between gap-2">
+      <div class="flex justify-end gap-2">
         <a
           class="btn btn-sm glass bg-secondary"
           download="abi.json"

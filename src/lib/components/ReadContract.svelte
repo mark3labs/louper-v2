@@ -4,6 +4,8 @@
   import type { Facet, Method } from '../../types/entities'
   import ContractReader from '../services/contractReader'
   import Tags from 'svelte-tags-input'
+  import { BigNumber } from 'ethers'
+  import {} from 'os'
 
   export let address: string
   export let network: string
@@ -90,7 +92,16 @@
           {:then res}
             {#if res}
               <pre class="text-xs md:text-base text-base-content">
-                {JSON.stringify(res.data, null, 2)}
+                {JSON.stringify(
+                  res.data,
+                  (k, v) => {
+                    if (typeof v === 'object' && v.type === 'BigNumber') {
+                      return BigNumber.from(v.hex).toString()
+                    }
+                    return v
+                  },
+                  2,
+                )}
               </pre>
             {/if}
           {:catch error}
