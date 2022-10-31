@@ -34,11 +34,12 @@ supabase status
 
 Copy the `service_role key` and paste that as the value of `SUPABASE_KEY` in `.env`
 
-Ensure you have [pnpm](https://pnpm.io/installation) installed and install dependencies via `pnpm install`
+Ensure you have [pnpm](https://pnpm.io/installation) installed.
 
 Run:
 
 ```sh
+pnpm install
 pnpm run dev
 ```
 
