@@ -11,7 +11,11 @@
     <div class="card-title">Search by Address</div>
     <div class="grid grid-flow-col card bg-base-300 rounded-box p-1 lg:p-2">
       <div class="form-control">
-        <div class="relative">
+        <form
+          on:submit|preventDefault|stopPropagation={() =>
+            goto(`/diamond/${address}?network=${network}`)}
+          class="relative"
+        >
           <input
             type="text"
             placeholder="0x..."
@@ -30,11 +34,11 @@
           </select>
           <button
             class="absolute top-0 right-0 btn border-0 bg-gradient-to-r from-primary to-secondary"
-            on:click={() => goto(`/diamond/${address}?network=${network}`)}
+            type="submit"
           >
             🔎
           </button>
-        </div>
+        </form>
       </div>
     </div>
   </div>

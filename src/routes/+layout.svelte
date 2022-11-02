@@ -133,7 +133,7 @@
           </svg>
         </a>
 
-        <a href="https://github.com/mark3labs/louper" target="_blank">
+        <a href="https://github.com/mark3labs/louper-v2" target="_blank">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-brand-github"
