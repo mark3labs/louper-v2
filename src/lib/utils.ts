@@ -38,6 +38,24 @@ export const getFacetMethods = (address: string, abi: any): Method[] => {
   return methods
 }
 
+export const getABIMethods = (address: string, abi: any): string => {
+  const contract = new ethers.Contract(address, abi)
+
+  const methods: Method[] = []
+  const events = contract.interface.events
+  for (const [f, val] of Object.entries(events)) {
+    const selector = utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10)
+
+    const method: Method = {
+      signature: f,
+      selector,
+      fragment: val,
+    }
+    methods.push(method)
+  }
+  return methods
+}
+
 export const shortProfile = (address: string) => {
   return `${address.substring(0, 5)}-${address.substring(address.length - 5)}`
 }

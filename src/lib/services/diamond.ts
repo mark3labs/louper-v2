@@ -1,6 +1,6 @@
 import type { Diamond, Method, Facet, LouperEvent } from '../../types/entities'
 import { ethers, utils } from 'ethers'
-import { getFacetMethods } from '$lib/utils'
+import { getFacetMethods, getABIMethods } from '$lib/utils'
 
 type FetchFunction = (info: RequestInfo, init?: RequestInit) => Promise<Response>
 
@@ -17,7 +17,8 @@ export default class DiamondContract implements Diamond {
   facetsToSelectors: Map<string, string[]> = new Map<string, string[]>()
   fetch: FetchFunction
   abi = []
-  abiSelectorsTemp = []
+  functionSelectorsTemp = []
+  eventSignaturesTemp = []
 
   constructor(address: string, network: string, fetch: FetchFunction) {
     this.address = address
@@ -107,14 +108,25 @@ export default class DiamondContract implements Diamond {
         }
       } else {
         facetData.abi.forEach((abi) => {
-          const method = getFacetMethods(this.address, [abi])
+          const functionMethods = getFacetMethods(this.address, [abi])
           // Method should be an active selector
-          if (method.length > 0 && this.selectors.includes(method[0].selector)) {
+          if (functionMethods.length > 0 && this.selectors.includes(functionMethods[0].selector)) {
             // New facets will contain already existing selectors, prevent those from being duplicated
-            if (!this.abiSelectorsTemp.includes(method[0].selector)) {
+            if (!this.functionSelectorsTemp.includes(functionMethods[0].selector)) {
               this.abi.push(abi)
               // A Diamond allows duplicate names (but not selectors), so we can't use the ABI name
-              this.abiSelectorsTemp.push(method[0].selector)
+              this.functionSelectorsTemp.push(functionMethods[0].selector)
+            }
+          }
+
+          if (abi.type === 'event') {
+            const abiMethods = getABIMethods(this.address, [abi])
+            if (
+              abiMethods.length > 0 &&
+              !this.eventSignaturesTemp.includes(abiMethods[0].signature)
+            ) {
+              this.abi.push(abi)
+              this.eventSignaturesTemp.push(abiMethods[0].signature)
             }
           }
         })
