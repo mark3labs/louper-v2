@@ -213,7 +213,7 @@ export const NETWORKS: Record<string, Network> = {
     rpcUrl: 'https://rpc.energyweb.org',
     explorerUrl: 'http://explorer.energyweb.org',
     explorerApiUrl: 'https://explorer.energyweb.org/api-docs',
-    emoji: '🟣',
+    emoji: '⚡',
     chainId: '246',
   },
   volta: {
@@ -221,7 +221,7 @@ export const NETWORKS: Record<string, Network> = {
     rpcUrl: 'https://volta-rpc.energyweb.org',
     explorerUrl: 'http://volta-explorer.energyweb.org',
     explorerApiUrl: 'https://volta-explorer.energyweb.org/api-docs',
-    emoji: '🟣',
+    emoji: '⚡',
     chainId: '73799',
   },
 }
