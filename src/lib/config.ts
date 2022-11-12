@@ -208,4 +208,20 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🟩',
     chainId: '1088',
   },
+  ewc: {
+    title: 'Energy Web Chain',
+    rpcUrl: 'https://rpc.energyweb.org',
+    explorerUrl: 'http://explorer.energyweb.org',
+    explorerApiUrl: 'https://explorer.energyweb.org/api-docs',
+    emoji: '⚡',
+    chainId: '246',
+  },
+  volta: {
+    title: 'Volta - Energy Web Testnet',
+    rpcUrl: 'https://volta-rpc.energyweb.org',
+    explorerUrl: 'http://volta-explorer.energyweb.org',
+    explorerApiUrl: 'https://volta-explorer.energyweb.org/api-docs',
+    emoji: '⚡',
+    chainId: '73799',
+  },
 }
