@@ -7,7 +7,7 @@
   import { utils } from 'ethers'
   import { getFacetMethods } from '$lib/utils'
   import Loading from './Loading.svelte'
-  import type { Method } from './../types/entities'
+  import type { Method } from '../../types/entities'
 
   let facetAddress = ''
   let facet: any | undefined = undefined
