@@ -104,6 +104,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🔵',
     chainId: '42161',
   },
+  arbitrum_goerli: {
+    title: 'Arbitrum Goerli',
+    rpcUrl: 'https://goerli-rollup.arbitrum.io/rpc',
+    explorerUrl: 'https://goerli.arbiscan.io/',
+    explorerApiUrl: 'https://api-goerli.arbiscan.io/api',
+    emoji: '🧪',
+    chainId: '421613',
+  },
   arbutrum_testnet: {
     title: 'Arbitrum Testnet',
     rpcUrl: 'https://rinkeby.arbitrum.io/rpc',
