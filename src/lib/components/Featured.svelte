@@ -52,7 +52,7 @@
       name: 'LIFI',
       description: 'Developer Solution Providing Advanced Bridge Aggregation with DEX Connectivity',
       icon: '/img/lifi.png',
-      url: '/diamond/0x362fa9d0bca5d19f743db50738345ce2b40ec99f',
+      url: '/diamond/0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE',
       projectUrl: 'https://li.fi',
     },
   ]

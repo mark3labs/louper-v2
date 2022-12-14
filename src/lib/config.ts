@@ -88,15 +88,15 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🔴',
     chainId: '10',
   },
-  optimism_kovan: {
-    title: 'Optimism Kovan Testnet',
-    rpcUrl: 'https://kovan.optimism.io',
-    explorerUrl: 'https://kovan-optimistic.etherscan.io/',
-    explorerApiUrl: 'https://api-kovan-optimistic.etherscan.io/api',
+  optimism_goerli: {
+    title: 'Optimism Goerli Testnet',
+    rpcUrl: 'https://goerli.optimism.io',
+    explorerUrl: 'https://goerli-optimism.etherscan.io/',
+    explorerApiUrl: 'https://api-goerli-optimistic.etherscan.io/',
     emoji: '🧪',
-    chainId: '69',
+    chainId: '420',
   },
-  abritrum: {
+  arbitrum: {
     title: 'Arbitrum',
     rpcUrl: 'https://arb1.arbitrum.io/rpc',
     explorerUrl: 'https://arbiscan.io/',
@@ -111,14 +111,6 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-goerli.arbiscan.io/api',
     emoji: '🧪',
     chainId: '421613',
-  },
-  arbutrum_testnet: {
-    title: 'Arbitrum Testnet',
-    rpcUrl: 'https://rinkeby.arbitrum.io/rpc',
-    explorerUrl: 'https://testnet.arbiscan.io/',
-    explorerApiUrl: 'https://api-testnet.arbiscan.io/api',
-    emoji: '🧪',
-    chainId: '421611',
   },
   moonriver: {
     title: 'Moonriver',
