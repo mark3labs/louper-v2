@@ -55,6 +55,13 @@
       url: '/diamond/0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE',
       projectUrl: 'https://li.fi',
     },
+    {
+      name: 'Connext',
+      description: 'The most secure interoperability protocol to build crosschain dApps',
+      icon: '/img/connext-logo.png',
+      url: '/diamond/0x2b501381c6d6aFf9238526352b1c7560Aa35A7C5?network=mainnet',
+      projectUrl: 'https://connext.network',
+    },
   ]
 </script>
 
