@@ -1,16 +1,12 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from '@sveltejs/kit'
-import dotenv from 'dotenv'
-dotenv.config()
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type PostgrestError } from '@supabase/supabase-js'
+import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private'
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-export const POST: RequestHandler<
-  void,
-  { network: string; address: string; name: string }
-> = async ({ request }) => {
+export const POST = (async ({ request }) => {
   const body = await request.json()
   const network = body.network.toLowerCase()
   const address = body.address.toLowerCase()
@@ -38,26 +34,26 @@ export const POST: RequestHandler<
     record.hits += 1
   }
 
-  ;({ data, error } = await supabase.from('leaderboard').upsert(record))
+  ; ({ data, error } = await supabase.from('leaderboard').upsert(record))
   if (error) {
     console.error(error)
   }
 
   return new Response('OK')
-}
+}) satisfies RequestHandler
 
-export const GET: RequestHandler = async ({ url }) => {
-  let data
-  let error
+export const GET = (async ({ url }) => {
+  let data: Record<string, unknown>[] = []
+  let error: PostgrestError | null = null
 
   if (url.searchParams.get('ranked')) {
-    ;({ data, error } = await supabase
+    ; ({ data, error } = await supabase
       .from('leaderboard')
       .select()
       .order('hits', { ascending: false })
       .limit(10))
   } else {
-    ;({ data, error } = await supabase
+    ; ({ data, error } = await supabase
       .from('leaderboard')
       .select()
       .order('updated_at', { ascending: false })
@@ -76,4 +72,4 @@ export const GET: RequestHandler = async ({ url }) => {
   return json({
     diamonds,
   })
-}
+}) satisfies RequestHandler

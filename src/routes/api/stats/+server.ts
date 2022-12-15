@@ -1,16 +1,14 @@
 import { json } from '@sveltejs/kit'
-import dotenv from 'dotenv'
 import type { RequestHandler } from '@sveltejs/kit'
 import { createClient } from '@supabase/supabase-js'
 import axios from 'redaxios'
-
-dotenv.config()
+import { SUPABASE_URL, SUPABASE_KEY, SIMPLE_ANALYTICS_API_KEY } from '$env/static/private'
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
-const SA_KEY = process.env['SIMPLE_ANALYTICS_API_KEY']
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+const SA_KEY = SIMPLE_ANALYTICS_API_KEY
 
-export const GET: RequestHandler = async () => {
+export const GET = (async () => {
   let { error, count } = await supabase
     .from('contracts')
     .select('name', { count: 'exact', head: true })
@@ -24,7 +22,7 @@ export const GET: RequestHandler = async () => {
     contractCount = count
   }
 
-  ;({ error, count } = await supabase
+  ; ({ error, count } = await supabase
     .from('leaderboard')
     .select('name', { count: 'exact', head: true }))
 
@@ -56,4 +54,4 @@ export const GET: RequestHandler = async () => {
     diamondCount,
     pageViews,
   })
-}
+}) satisfies RequestHandler
