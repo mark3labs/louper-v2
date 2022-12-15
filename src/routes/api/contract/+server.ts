@@ -3,22 +3,17 @@ import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
 import { utils } from 'ethers'
 import type { RequestHandler } from '@sveltejs/kit'
-
-import dotenv from 'dotenv'
+import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private'
 
 const SOURCIFY_REPO_URL = 'https://repo.sourcify.dev'
-
-dotenv.config()
 
 import { createClient } from '@supabase/supabase-js'
 import { getEtherscanApiKey } from '$lib/utils'
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient(process.env['SUPABASE_URL'], process.env['SUPABASE_KEY'])
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-export const POST: RequestHandler<void, { network: string; address: string }> = async ({
-  request,
-}) => {
+export const POST = (async ({ request }) => {
   const body = await request.json()
   const network = body.network.toLowerCase() || 'mainnet'
   const address = body.address.toLowerCase()
@@ -46,8 +41,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
     )
     if (metadata) {
       console.log(
-        `Fetched ABI for ${
-          Object.values(metadata.data.settings.compilationTarget)[0] as string
+        `Fetched ABI for ${Object.values(metadata.data.settings.compilationTarget)[0] as string
         }. Caching...`,
       )
       await cacheAbi(
@@ -94,7 +88,7 @@ export const POST: RequestHandler<void, { network: string; address: string }> = 
     name: '',
     abi: [],
   })
-}
+}) satisfies RequestHandler
 
 const fetchCachedAbi = async (network: string, address: string) => {
   const { data, error } = await supabase

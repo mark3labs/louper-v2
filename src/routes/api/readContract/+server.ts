@@ -1,17 +1,9 @@
 import { json } from '@sveltejs/kit'
 import { ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
-import dotenv from 'dotenv'
 import type { RequestHandler } from '@sveltejs/kit'
 
-dotenv.config()
-
-const INFURA_API_KEY = process.env['INFURA_API_KEY']
-
-export const POST: RequestHandler<
-  void,
-  { network: string; address: string; fragment: string; args: [] }
-> = async ({ request }) => {
+export const POST = (async ({ request }) => {
   const body = await request.json()
   console.info(
     `Reading contract data for 💎 diamond at ${body.address} on ${body.network || 'mainnet'}`,
@@ -23,8 +15,7 @@ export const POST: RequestHandler<
   abi.push(fragment)
   const args = body.args
 
-  let rpcUrl = body.network ? NETWORKS[body.network].rpcUrl : NETWORKS['mainnet'].rpcUrl
-  rpcUrl = rpcUrl.replace('%INFURA_API_KEY%', INFURA_API_KEY)
+  const rpcUrl = body.network ? NETWORKS[body.network].rpcUrl : NETWORKS['mainnet'].rpcUrl
   const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
   const diamondContract = new ethers.Contract(address, abi, provider)
 
@@ -41,4 +32,4 @@ export const POST: RequestHandler<
       value: e.value,
     })
   }
-}
+}) satisfies RequestHandler
