@@ -112,6 +112,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🧪',
     chainId: '421613',
   },
+  arbitrum_nova: {
+    title: 'Arbitrum Nova',
+    rpcUrl: 'https://nova.arbitrum.io/rpc',
+    explorerUrl: 'https://nova.arbiscan.io',
+    explorerApiUrl: 'https://api-nova.arbiscan.io/api',
+    emoji: '🔵',
+    chainId: '42170',
+  },
   moonriver: {
     title: 'Moonriver',
     rpcUrl: 'https://rpc.moonriver.moonbeam.network',
@@ -223,5 +231,21 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://volta-explorer.energyweb.org/api-docs',
     emoji: '⚡',
     chainId: '73799',
+  },
+  telos: {
+    title: 'Telos',
+    rpcUrl: 'https://mainnet.telos.net/evm',
+    explorerUrl: 'https://www.teloscan.io/',
+    explorerApiUrl: '',
+    emoji: '🔵',
+    chainId: '40',
+  },
+  telos_testnet: {
+    title: 'Telos Testnet',
+    rpcUrl: 'https://testnet.telos.net/evm',
+    explorerUrl: 'https://testnet.teloscan.io/',
+    explorerApiUrl: '',
+    emoji: '🧪',
+    chainId: '41',
   },
 }
