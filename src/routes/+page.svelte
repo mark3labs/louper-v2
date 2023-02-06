@@ -11,7 +11,7 @@
   <!-- Stats -->
   <Stats />
   <!-- Latest Diamonds -->
-  <div class="flex flex-col xl:flex-row py-5 bg-base-300 sm:py-10 lg:py-10 rounded-box space-y-5">
+  <div class="flex flex-col xl:flex-row py-5 bg-base-300 sm:py-10 lg:py-10 rounded-box">
     <LatestDiamonds />
     <TopDiamonds />
   </div>
