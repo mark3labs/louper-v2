@@ -24,6 +24,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🧪',
     chainId: '5',
   },
+  sepolia: {
+    title: 'Sepolia Testnet',
+    rpcUrl: 'https://endpoints.omniatech.io/v1/eth/sepolia/public',
+    explorerUrl: 'https://sepolia.etherscan.io/',
+    explorerApiUrl: 'https://api-sepolia.etherscan.io/api',
+    emoji: '🏀',
+    chainId: '11155111',
+  },
   xdai: {
     title: 'Gnosis (XDai)',
     rpcUrl: 'https://rpc.gnosischain.com/',
