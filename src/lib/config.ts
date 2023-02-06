@@ -228,7 +228,7 @@ export const NETWORKS: Record<string, Network> = {
     title: 'Energy Web Chain',
     rpcUrl: 'https://rpc.energyweb.org',
     explorerUrl: 'http://explorer.energyweb.org',
-    explorerApiUrl: 'https://explorer.energyweb.org/api-docs',
+    explorerApiUrl: 'https://explorer.energyweb.org/api',
     emoji: '⚡',
     chainId: '246',
   },
@@ -236,7 +236,7 @@ export const NETWORKS: Record<string, Network> = {
     title: 'Volta - Energy Web Testnet',
     rpcUrl: 'https://volta-rpc.energyweb.org',
     explorerUrl: 'http://volta-explorer.energyweb.org',
-    explorerApiUrl: 'https://volta-explorer.energyweb.org/api-docs',
+    explorerApiUrl: 'https://volta-explorer.energyweb.org/api',
     emoji: '⚡',
     chainId: '73799',
   },
@@ -256,4 +256,12 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🧪',
     chainId: '41',
   },
+  skale_testnet:{
+    title: 'Skale Testnet',
+    rpcUrl: 'https://staging-v3.skalenodes.com/v1/staging-aware-chief-gianfar',
+    explorerUrl: 'https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/',
+    explorerApiUrl: 'https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/api',
+    emoji: '⚙️',
+    chainId: '0x5a79c44e',
+  }
 }
