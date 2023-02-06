@@ -256,4 +256,12 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🧪',
     chainId: '41',
   },
+  skale_testnet:{
+    title: 'Skale Testnet',
+    rpcUrl: 'https://staging-v3.skalenodes.com/v1/staging-aware-chief-gianfar',
+    explorerUrl: 'https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/',
+    explorerApiUrl: '',
+    emoji: '⚙️',
+    chainId: '0x5a79c44e',
+  }
 }
