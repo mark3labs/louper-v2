@@ -128,6 +128,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🔵',
     chainId: '42170',
   },
+  moonbase: {
+    title: 'Moonbase Alpha',
+    rpcUrl: 'https://rpc.api.moonbase.moonbeam.network',
+    explorerUrl: 'https://moonbase.moonscan.io/',
+    explorerApiUrl: 'https://api-moonbase.moonscan.io/api',
+    emoji: '🌕',
+    chainId: '1287',
+  },
   moonriver: {
     title: 'Moonriver',
     rpcUrl: 'https://rpc.moonriver.moonbeam.network',
