@@ -35,8 +35,8 @@ export const NETWORKS: Record<string, Network> = {
   xdai: {
     title: 'Gnosis (XDai)',
     rpcUrl: 'https://rpc.gnosischain.com/',
-    explorerUrl: 'https://blockscout.com/xdai/mainnet',
-    explorerApiUrl: 'https://blockscout.com/poa/xdai/api',
+    explorerUrl: 'https://gnosisscan.io',
+    explorerApiUrl: 'https://api.gnosisscan.io/api',
     emoji: '🟡',
     chainId: '100',
   },
