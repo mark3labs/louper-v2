@@ -35,8 +35,8 @@ export const NETWORKS: Record<string, Network> = {
   xdai: {
     title: 'Gnosis (XDai)',
     rpcUrl: 'https://rpc.gnosischain.com/',
-    explorerUrl: 'https://blockscout.com/xdai/mainnet',
-    explorerApiUrl: 'https://blockscout.com/poa/xdai/api',
+    explorerUrl: 'https://gnosisscan.io',
+    explorerApiUrl: 'https://api.gnosisscan.io/api',
     emoji: '🟡',
     chainId: '100',
   },
@@ -127,6 +127,14 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-nova.arbiscan.io/api',
     emoji: '🔵',
     chainId: '42170',
+  },
+  moonbase: {
+    title: 'Moonbase Alpha',
+    rpcUrl: 'https://rpc.api.moonbase.moonbeam.network',
+    explorerUrl: 'https://moonbase.moonscan.io/',
+    explorerApiUrl: 'https://api-moonbase.moonscan.io/api',
+    emoji: '🌕',
+    chainId: '1287',
   },
   moonriver: {
     title: 'Moonriver',
