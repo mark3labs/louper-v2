@@ -265,7 +265,7 @@ export const NETWORKS: Record<string, Network> = {
     chainId: '41',
   },
   cronos: {
-    title: 'Cronos Testnet',
+    title: 'Cronos',
     rpcUrl: 'https://evm.cronos.org',
     explorerUrl: 'https://cronoscan.com/',
     explorerApiUrl: 'api.cronoscan.com/api',
@@ -280,7 +280,7 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '⏱️',
     chainId: '338',
   },
-  skale_testnet:{
+  skale_testnet: {
     title: 'Skale Testnet',
     rpcUrl: 'https://staging-v3.skalenodes.com/v1/staging-aware-chief-gianfar',
     explorerUrl: 'https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/',
