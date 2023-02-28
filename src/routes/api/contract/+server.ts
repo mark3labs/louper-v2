@@ -18,8 +18,6 @@ export const POST = (async ({ request }) => {
   const network = body.network.toLowerCase() || 'mainnet'
   const address = body.address.toLowerCase()
 
-  const API_KEY = getEtherscanApiKey(network)
-
   console.info(`Fetching data for 📝 contract at ${address} on ${network}`)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,57 +29,18 @@ export const POST = (async ({ request }) => {
     })
   }
 
-  // Try Sourcify first
   try {
-    console.log('Trying Sourcify...')
-    const metadata = await axios.get(
-      `${SOURCIFY_REPO_URL}/contracts/full_match/${NETWORKS[network].chainId}/${utils.getAddress(
-        address,
-      )}/metadata.json`,
-    )
-    if (metadata) {
-      console.log(
-        `Fetched ABI for ${Object.values(metadata.data.settings.compilationTarget)[0] as string
-        }. Caching...`,
-      )
-      await cacheAbi(
-        network,
-        address,
-        Object.values(metadata.data.settings.compilationTarget)[0] as string,
-        metadata.data.output.abi,
-      )
+    const res = await axios.get(`https://anyabi.xyz/api/get-abi/${NETWORKS[network].chainId}/${address}`)
+    if (res.data.abi) {
+      console.log(`ABI for ${res.data.name} fetched from AnyABI. Caching...`)
+      await cacheAbi(network, address, res.data.name, res.data.abi)
       return json({
-        abi: metadata.data.output.abi,
-        name: Object.values(metadata.data.settings.compilationTarget)[0] as string,
+        abi: res.data.abi,
+        name: res.data.name,
       })
     }
   } catch (e) {
-    console.log(e)
-    console.log('Nothing found on Sourcify.')
-  }
-
-  const apiUrl = NETWORKS[network].explorerApiUrl
-  if (apiUrl) {
-    try {
-      const fullUrl = `${apiUrl}?module=contract&action=getsourcecode&address=${address}&apikey=${API_KEY}`
-      console.log(fullUrl)
-      const resp = await axios.get(fullUrl)
-      const abi = resp.data.result[0].SourceCode ? JSON.parse(resp.data.result[0].ABI) : []
-      const name = resp.data.result[0].ContractName || ''
-
-      if (abi.length) {
-        console.log(`Fetched ABI for ${name}. Caching...`)
-        await cacheAbi(network, address, name, abi)
-      } else {
-        console.log('Contract not verified...')
-      }
-      return json({
-        name,
-        abi,
-      })
-    } catch (e) {
-      console.log('Nothing found on block explorer.')
-    }
+    console.log('Nothing found on AnyABI.')
   }
 
   return json({
@@ -103,11 +62,11 @@ const fetchCachedAbi = async (network: string, address: string) => {
   }
 
   if (!data.length) {
-    console.log('No cached ABI. Fetching from block explorer...')
+    console.log('No cached ABI. Fetching from AnyABI...')
     return false
   }
 
-  console.log(`ABI for ${data[0].name} fetched.`)
+  console.log(`ABI for ${data[0].name} fetched from cache.`)
   return { abi: data[0].abi, name: data[0].name }
 }
 
