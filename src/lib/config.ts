@@ -287,5 +287,13 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/api',
     emoji: '⚙️',
     chainId: '0x5a79c44e',
-  }
+  },
+  base_testnet: {
+    title: 'Base Testnet',
+    rpcUrl: 'https://goerli.base.org',
+    explorerUrl: 'https://goerli.basescan.org',
+    explorerApiUrl: 'https://api-goerli.basescan.org/api',
+    emoji: '🟦',
+    chainId: '84531',
+  },
 }
