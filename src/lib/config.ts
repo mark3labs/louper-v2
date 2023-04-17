@@ -299,7 +299,7 @@ export const NETWORKS: Record<string, Network> = {
   scroll_testnet: {
     title: 'Scroll Testnet',
     rpcUrl: 'https://alpha-rpc.scroll.io/l2',
-    explorerUrl: 'https://blockscout.scroll.io/',
+    explorerUrl: 'https://blockscout.scroll.io',
     explorerApiUrl: 'https://blockscout.scroll.io/api',
     emoji: '📜',
     chainId: '534353'
