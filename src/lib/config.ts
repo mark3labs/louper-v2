@@ -303,5 +303,13 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://blockscout.scroll.io/api',
     emoji: '📜',
     chainId: '534353'
+  },
+  linea_testnet: {
+    title: 'Linea Testnet',
+    rpcUrl: 'https://rpc.goerli.linea.build',
+    explorerUrl: 'https://explorer.goerli.linea.build',
+    explorerApiUrl: 'https://explorer.goerli.linea.build/api',
+    emoji: '⚫',
+    chainId: '59140'
   }
 }
