@@ -19,7 +19,7 @@
   let selectedMethod: Method | null = null
   let args: any[] = []
   let error: any = null
-  let value: number = 0
+  let value = 0
 
   const connect = async (option = 'builtin') => {
     try {
@@ -145,7 +145,15 @@
             {#if input.type.indexOf('[') > -1 && input.type.indexOf(']') > -1}
               <Tags on:tags={(event) => (args[i] = event.detail.tags)} allowPaste class="input" />
             {:else if input.type === 'bool'}
-              <input type="checkbox" name={input.name} bind:checked={args[i]} />
+              <select
+                name={input.name}
+                bind:value={args[i]}
+                class="border-2 rounded m-2 input input-primary input-bordered"
+                required
+              >
+                <option value={true}>True</option>
+                <option value={undefined}>False</option>
+              </select>
             {:else}
               <input
                 type="text"
