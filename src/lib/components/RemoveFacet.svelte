@@ -15,6 +15,7 @@
 
   let error: any = null
   let args: any = {}
+  let selectors: string[] = []
 
   const FacetCutAction = {
     Add: 0,
@@ -34,7 +35,7 @@
         {
           facetAddress: constants.AddressZero,
           action: FacetCutAction.Remove,
-          functionSelectors: facet.methods.map((m) => m.selector),
+          functionSelectors: selectors,
         },
       ],
       constants.AddressZero,
@@ -128,6 +129,27 @@
     </div>
 
     {#if $wallet.state === 'Ready'}
+      {#if facet}
+        <table class="table table-compact w-full">
+          <thead>
+            <tr>
+              <th>Remove</th>
+              <th>Method</th>
+              <th class="text-right"><span class="mr-3">Selector</span></th>
+            </tr>
+          </thead>
+          {#each facet.methods as method}
+            <tr>
+              <th><input type="checkbox" bind:group={selectors} value={method.selector} /></th>
+              <td>{method.signature}</td>
+              <td class="text-right">
+                <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
+              </td>
+            </tr>
+          {/each}
+        </table>
+      {/if}
+
       <div class="flex">
         <button
           class="btn btn-sm glass mt-3 bg-error"
