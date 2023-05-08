@@ -77,10 +77,10 @@
       return
     }
 
-    if (allFacets.map((f) => f.address.toLowerCase()).includes(facetAddress.toLowerCase())) {
-      fetchFacetError = 'Facet already exists.'
-      return
-    }
+    // if (allFacets.map((f) => f.address.toLowerCase()).includes(facetAddress.toLowerCase())) {
+    //   fetchFacetError = 'Facet already exists.'
+    //   return
+    // }
 
     const res = await fetch('/api/contract', {
       method: 'POST',
