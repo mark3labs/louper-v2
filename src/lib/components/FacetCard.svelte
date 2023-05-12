@@ -1,6 +1,6 @@
 <script lang="ts">
   import type DiamondContract from '$lib/services/diamond'
-  import { getExplorerAddressUrl, getVerifyContractUrl } from '$lib/utils'
+  import { getExplorerAddressUrl } from '$lib/utils'
   import type { Facet } from 'src/types/entities'
 
   export let diamond: DiamondContract
@@ -20,10 +20,10 @@
       {#if !facet.name}
         <a
           class="inline-block text-primary uppercase font-bold"
-          href={getVerifyContractUrl(facet.address, diamond.network)}
+          href="https://sourcify.dev/#/verifier"
           target="_blank"
         >
-          Verify
+          Verify on Sourcify
           <svg
             class="w-3 h-3 md:w-4 md:h-4 inline mb-1"
             fill="currentColor"
