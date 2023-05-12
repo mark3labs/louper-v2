@@ -158,6 +158,9 @@
       network={diamond.network}
       facetsToName={diamond.facetsToName}
     />
+    {#if diamond.facets.length === 0}
+      <h4>No facets found. This contract is not a proper diamond...</h4>
+    {/if}
     <div class="grid lg:grid-cols-2 gap-3">
       {#each diamond.facets as facet}
         <FacetCard

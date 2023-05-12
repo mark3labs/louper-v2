@@ -17,8 +17,8 @@
   let { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
   let selectedMethod: Method | null = null
-  let args: any[] = []
-  let error: any = null
+  let args: unknown[] = []
+  let error: { message: string } | null = null
   let value = 0
 
   const connect = async (option = 'builtin') => {
@@ -51,7 +51,7 @@
   }
 
   $: if ($flow.executionError) {
-    error = $flow.executionError
+    error = $flow.executionError as { message: string }
     flow.cancel()
     wallet.acknowledgeError()
   }
