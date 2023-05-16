@@ -128,7 +128,11 @@
             const method = selectedMethod.fragment
               .format(ethers.utils.FormatTypes.minimal)
               .split(' ')[1]
-            await contracts.facet[method](...args, { value: utils.parseEther(value.toString()) })
+            await contracts.facet[method](...args, {
+              value: selectedMethod.fragment.payable
+                ? utils.parseEther(value.toString())
+                : undefined,
+            })
           })
         }}
         class="py-3"
