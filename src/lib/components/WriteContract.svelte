@@ -170,7 +170,7 @@
         {/each}
         {#if selectedMethod.fragment.payable}
           <div class="ml-2 inline-block mr-2 form-control">
-            <label for="valu" class="label">
+            <label for="value" class="label">
               <span class="label-text">value</span>
               <span class="badge font-mono font-thin">ETH</span>
             </label>
