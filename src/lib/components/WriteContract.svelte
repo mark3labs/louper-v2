@@ -130,7 +130,7 @@
               .split(' ')[1]
             await contracts.facet[method](...args, {
               value: selectedMethod.fragment.payable
-                ? utils.parseEther(value.toString())
+                ? utils.parseEther(value.toString()).toString()
                 : undefined,
             })
           })
