@@ -11,6 +11,27 @@
   export let showWriteContract: boolean
   export let showRemoveFacet: boolean
   export let activeFacet: Facet
+
+  export const readOnlyMethods = facet.methods.filter((m) => {
+    if (m.fragment) {
+      return m.fragment.constant
+    }
+    return false
+  })
+
+  export const writeableMethods = facet.methods.filter((m) => {
+    if (m.fragment) {
+      return !m.fragment.constant
+    }
+    return false
+  })
+
+  export const unknownMethods = facet.methods.filter((m) => {
+    if (!m.fragment) {
+      return true
+    }
+    return false
+  })
 </script>
 
 <div class="card shadow mockup-code bg-base-300 text-base-content">
@@ -92,7 +113,41 @@
             <th class="text-right"><span class="mr-3">Selector</span></th>
           </tr>
         </thead>
-        {#each facet.methods as method}
+        <tr>
+          <td />
+        </tr>
+        {#if readOnlyMethods.length > 0}
+          <tr>
+            <th class="font-bold uppercase bg-base-200 py-0 rounded" colspan="2">Read Only</th>
+          </tr>
+        {/if}
+        {#each readOnlyMethods as method}
+          <tr>
+            <td>{method.signature}</td>
+            <td class="text-right">
+              <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
+            </td>
+          </tr>
+        {/each}
+        {#if writeableMethods.length > 0}
+          <tr>
+            <th class="font-bold uppercase bg-base-200 py-0 rounded" colspan="2">Writeable</th>
+          </tr>
+        {/if}
+        {#each writeableMethods as method}
+          <tr>
+            <td>{method.signature}</td>
+            <td class="text-right">
+              <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
+            </td>
+          </tr>
+        {/each}
+        {#if unknownMethods.length > 0}
+          <tr>
+            <th class="font-bold uppercase bg-base-200 py-0 rounded" colspan="2">Unknown</th>
+          </tr>
+        {/if}
+        {#each unknownMethods as method}
           <tr>
             <td>{method.signature}</td>
             <td class="text-right">
