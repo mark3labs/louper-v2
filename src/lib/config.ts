@@ -34,6 +34,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-sepolia.etherscan.io/api',
     emoji: '🏀',
     chainId: '11155111',
+    txHistorySupported: true,
   },
   xdai: {
     title: 'Gnosis (XDai)',
@@ -42,6 +43,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.gnosisscan.io/api',
     emoji: '🟡',
     chainId: '100',
+    txHistorySupported: true,
   },
   polygon: {
     title: 'Polygon',
@@ -59,6 +61,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-testnet.polygonscan.com/api',
     emoji: '🧪',
     chainId: '80001',
+    txHistorySupported: true,
   },
   binance: {
     title: 'Binance Smart Chain',
@@ -84,6 +87,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.snowtrace.io/api',
     emoji: '⛰️',
     chainId: '43114',
+    txHistorySupported: true,
   },
   fuji: {
     title: 'Avalanche Fuji Testnet',
@@ -92,6 +96,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-testnet.snowtrace.io/api',
     emoji: '🧪',
     chainId: '43113',
+    txHistorySupported: true,
   },
   optimism: {
     title: 'Optimism',
@@ -150,6 +155,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-moonriver.moonscan.io/api',
     emoji: '🌕',
     chainId: '1285',
+    txHistorySupported: true,
   },
   moonbeam: {
     title: 'Moonbeam',
@@ -158,6 +164,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-moonbeam.moonscan.io/api',
     emoji: '🌕',
     chainId: '1284',
+    txHistorySupported: true,
   },
   celo: {
     title: 'Celo',
@@ -166,6 +173,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://explorer.celo.org/api',
     emoji: '🟩',
     chainId: '42220',
+    txHistorySupported: true,
   },
   fantom: {
     title: 'Fantom',
@@ -174,6 +182,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.ftmscan.com/api',
     emoji: '👻',
     chainId: '250',
+    txHistorySupported: true,
   },
   fantom_testnet: {
     title: 'Fantom Testnet',

@@ -154,7 +154,7 @@
         {/if}
       </div>
     </div>
-    {#if NETWORKS[diamond.network].txHistorySupported}
+    {#if NETWORKS[diamond.network].txHistorySupported || true}
       <Transactions {diamond} />
     {/if}
     <History
