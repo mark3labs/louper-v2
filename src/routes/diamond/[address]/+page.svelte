@@ -14,6 +14,8 @@
   import Bookmark from '$lib/components/Bookmark.svelte'
   import user from '$lib/stores/user'
   import Comments from '$lib/components/Comments.svelte'
+  import { NETWORKS } from '$lib/config'
+  import Transactions from '$lib/components/Transactions.svelte'
 
   const { addNotification } = getNotificationsContext()
 
@@ -152,12 +154,15 @@
         {/if}
       </div>
     </div>
-    <Comments {diamond} />
+    {#if NETWORKS[diamond.network].txHistorySupported}
+      <Transactions {diamond} />
+    {/if}
     <History
       events={diamond.events}
       network={diamond.network}
       facetsToName={diamond.facetsToName}
     />
+    <Comments {diamond} />
     {#if diamond.facets.length === 0}
       <h4>No facets found. This contract is not a proper diamond...</h4>
     {/if}

@@ -5,6 +5,7 @@ type Network = {
   explorerApiUrl: string
   emoji: string
   chainId: string
+  txHistorySupported?: boolean
 }
 
 export const NETWORKS: Record<string, Network> = {
@@ -15,6 +16,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.etherscan.io/api',
     emoji: '🟢',
     chainId: '1',
+    txHistorySupported: true,
   },
   goerli: {
     title: 'Goerli Testnet',
@@ -23,6 +25,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-goerli.etherscan.io/api',
     emoji: '🧪',
     chainId: '5',
+    txHistorySupported: true,
   },
   sepolia: {
     title: 'Sepolia Testnet',
@@ -47,6 +50,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.polygonscan.com/api',
     emoji: '🟣',
     chainId: '137',
+    txHistorySupported: true,
   },
   mumbai: {
     title: 'Polygon Mumbai Testnet',
@@ -63,6 +67,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.bscscan.com/api',
     emoji: '🟠',
     chainId: '56',
+    txHistorySupported: true,
   },
   binance_testnet: {
     title: 'Binance Smart Chain Testnet',
@@ -95,6 +100,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api-optimistic.etherscan.io/api',
     emoji: '🔴',
     chainId: '10',
+    txHistorySupported: true,
   },
   optimism_goerli: {
     title: 'Optimism Goerli Testnet',
@@ -111,6 +117,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://api.arbiscan.io/api',
     emoji: '🔵',
     chainId: '42161',
+    txHistorySupported: true,
   },
   arbitrum_goerli: {
     title: 'Arbitrum Goerli',
@@ -302,7 +309,7 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://blockscout.scroll.io',
     explorerApiUrl: 'https://blockscout.scroll.io/api',
     emoji: '📜',
-    chainId: '534353'
+    chainId: '534353',
   },
   linea_testnet: {
     title: 'Linea Testnet',
@@ -310,6 +317,6 @@ export const NETWORKS: Record<string, Network> = {
     explorerUrl: 'https://explorer.goerli.linea.build',
     explorerApiUrl: 'https://explorer.goerli.linea.build/api',
     emoji: '⚫',
-    chainId: '59140'
-  }
+    chainId: '59140',
+  },
 }
