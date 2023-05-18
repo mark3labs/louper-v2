@@ -69,7 +69,7 @@
                 class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
                 on:click={() => window.open(getExplorerTxUrl(t.hash, diamond.network))}
               >
-                {shortHash(t.hash)}
+                {t.hash ? shortHash(t.hash) : ''}
                 <svg
                   class="w-3 h-3 md:w-4 md:h-4 inline ml-2"
                   fill="currentColor"
@@ -92,7 +92,7 @@
                 class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
                 on:click={() => window.open(getExplorerAddressUrl(t.address, diamond.network))}
               >
-                {shortAddress(t.from)}
+                {t.from ? shortAddress(t.from) : ''}
                 <svg
                   class="w-3 h-3 md:w-4 md:h-4 inline ml-2"
                   fill="currentColor"
