@@ -328,4 +328,20 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '⚫',
     chainId: '59140',
   },
+  xdc_mainnet: {
+    title: 'XDC Mainnet',
+    rpcUrl: 'https://rpc.xinfin.network',
+    explorerUrl: 'https://xdc.blocksscan.io',
+    explorerApiUrl: 'https://xdc.blocksscan.io/api',
+    emoji: '🐱‍🏍',
+    chainId: '50',
+  },
+  xdc_apothem_testnet: {
+    title: 'Apothem XDC Testnet',
+    rpcUrl: 'https://apothem.xdcrpc.com',
+    explorerUrl: 'https://apothem.blocksscan.io',
+    explorerApiUrl: 'https://apothem.blocksscan.io/api',
+    emoji: '🕸',
+    chainId: '51',
+  },
 }
