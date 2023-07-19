@@ -56,7 +56,7 @@ export const NETWORKS: Record<string, Network> = {
   },
   mumbai: {
     title: 'Polygon Mumbai Testnet',
-    rpcUrl: 'https://matic-mumbai.chainstacklabs.com/',
+    rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
     explorerUrl: 'https://mumbai.polygonscan.com/',
     explorerApiUrl: 'https://api-testnet.polygonscan.com/api',
     emoji: '🧪',
