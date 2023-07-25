@@ -344,4 +344,20 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🕸',
     chainId: '51',
   },
+  kava_mainnet: {
+    title: 'Kava EVM Co-Chain',
+    rpcUrl: 'https://evm.kava.io',
+    explorerUrl: 'https://explorer.kava.io/',
+    explorerApiUrl: 'https://explorer.kava.io/api',
+    emoji: '💥',
+    chainId: '2222',
+  },
+  kava_testnet: {
+    title: 'Kava EVM Testnet',
+    rpcUrl: 'https://evm.testnet.kava.io',
+    explorerUrl: 'https://explorer.testnet.kava.io',
+    explorerApiUrl: 'https://explorer.testnet.kava.io/api',
+    emoji: '💥',
+    chainId: '2221',
+  },
 }
