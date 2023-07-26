@@ -18,6 +18,15 @@ export const NETWORKS: Record<string, Network> = {
     chainId: '1',
     txHistorySupported: true,
   },
+  ganache: {
+    title: 'Ganache Testnet',
+    rpcUrl: 'http://127.0.0.1:8545/',
+    explorerUrl: '',
+    explorerApiUrl: '',
+    emoji: '🔮',
+    chainId: '1337',
+    txHistorySupported: true,
+  },
   goerli: {
     title: 'Goerli Testnet',
     rpcUrl: 'https://rpc.ankr.com/eth_goerli',
