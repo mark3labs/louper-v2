@@ -130,24 +130,26 @@
 
     {#if $wallet.state === 'Ready'}
       {#if facet}
-        <table class="table table-compact w-full">
-          <thead>
-            <tr>
-              <th>Remove</th>
-              <th>Method</th>
-              <th class="text-right"><span class="mr-3">Selector</span></th>
-            </tr>
-          </thead>
-          {#each facet.methods as method}
-            <tr>
-              <th><input type="checkbox" bind:group={selectors} value={method.selector} /></th>
-              <td>{method.signature}</td>
-              <td class="text-right">
-                <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
-              </td>
-            </tr>
-          {/each}
-        </table>
+        <div class="overflow-x-auto">
+          <table class="table table-compact w-full">
+            <thead>
+              <tr>
+                <th>Remove</th>
+                <th>Method</th>
+                <th class="text-right"><span class="mr-3">Selector</span></th>
+              </tr>
+            </thead>
+            {#each facet.methods as method}
+              <tr>
+                <th><input type="checkbox" bind:group={selectors} value={method.selector} /></th>
+                <td>{method.signature}</td>
+                <td class="text-right">
+                  <span class="badge badge-info badge-outline font-bold">{method.selector}</span>
+                </td>
+              </tr>
+            {/each}
+          </table>
+        </div>
       {/if}
 
       <div class="flex">
