@@ -312,13 +312,21 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🟦',
     chainId: '84531',
   },
-  scroll_testnet: {
-    title: 'Scroll Testnet',
+  scroll_alpha_testnet: {
+    title: 'Scroll Alpha',
     rpcUrl: 'https://alpha-rpc.scroll.io/l2',
-    explorerUrl: 'https://blockscout.scroll.io',
-    explorerApiUrl: 'https://blockscout.scroll.io/api',
+    explorerUrl: 'https://alpha-blockscout.scroll.io',
+    explorerApiUrl: 'https://alpha-blockscout.scroll.io/api',
     emoji: '📜',
     chainId: '534353',
+  },
+  scroll_sepolia_testnet: {
+    title: 'Scroll Sepolia',
+    rpcUrl: 'https://sepolia-rpc.scroll.io',
+    explorerUrl: 'https://sepolia-blockscout.scroll.io',
+    explorerApiUrl: 'https://sepolia-blockscout.scroll.io/api',
+    emoji: '📜',
+    chainId: '534351',
   },
   linea_testnet: {
     title: 'Linea Testnet',
