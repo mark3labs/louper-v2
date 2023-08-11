@@ -54,6 +54,14 @@ export const NETWORKS: Record<string, Network> = {
     chainId: '137',
     txHistorySupported: true,
   },
+  polygon_zkevm: {
+    title: 'Polygon ZK-EVM',
+    rpcUrl: 'https://zkevm-rpc.com/',
+    explorerUrl: 'https://zkevm.polygonscan.com',
+    explorerApiUrl: 'https://api-zkevm.polygonscan.com/api',
+    emoji: '🟪',
+    chainId: '1101',
+  },
   mumbai: {
     title: 'Polygon Mumbai Testnet',
     rpcUrl: 'https://matic-mumbai.chainstacklabs.com/',
