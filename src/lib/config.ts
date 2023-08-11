@@ -368,4 +368,12 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '💥',
     chainId: '2221',
   },
+  velas: {
+    title: 'Velas',
+    rpcUrl: 'https://explorer.velas.com/rpc',
+    explorerUrl: 'https://explorer.velas.com',
+    explorerApiUrl: 'https://explorer.velas.com/api',
+    emoji: '🔻',
+    chainId: '106',
+  },
 }
