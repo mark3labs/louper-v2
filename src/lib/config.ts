@@ -344,6 +344,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '⚫',
     chainId: '59140',
   },
+  linea: {
+    title: 'Linea',
+    rpcUrl: 'https://rpc.linea.build',
+    explorerUrl: 'https://explorer.linea.build',
+    explorerApiUrl: 'https://explorer.linea.build/api',
+    emoji: '⚫',
+    chainId: '59144',
+  },
   xdc_mainnet: {
     title: 'XDC Mainnet',
     rpcUrl: 'https://rpc.xinfin.network',
