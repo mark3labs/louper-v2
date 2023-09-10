@@ -6,12 +6,12 @@
   export let network = 'mainnet'
 </script>
 
-<div class="lg:flex lg: flex-row lg:space-x-3 space-y-2">
+<div class="lg:flex lg:flex-row lg:space-x-3 space-y-2">
   <!-- Search Bar -->
-  <div class="w-full lg:w-3/4">
+  <div class="w-full lg:flex-grow py-1">
     <Search {address} {network} />
   </div>
-  <div class="w-full lg:w-1/4">
+  <div class="flex-grow-0 p-0">
     <Sponsor />
   </div>
 </div>

@@ -12,7 +12,7 @@ export const POST = (async ({ request }) => {
   const address = body.address.toLowerCase()
 
   const rpcUrl = body.network ? NETWORKS[body.network].rpcUrl : NETWORKS['mainnet'].rpcUrl
-  const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+  const provider = new ethers.JsonRpcProvider(rpcUrl)
   const diamondContract = new ethers.Contract(address, abi, provider)
 
   try {

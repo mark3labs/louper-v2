@@ -8,7 +8,7 @@ const config = {
   resolve: {
     alias: {
       events: 'rollup-plugin-node-polyfills/polyfills/events',
-      buffer: 'rollup-plugin-node-polyfills/polyfills/buffer-es6',
+      // buffer: 'rollup-plugin-node-polyfills/polyfills/buffer-es6',
     },
   },
   plugins: [sveltekit()],

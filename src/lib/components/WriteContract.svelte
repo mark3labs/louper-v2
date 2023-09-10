@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ethers, utils } from 'ethers'
+  import { ethers } from 'ethers'
   import Loading from './Loading.svelte'
   import Tags from 'svelte-tags-input'
   import type { Facet, Method } from '../../types/entities'
@@ -125,12 +125,10 @@
         on:submit|preventDefault={() => {
           error = null
           flow.execute(async (contracts) => {
-            const method = selectedMethod.fragment
-              .format(ethers.utils.FormatTypes.minimal)
-              .split(' ')[1]
+            const method = selectedMethod.fragment.format('minimal').split(' ')[1]
             await contracts.facet[method](...args, {
               value: selectedMethod.fragment.payable
-                ? utils.parseEther(value.toString()).toString()
+                ? ethers.parseEther(value.toString()).toString()
                 : undefined,
             })
           })

@@ -16,12 +16,12 @@ export const POST = (async ({ request }) => {
   const args = body.args
 
   const rpcUrl = body.network ? NETWORKS[body.network].rpcUrl : NETWORKS['mainnet'].rpcUrl
-  const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+  const provider = new ethers.JsonRpcProvider(rpcUrl)
   const diamondContract = new ethers.Contract(address, abi, provider)
 
   try {
-    const funcFragment = ethers.utils.FunctionFragment.from(fragment)
-    const method = funcFragment.format(ethers.utils.FormatTypes.minimal).split(' ')[1]
+    const funcFragment = ethers.FunctionFragment.from(fragment)
+    const method = funcFragment.format('minimal').split(' ')[1]
     console.log(method)
     const data = await diamondContract[method](...args)
     return json(data)

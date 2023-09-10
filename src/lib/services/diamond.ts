@@ -1,5 +1,5 @@
 import type { Diamond, Method, Facet, LouperEvent } from '../../types/entities'
-import { ethers, utils } from 'ethers'
+import { FunctionFragment, ethers } from 'ethers'
 import { getFacetMethods, getABIMethods } from '$lib/utils'
 
 type FetchFunction = (info: RequestInfo, init?: RequestInit) => Promise<Response>
@@ -93,7 +93,7 @@ export default class DiamondContract implements Diamond {
               signature = data.result.function[selector][0].name
             }
 
-            if (signature === 'diamondCut((address,uint8,bytes4[])[],address,bytes)') {
+            if (selector === '0x1f931c1c') {
               this.isFinal = false
             }
           } catch (e) {
@@ -172,25 +172,27 @@ export default class DiamondContract implements Diamond {
     const contract = new ethers.Contract(address, abi)
 
     const methods: Method[] = []
-    const functions = contract.interface.functions
-    for (const [f, val] of Object.entries(functions)) {
-      if (f === 'diamondCut((address,uint8,bytes4[])[],address,bytes)') {
+    for (const f of contract.interface.fragments.filter(
+      (f) => f.type === 'function',
+    ) as FunctionFragment[]) {
+      const func = f.format('minimal').replace('function ', '')
+      if (f.selector === '0x1f931c1c') {
+        // diamondCut
         this.isFinal = false
       }
 
-      const selector = utils.keccak256(utils.toUtf8Bytes(f)).substring(0, 10)
-
-      if (!this.facetsToSelectors[address].includes(selector)) continue
+      if (!this.facetsToSelectors[address].includes(f.selector)) continue
 
       const method: Method = {
-        signature: f,
-        selector,
-        fragment: val,
+        signature: func,
+        selector: f.selector,
+        fragment: f,
       }
 
       methods.push(method)
     }
 
+    console.log(methods)
     return methods
   }
 }

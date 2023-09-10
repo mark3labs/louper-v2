@@ -1,7 +1,7 @@
 <script lang="ts">
   import type DiamondContract from '$lib/services/diamond'
   import { getExplorerAddressUrl } from '$lib/utils'
-  import type { Facet } from 'src/types/entities'
+  import type { Facet } from '../../types/entities'
 
   export let diamond: DiamondContract
 
@@ -63,7 +63,7 @@
     </div>
     <div class="flex space-x-2">
       <div
-        class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
+        class="badge badge-accent text-accent-content p-3 cursor-pointer text-xs lg:text-base font-bold"
         on:click={() => window.open(getExplorerAddressUrl(facet.address, diamond.network))}
       >
         {facet.address}
@@ -82,7 +82,7 @@
         </svg>
       </div>
       <div
-        class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
+        class="badge badge-accent text-accent-content p-3 cursor-pointer text-xs lg:text-base font-bold"
         on:click={async () => {
           await navigator.clipboard.writeText(`${facet.address}`)
           alert('Address copied!')
@@ -118,7 +118,7 @@
         </tr>
         {#if readOnlyMethods.length > 0}
           <tr>
-            <th class="font-bold uppercase bg-base-200 py-0 rounded" colspan="2">Read Only</th>
+            <th class="font-bold uppercase bg-base-100 py-1 rounded-lg" colspan="2">Read Only</th>
           </tr>
         {/if}
         {#each readOnlyMethods as method}
@@ -131,7 +131,7 @@
         {/each}
         {#if writeableMethods.length > 0}
           <tr>
-            <th class="font-bold uppercase bg-base-200 py-0 rounded" colspan="2">Writeable</th>
+            <th class="font-bold uppercase bg-base-100 py-1 rounded-lg" colspan="2">Writeable</th>
           </tr>
         {/if}
         {#each writeableMethods as method}
@@ -157,57 +157,61 @@
         {/each}
       </table>
     </div>
-    <div class="card-actions bg-secondary rounded-md p-1 text-secondary-content">
+    <div class="card-actions bg-base-100 rounded-md p-2 text-secondary-content">
       {#if facet.name}
-        <button
-          class="btn glass btn-xs"
-          on:click={() => {
-            showReadContract = true
-            showWriteContract = false
-            showRemoveFacet = false
-            activeFacet = facet
-          }}
-        >
-          <svg
-            class="w-4 h-4 mr-1"
-            stroke="currentColor"
-            stroke-width="2"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            viewBox="0 0 24 24"
+        {#if readOnlyMethods.length}
+          <button
+            class="btn glass btn-xs bg-primary text-primary-content font-bold"
+            on:click={() => {
+              showReadContract = true
+              showWriteContract = false
+              showRemoveFacet = false
+              activeFacet = facet
+            }}
           >
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-          Read
-        </button>
-        <button
-          class="btn glass btn-xs"
-          on:click={() => {
-            showReadContract = false
-            showWriteContract = true
-            showRemoveFacet = false
-            activeFacet = facet
-          }}
-        >
-          <svg
-            class="w-4 h-4 mr-1"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+            <svg
+              class="w-4 h-4 mr-1"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            Read
+          </button>
+        {/if}
+        {#if writeableMethods.length}
+          <button
+            class="btn glass btn-xs bg-secondary text-secondary-content font-bold"
+            on:click={() => {
+              showReadContract = false
+              showWriteContract = true
+              showRemoveFacet = false
+              activeFacet = facet
+            }}
           >
-            <path
-              fill-rule="evenodd"
-              d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          Write
-        </button>
+            <svg
+              class="w-4 h-4 mr-1"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Write
+          </button>
+        {/if}
       {/if}
       <button
-        class="btn glass btn-xs bg-error"
+        class="btn glass btn-xs bg-red-600 text-white font-bold"
         on:click={() => {
           showReadContract = false
           showWriteContract = false

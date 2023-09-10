@@ -8,7 +8,7 @@
     getExplorerTxUrl,
     getExplorerAddressUrl,
   } from '$lib/utils'
-  import { utils } from 'ethers'
+  import { ethers } from 'ethers'
 
   export let diamond: DiamondContract
 
@@ -108,7 +108,7 @@
                 </svg>
               </div>
             </td>
-            <td>{utils.formatEther(t.value)}</td>
+            <td>{ethers.formatEther(typeof t.value === 'string' ? t.value : 0)}</td>
           </tr>
         {/each}
       </tbody>

@@ -1,14 +1,10 @@
 import { json } from '@sveltejs/kit'
 import { NETWORKS } from '$lib/config'
 import axios from 'redaxios'
-import { utils } from 'ethers'
 import type { RequestHandler } from '@sveltejs/kit'
 import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private'
 
-const SOURCIFY_REPO_URL = 'https://repo.sourcify.dev'
-
 import { createClient } from '@supabase/supabase-js'
-import { getEtherscanApiKey } from '$lib/utils'
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -30,7 +26,9 @@ export const POST = (async ({ request }) => {
   }
 
   try {
-    const res = await axios.get(`https://anyabi.xyz/api/get-abi/${NETWORKS[network].chainId}/${address}`)
+    const res = await axios.get(
+      `https://anyabi.xyz/api/get-abi/${NETWORKS[network].chainId}/${address}`,
+    )
     if (res.data.abi) {
       console.log(`ABI for ${res.data.name} fetched from AnyABI. Caching...`)
       await cacheAbi(network, address, res.data.name, res.data.abi)

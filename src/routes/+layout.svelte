@@ -10,7 +10,7 @@
   import user from '$lib/stores/user'
   import orbis from '$lib/stores/orbis'
   import { onMount } from 'svelte'
-  import { browser } from '$app/env'
+  import { browser } from '$app/environment'
 
   onMount(async () => {
     if (browser) {
@@ -49,12 +49,7 @@
           target="_blank"
           class="btn text-purple-800 bg-gradient-to-l from-yellow-200 via-pink-200 to-pink-400 font-bold"
         >
-          <span class="hidden md:inline-block"> Launch a Diamond With </span>
-          <img
-            class="h-4 md:h-6 md:ml-2"
-            src="https://flair.dev/_next/static/media/logo-text-color.53b661c5.svg"
-            alt="Launch a Diamond With Flair"
-          />
+          <span class="hidden md:inline-block"> Index Your Diamond With Flair 🔮</span>
         </a>
         {#if $user !== null}
           <ProfileDropdown />

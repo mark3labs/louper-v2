@@ -1,5 +1,5 @@
 import { NETWORKS } from './config'
-import { ethers, utils } from 'ethers'
+import { FunctionFragment, ethers } from 'ethers'
 import type { Method } from '../types/entities'
 
 export const getExplorerAddressUrl = (address: string, network = 'mainnet'): string => {
@@ -24,32 +24,34 @@ export const getFacetMethods = (address: string, abi: any): Method[] => {
   const contract = new ethers.Contract(address, abi)
 
   const methods: Method[] = []
-  const functions = contract.interface.functions
-  for (const [f, val] of Object.entries(functions)) {
-    const selector = utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10)
+  for (const f of contract.interface.fragments.filter(
+    (f) => f.type === 'function',
+  ) as FunctionFragment[]) {
+    const func = f.format('minimal')
 
     const method: Method = {
-      signature: f,
-      selector,
-      fragment: val,
+      signature: func,
+      selector: f.selector,
+      fragment: f as FunctionFragment,
     }
     methods.push(method)
   }
   return methods
 }
 
-export const getABIMethods = (address: string, abi: any): string => {
+export const getABIMethods = (address: string, abi: any): Method[] => {
   const contract = new ethers.Contract(address, abi)
 
   const methods: Method[] = []
-  const events = contract.interface.events
-  for (const [f, val] of Object.entries(events)) {
-    const selector = utils.keccak256(utils.toUtf8Bytes(f)).substr(0, 10)
+  for (const f of contract.interface.fragments.filter(
+    (f) => f.type === 'function',
+  ) as FunctionFragment[]) {
+    const func = f.format('minimal')
 
     const method: Method = {
-      signature: f,
-      selector,
-      fragment: val,
+      signature: func,
+      selector: f.selector,
+      fragment: f,
     }
     methods.push(method)
   }

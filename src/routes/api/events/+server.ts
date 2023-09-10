@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import { ethers } from 'ethers'
+import { Result, ethers } from 'ethers'
 import { NETWORKS } from '$lib/config'
 import type { LouperEvent } from '../../../types/entities'
 import type { RequestHandler } from '@sveltejs/kit'
@@ -26,16 +26,18 @@ export const POST = (async ({ request }) => {
     const louperEvents: LouperEvent[] = []
 
     if (resp.data) {
-      const iface = new ethers.utils.Interface(abi)
+      const iface = new ethers.Interface(abi)
       for (let i = 0; i < resp.data.result.length; i++) {
         const louperEvent: LouperEvent = {
           ...iface.decodeEventLog('DiamondCut', resp.data.result[i].data),
           timestamp: parseInt(resp.data.result[i].timeStamp, 16),
-          txHash: resp.data.result[i].transactionHash,
+          txHash: resp.data.result[i].transactionHash as string,
         }
         louperEvents.push(louperEvent)
       }
     }
-    return json(louperEvents)
+    return new Response(
+      JSON.stringify(louperEvents, (_, v) => (typeof v === 'bigint' ? v.toString() : v)),
+    )
   }
 }) satisfies RequestHandler

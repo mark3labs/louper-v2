@@ -8,6 +8,9 @@
   }
 </script>
 
-<button class="btn bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" on:click={connect}>
+<button
+  class="btn bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white font-bold"
+  on:click={connect}
+>
   Sign In
 </button>

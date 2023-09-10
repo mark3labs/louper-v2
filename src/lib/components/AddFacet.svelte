@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { constants } from 'ethers'
+  import { ethers } from 'ethers'
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { onMount, onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
-  import { utils } from 'ethers'
   import { getFacetMethods } from '$lib/utils'
   import Loading from './Loading.svelte'
   import type { Method } from '../../types/entities'
@@ -12,7 +11,6 @@
   let facetAddress = ''
   let facet: any | undefined = undefined
 
-  export let allFacets: any[] = []
   export let address: string
   export let network: string
   export let showModal = false
@@ -22,8 +20,8 @@
   let args: any = {}
   let methods: Method[] = []
   let selectors = []
-  let initContract
-  let initCalldata
+  let initContract = null
+  let initCalldata = null
 
   const FacetCutAction = {
     Add: 0,
@@ -33,7 +31,7 @@
 
   let { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
-  const iface = new utils.Interface([
+  const iface = new ethers.Interface([
     'function diamondCut(tuple(address facetAddress, uint8 action, bytes4[] functionSelectors)[],address initAddress, bytes callData) external',
   ])
 
@@ -46,10 +44,9 @@
           functionSelectors: selectors,
         },
       ],
-      utils.isAddress(initContract) ? initContract : constants.AddressZero,
+      ethers.isAddress(initContract) ? initContract : ethers.ZeroAddress,
       initCalldata ? initCalldata : '0x',
     ]
-    console.log(selectors)
   }
 
   const connect = async (option = 'builtin') => {
@@ -72,7 +69,7 @@
 
   const fetchFacet = async () => {
     fetchFacetError = ''
-    if (!utils.isAddress(facetAddress)) {
+    if (!ethers.isAddress(facetAddress)) {
       fetchFacetError = 'Invalid address.'
       return
     }

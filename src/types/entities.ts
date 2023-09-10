@@ -1,5 +1,5 @@
-import type { Event } from 'ethers'
-import type { FunctionFragment } from 'ethers/lib/utils'
+import type { Result } from 'ethers'
+import type { FunctionFragment } from 'ethers'
 
 export interface Method {
   signature: string
@@ -13,7 +13,7 @@ export interface Facet {
   methods: Method[]
 }
 
-export interface LouperEvent extends Event {
+export interface LouperEvent extends Result {
   timestamp: number
   txHash: string
 }

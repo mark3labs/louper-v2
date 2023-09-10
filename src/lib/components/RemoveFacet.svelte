@@ -1,12 +1,11 @@
 <script lang="ts">
   import Loading from '$lib/components/Loading.svelte'
   import type { Facet } from '../../types/entities'
-  import { constants } from 'ethers'
+  import { ethers } from 'ethers'
   import { initWeb3W } from 'web3w'
   import { WalletConnectModuleLoader } from 'web3w-walletconnect-loader'
   import { onMount, onDestroy } from 'svelte'
   import { NETWORKS } from '$lib/config'
-  import { utils } from 'ethers'
 
   export let facet: Facet | undefined = undefined
   export let address: string
@@ -25,7 +24,7 @@
 
   let { wallet, builtin, flow, transactions, chain } = initWeb3W({})
 
-  const iface = new utils.Interface([
+  const iface = new ethers.Interface([
     'function diamondCut(tuple(address facetAddress, uint8 action, bytes4[] functionSelectors)[],address initAddress, bytes callData) external',
   ])
 
@@ -33,12 +32,12 @@
     args = [
       [
         {
-          facetAddress: constants.AddressZero,
+          facetAddress: ethers.ZeroAddress,
           action: FacetCutAction.Remove,
           functionSelectors: selectors,
         },
       ],
-      constants.AddressZero,
+      ethers.ZeroAddress,
       '0x',
     ]
   }

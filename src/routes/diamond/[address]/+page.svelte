@@ -4,7 +4,6 @@
   import ReadContract from '$lib/components/ReadContract.svelte'
   import WriteContract from '$lib/components/WriteContract.svelte'
   import History from '$lib/components/History.svelte'
-  import DiamondContract from '$lib/services/diamond'
   import { getExplorerAddressUrl } from '$lib/utils'
   import RemoveFacet from '$lib/components/RemoveFacet.svelte'
   import type { Facet } from '../../../types/entities'
@@ -61,7 +60,7 @@
   <h1 class="text-4xl text-center">{diamond.name || 'UNKNOWN'}</h1>
   <div class="flex justify-center space-x-2">
     <div
-      class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
+      class="badge badge-accent text-accent-content p-3 cursor-pointer text-xs lg:text-base font-bold"
       on:click={() => window.open(getExplorerAddressUrl(diamond.address, diamond.network))}
     >
       {diamond.address}
@@ -80,7 +79,7 @@
       </svg>
     </div>
     <div
-      class="badge badge-info p-3 cursor-pointer text-xs lg:text-base"
+      class="badge badge-accent text-accent-content p-3 cursor-pointer text-xs lg:text-base font-bold"
       on:click={async () => {
         await navigator.clipboard.writeText(`${diamond.address}`)
         alert('Address copied!')
@@ -106,13 +105,17 @@
   {#if !showReadContract && !showWriteContract && !showAddFacet && !showRemoveFacet}
     <div class="flex flex-col md:flex-row space-y-3 justify-between">
       {#if diamond.isFinal}
-        <div class="badge badge-success badge-lg">Final</div>
+        <div class="badge badge-success text-success-content badge-lg uppercase font-bold text-xl">
+          Immutable
+        </div>
       {:else}
-        <div class="badge badge-warning badge-lg">Upgradable</div>
+        <div class="badge badge-warning text-warning-content badge-lg uppercase font-bold text-xl">
+          Upgradable
+        </div>
       {/if}
       <div class="flex justify-end gap-2">
         <a
-          class="btn btn-sm glass bg-secondary"
+          class="btn btn-sm glass bg-secondary text-secondary-content"
           download="abi.json"
           href={`data:application/octet-stream,${encodeURI(JSON.stringify(diamond.abi))}`}
         >
@@ -132,7 +135,10 @@
           </svg>
           Download ABI
         </a>
-        <button class="btn btn-sm glass bg-primary" on:click={() => (showAddFacet = true)}>
+        <button
+          class="btn btn-sm glass bg-primary text-primary-content"
+          on:click={() => (showAddFacet = true)}
+        >
           <svg
             class="w-4 h-4 mr-1"
             fill="none"
@@ -197,10 +203,5 @@
     bind:showModal={showRemoveFacet}
     bind:facet={activeFacet}
   />
-  <AddFacet
-    allFacets={diamond.facets}
-    address={diamond.address}
-    network={diamond.network}
-    bind:showModal={showAddFacet}
-  />
+  <AddFacet address={diamond.address} network={diamond.network} bind:showModal={showAddFacet} />
 </div>
