@@ -140,6 +140,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🧪',
     chainId: '421613',
   },
+  arbitrum_sepolia: {
+    title: 'Arbitrum Sepolia',
+    rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
+    explorerUrl: 'https://sepolia-explorer.arbitrum.io/',
+    explorerApiUrl: 'https://sepolia-explorer.arbitrum.io/api',
+    emoji: '🧪',
+    chainId: '421614',
+  },
   arbitrum_nova: {
     title: 'Arbitrum Nova',
     rpcUrl: 'https://nova.arbitrum.io/rpc',
