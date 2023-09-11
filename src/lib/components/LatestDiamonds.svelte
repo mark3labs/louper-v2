@@ -13,7 +13,7 @@
 
 <div class="px-4 mx-auto sm:px-6 lg:px-8 w-full">
   <div>
-    <p class="text-base font-bold ">Recent Diamonds Inspected</p>
+    <p class="text-base font-bold">Recent Diamonds Inspected</p>
   </div>
 
   <div class="mt-6">
@@ -28,13 +28,15 @@
           </tr>
         </thead>
         <tbody>
-          {#each diamonds as diamond}
+          {#each diamonds.filter((d) => {
+            NETWORKS[d.network]
+          }) as diamond}
             <tr
               class="hover cursor-pointer"
               on:click={() => goto(`/diamond/${diamond.address}?network=${diamond.network}`)}
             >
-              <td>{diamond.name.substring(0,25)}</td>
-              <td>{diamond.address.substring(0,20)}...{diamond.address.substring(36)}</td>
+              <td>{diamond.name.substring(0, 25)}</td>
+              <td>{diamond.address.substring(0, 20)}...{diamond.address.substring(36)}</td>
               <td class="capitalize">
                 {NETWORKS[diamond.network].emoji}&nbsp;
                 {NETWORKS[diamond.network].title}
