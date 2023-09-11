@@ -62,6 +62,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🟪',
     chainId: '1101',
   },
+  linea: {
+    title: 'Linea',
+    rpcUrl: 'https://rpc.linea.build',
+    explorerUrl: 'https://lineascan.build',
+    explorerApiUrl: 'https://api.lineascan.build/api',
+    emoji: '🟦',
+    chainId: '59144',
+  },
   mumbai: {
     title: 'Polygon Mumbai Testnet',
     rpcUrl: 'https://matic-mumbai.chainstacklabs.com/',
@@ -320,6 +328,14 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '⚙️',
     chainId: '0x5a79c44e',
   },
+  base: {
+    title: 'Base',
+    rpcUrl: 'https://mainnet.base.org',
+    explorerUrl: 'https://basescan.org',
+    explorerApiUrl: 'https://api.basescan.org/api',
+    emoji: '🔵',
+    chainId: '8453',
+  },
   base_testnet: {
     title: 'Base Testnet',
     rpcUrl: 'https://goerli.base.org',
@@ -391,5 +407,13 @@ export const NETWORKS: Record<string, Network> = {
     explorerApiUrl: 'https://explorer.velas.com/api',
     emoji: '🔻',
     chainId: '106',
+  },
+  zksync: {
+    title: 'zkSync',
+    rpcUrl: 'https://mainnet.era.zksync.io',
+    explorerUrl: 'https://explorer.zksync.io/',
+    explorerApiUrl: '',
+    emoji: '🔄',
+    chainId: '324',
   },
 }

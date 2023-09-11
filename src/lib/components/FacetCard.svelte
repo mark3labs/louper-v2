@@ -144,7 +144,7 @@
         {/each}
         {#if unknownMethods.length > 0}
           <tr>
-            <th class="font-bold uppercase bg-base-200 py-0 rounded" colspan="2">Unknown</th>
+            <th class="font-bold uppercase bg-base-100 py-1 rounded-lg" colspan="2">Unknown</th>
           </tr>
         {/if}
         {#each unknownMethods as method}
