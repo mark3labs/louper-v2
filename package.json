@@ -60,6 +60,7 @@
     "lodash": "^4.17.21",
     "redaxios": "^0.5.1",
     "svelte-notifications": "^0.9.98",
+    "svelte-select": "^5.7.0",
     "svelte-tags-input": "^5.0.0",
     "web3w": "0.3.2-beta.22",
     "web3w-walletconnect-loader": "^0.4.3"

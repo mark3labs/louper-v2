@@ -55,6 +55,9 @@ dependencies:
   svelte-notifications:
     specifier: ^0.9.98
     version: 0.9.98
+  svelte-select:
+    specifier: ^5.7.0
+    version: 5.7.0
   svelte-tags-input:
     specifier: ^5.0.0
     version: 5.0.0
@@ -1159,6 +1162,23 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+    dev: false
+
+  /@floating-ui/core@1.4.1:
+    resolution: {integrity: sha512-jk3WqquEJRlcyu7997NtR5PibI+y5bi+LS3hPmguVClypenMsCY3CBa3LAQnozRCtCrYWSEtAdiskpamuJRFOQ==}
+    dependencies:
+      '@floating-ui/utils': 0.1.2
+    dev: false
+
+  /@floating-ui/dom@1.5.2:
+    resolution: {integrity: sha512-6ArmenS6qJEWmwzczWyhvrXRdI/rI78poBcW0h/456+onlabit+2G+QxHx5xTOX60NBJQXjsCLFbW2CmsXpUog==}
+    dependencies:
+      '@floating-ui/core': 1.4.1
+      '@floating-ui/utils': 0.1.2
+    dev: false
+
+  /@floating-ui/utils@0.1.2:
+    resolution: {integrity: sha512-ou3elfqG/hZsbmF4bxeJhPHIf3G2pm0ujc39hYEZrfVqt7Vk/Zji6CXc3W0pmYM8BW1g40U+akTl9DKZhFhInQ==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:
@@ -5713,6 +5733,13 @@ packages:
       svelte: 4.2.0
     dev: false
 
+  /svelte-floating-ui@1.2.8:
+    resolution: {integrity: sha512-8Ifi5CD2Ui7FX7NjJRmutFtXjrB8T/FMNoS2H8P81t5LHK4I9G4NIs007rLWG/nRl7y+zJUXa3tWuTjYXw/O5A==}
+    dependencies:
+      '@floating-ui/core': 1.4.1
+      '@floating-ui/dom': 1.5.2
+    dev: false
+
   /svelte-hmr@0.15.3(svelte@4.2.0):
     resolution: {integrity: sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -5773,6 +5800,13 @@ packages:
       svelte: 4.2.0
       typescript: 5.2.2
     dev: true
+
+  /svelte-select@5.7.0:
+    resolution: {integrity: sha512-oClK1exjcWDj2817+0djGhK04t5CSZbuP0oh7gz+3dEcn/G+QqRsfI2/dvIyOSHILqNzlj+Ztp2z1pMtE7Wf8Q==}
+    dependencies:
+      '@floating-ui/dom': 1.5.2
+      svelte-floating-ui: 1.2.8
+    dev: false
 
   /svelte-tags-input@5.0.0:
     resolution: {integrity: sha512-lH0rkSdVcurCEnJBkHG9gTQfpz0gsQmVBzA+TQqSLL1/A0okRsz8lZJzVC20d6Eufkr24b5zHkYzQmrbIaqS/w==}

@@ -1,9 +1,14 @@
 <script>
   import { goto } from '$app/navigation'
   import { NETWORKS } from '$lib/config'
+  import Select from 'svelte-select'
 
   export let address = ''
   export let network = 'mainnet'
+
+  const handleChange = (e) => {
+    network = e.detail.value
+  }
 </script>
 
 <div class="card flex flex-col justify-around h-full bg-base-200 shadow-xl">
@@ -14,7 +19,7 @@
         <form
           on:submit|preventDefault|stopPropagation={() =>
             goto(`/diamond/${address}?network=${network}`)}
-          class="relative"
+          class="relative flex"
         >
           <input
             type="text"
@@ -22,16 +27,22 @@
             bind:value={address}
             class="w-full pr-16 input text-2xl bg-base-300 text-base-content"
           />
-          <select
-            class="select select-sm absolute top-2 right-14 mr-3 bg-base-300 w-1/5 lg:w-auto"
-            bind:value={network}
-          >
-            {#each Object.keys(NETWORKS) as network}
-              <option value={network} class="font-semibold">
-                {NETWORKS[network].emoji} {NETWORKS[network].title}</option
-              >
-            {/each}
-          </select>
+          <Select
+            items={Object.keys(NETWORKS)}
+            on:change={handleChange}
+            value={network}
+            class="search-select"
+          />
+          <!-- <select -->
+          <!--   class="select select-sm absolute top-2 right-14 mr-3 bg-base-300 w-1/5 lg:w-auto" -->
+          <!--   bind:value={network} -->
+          <!-- > -->
+          <!--   {#each Object.keys(NETWORKS) as network} -->
+          <!--     <option value={network} class="font-semibold"> -->
+          <!--       {NETWORKS[network].emoji} {NETWORKS[network].title}</option -->
+          <!--     > -->
+          <!--   {/each} -->
+          <!-- </select> -->
           <button
             class="absolute top-0 right-0 btn border-0 bg-gradient-to-r from-primary to-secondary"
             type="submit"
@@ -43,3 +54,15 @@
     </div>
   </div>
 </div>
+
+<style lang="postcss">
+  :global(.search-select) {
+    @apply !select !pr-16 !input !text-2xl !bg-base-300 !text-base-content !w-1/5 lg:!w-2/5;
+  }
+  :global(.svelte-select-list) {
+    @apply !bg-base-300 !text-base-content;
+  }
+  :global(.selected-item) {
+    @apply !text-2xl !text-base-content;
+  }
+</style>
