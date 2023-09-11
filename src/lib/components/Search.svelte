@@ -19,7 +19,7 @@
         <form
           on:submit|preventDefault|stopPropagation={() =>
             goto(`/diamond/${address}?network=${network}`)}
-          class="relative flex"
+          class="relative"
         >
           <input
             type="text"
@@ -57,12 +57,15 @@
 
 <style lang="postcss">
   :global(.search-select) {
-    @apply !select !pr-16 !input !text-2xl !bg-base-300 !text-base-content !w-1/5 lg:!w-2/5;
+    @apply !absolute !top-2 !right-14 !mr-3 !bg-base-300 !w-1/5 lg:!w-3/12 !border-0;
   }
   :global(.svelte-select-list) {
     @apply !bg-base-300 !text-base-content;
   }
   :global(.selected-item) {
-    @apply !text-2xl !text-base-content;
+    @apply !text-base-content;
+  }
+  :global(.clear-select > svg) {
+    @apply !h-3 !w-3;
   }
 </style>

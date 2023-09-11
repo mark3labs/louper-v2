@@ -57,7 +57,7 @@
         contracts: {
           facet: {
             address,
-            abi: iface.fragments.map((f) => f),
+            abi: JSON.parse(iface.formatJson()),
           },
         },
       })

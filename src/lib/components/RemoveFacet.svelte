@@ -50,7 +50,7 @@
         contracts: {
           facet: {
             address,
-            abi: iface.fragments.map((f) => f),
+            abi: JSON.parse(iface.formatJson()),
           },
         },
       })
@@ -156,6 +156,7 @@
           class="btn btn-sm glass mt-3 bg-error"
           on:click={() =>
             flow.execute(async (contracts) => {
+              console.log(args)
               const tx = await contracts.facet['diamondCut'](...args)
               await tx.wait()
               window.location.reload()
