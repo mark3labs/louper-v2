@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           {#each diamonds.filter((d) => {
-            NETWORKS[d.network]
+            NETWORKS[d.network] !== undefined
           }) as diamond}
             <tr
               class="hover cursor-pointer"
