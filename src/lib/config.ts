@@ -416,4 +416,12 @@ export const NETWORKS: Record<string, Network> = {
     emoji: '🔄',
     chainId: '324',
   },
+  zkSyncTestnet: {
+    title: 'zkSyncTestnet',
+    rpcUrl: 'https://testnet.era.zksync.dev',
+    explorerUrl: 'https://goerli.explorer.zksync.io/,
+    explorerApiUrl: '',
+    emoji: '🔄',
+    chainId: '280',
+  },
 }
