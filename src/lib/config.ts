@@ -355,10 +355,18 @@ export const NETWORKS: Record<string, Network> = {
   scroll_sepolia_testnet: {
     title: 'Scroll Sepolia',
     rpcUrl: 'https://sepolia-rpc.scroll.io',
-    explorerUrl: 'https://sepolia-blockscout.scroll.io',
-    explorerApiUrl: 'https://sepolia-blockscout.scroll.io/api',
+    explorerUrl: 'https://sepolia.scrollscan.com/',
+    explorerApiUrl: 'https://api-sepolia.scrollscan.com/api',
     emoji: '📜',
     chainId: '534351',
+  },
+  scroll: {
+    title: 'Scroll',
+    rpcUrl: 'https://rpc.scroll.io',
+    explorerUrl: 'https://scrollscan.com/',
+    explorerApiUrl: 'https://api.scrollscan.com/api',
+    emoji: '📜',
+    chainId: '534352',
   },
   linea_testnet: {
     title: 'Linea Testnet',
